@@ -5,17 +5,18 @@ const cors = require("cors");
 const path = require("path");
 const xmlparser = require("express-xml-bodyparser");
 const { Sequelize } = require("sequelize");
+const db = require("./models");  // import the models
 
-const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST } = process.env;
+// const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-    host: DB_HOST,
-    dialect: 'mysql'
-});
+// const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+//     host: DB_HOST,
+//     dialect: 'mysql'
+// });
 
-sequelize.authenticate()
-    .then(() => console.log("DB connection successful"))
-    .catch(console.error);
+// sequelize.authenticate()
+//     .then(() => console.log("DB connection successful"))
+//     .catch(console.error);
 
 const api = express();
 api.use(cors()); // enable CORS on all our requests 
@@ -25,9 +26,9 @@ api.use(express.text());
 api.use(xmlparser());
 
 // Sync Sequelize models
-// sequelize.sync({ force: false }).then(() => {
-//     console.log('Database & tables created!');
-// });
+db.sequelize.sync({ force: false }).then(() => {
+    console.log('Database & tables created!');
+}).catch(console.error);
 
 // API POST - CRUD Create/Convert
 
