@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link, useLocation} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ function NavigationBar() {
   const { selectedPatients, setSelectedPatient, selectedPatient } = useContext(PatientContext);
   const [expanded, setExpanded] = useState(false);
   const { startLoading } = useLoading();
-  const location = useLocation();
+  //const location = useLocation();
 
   useEffect(() => {
     // Update selectedPatient when selectedPatients change
@@ -26,7 +26,7 @@ function NavigationBar() {
     setExpanded(false); // Collapse Navbar on patient select
 
     // Check if the current path matches one of the specified routes
-    const currentPath = location.pathname;
+    //const currentPath = location.pathname;
     // const shouldStartLoading = ['/api', '/qr', '/beergarden', '/offroadpost'].includes(currentPath);
     
     // if (shouldStartLoading) {
@@ -47,7 +47,7 @@ function NavigationBar() {
   };
 
   return (
-    <Navbar expanded={expanded} expand="lg" bg="dark" variant="dark" fixed="top">
+    <Navbar expanded={expanded} expand="lg" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/" onClick={() => handleNavItemSelect(false)}>
           <img

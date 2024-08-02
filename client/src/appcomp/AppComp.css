@@ -7,3 +7,9 @@
 .search-form .form-control {
     margin-right: 10px;
 }
+
+.navbar {
+    background-color: rgb(212, 212, 47);
+    padding: 1rem;
+  }
+  

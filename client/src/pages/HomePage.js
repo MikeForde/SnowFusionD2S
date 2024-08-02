@@ -1,18 +1,17 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import "./Page.css";
-import { Card, Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
-import { PatientContext } from '../PatientContext';
-import { useLoading } from '../contexts/LoadingContext';
+//import axios from "axios";
+// import { PatientContext } from '../PatientContext';
+// import { useLoading } from '../contexts/LoadingContext';
 
-const server = process.env.REACT_APP_API_BASE_URL
-  ? axios.create({ baseURL: process.env.REACT_APP_API_BASE_URL })
-  : axios.create({});
+// const server = process.env.REACT_APP_API_BASE_URL
+//   ? axios.create({ baseURL: process.env.REACT_APP_API_BASE_URL })
+//   : axios.create({});
 
 function HomePage() {
-  const { selectedPatients, setSelectedPatients, setSelectedPatient } = useContext(PatientContext);
-  const { startLoading, stopLoading } = useLoading();
+  // const { selectedPatients, setSelectedPatients, setSelectedPatient } = useContext(PatientContext);
+  // const { startLoading, stopLoading } = useLoading();
 
 
   return (
