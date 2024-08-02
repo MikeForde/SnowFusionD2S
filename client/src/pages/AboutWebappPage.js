@@ -2,15 +2,12 @@ import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 function AboutWebAppPage() {
-    const isHostedOnAzure = window.location.href.includes("mern-webapp-mike.azurewebsites.net");
+    const isHostedOnAzure = window.location.href.includes("snomed-d2s.azurewebsites.net");
     return (
         <Container className="mt-5">
             <Row>
                 <Col>
                     <h2>About This Web Application</h2>
-                    <p>
-                        Built using the <a href="https://medium.com/@ksekwamote/how-to-build-a-sern-application-dc358b48defe" target="_blank" rel="noopener noreferrer">SERN Stack</a>. SERN stands for SQL, Express.js, React, and Node.js.
-                    </p>
                 </Col>
             </Row>
             <Row className="mt-4">
@@ -21,10 +18,9 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 The development pipeline involves the following steps:
                                 <ol>
-                                    <li>Development Environment Until 0_18: Linux ubuntu-like distribution (<a href="https://www.bodhilinux.com" target="_blank" rel="noopener noreferrer">Bodhi</a>) running on a virtual machine (VM).</li>
-                                    <li>Development Environment 0_19 and Beyond: Docker - Node 22 Bookworm</li>
-                                    <li>Version Control: <a href="https://github.com/MikeForde/mern-azure" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
-                                    <li>Continuous Deployment: GitHub Actions, which automates the deployment process to a cloud instance whenever changes are pushed to the <a href="https://github.com/MikeForde/mern-azure" target="_blank" rel="noopener noreferrer">GitHub Repository</a>.</li>
+                                    <li>Development Environment Docker - Node 22 Bookworm</li>
+                                    <li>Version Control: <a href="https://github.com/MikeForde/SnowFusionD2S" target="_blank" rel="noopener noreferrer">GitHub</a>.</li>
+                                    <li>Continuous Deployment: GitHub Actions, which automates the deployment process to a cloud instance whenever changes are pushed to the <a href="https://github.com/MikeForde/SnowFusionD2S" target="_blank" rel="noopener noreferrer">GitHub Repository</a>.</li>
                                 </ol>
                             </Card.Text>
                         </Card.Body>
