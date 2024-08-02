@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation} from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { PatientContext } from '../PatientContext';
 import { useLoading } from '../contexts/LoadingContext';
 import PatientSearch from './PatientSearch'; // Import the new component
@@ -27,11 +27,11 @@ function NavigationBar() {
 
     // Check if the current path matches one of the specified routes
     const currentPath = location.pathname;
-    const shouldStartLoading = ['/api', '/qr', '/beergarden', '/offroadpost'].includes(currentPath);
+    // const shouldStartLoading = ['/api', '/qr', '/beergarden', '/offroadpost'].includes(currentPath);
     
-    if (shouldStartLoading) {
-      startLoading();
-    }
+    // if (shouldStartLoading) {
+    //   startLoading();
+    // }
   };
 
   const handleNavItemSelect = (startLoad) => {
@@ -58,45 +58,14 @@ function NavigationBar() {
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
           />
-          IPS D2S Prototype 0_41
+          SnowFusion D2S Prototype 0_1
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/api" onClick={() => handleNavItemSelect(true)}>
-              <FontAwesomeIcon icon={faFileMedical} /> API
-            </Nav.Link>
-            <Nav.Link as={Link} to="/qr" onClick={() => handleNavItemSelect(true)}>
-              <FontAwesomeIcon icon={faQrcode} /> QR
-            </Nav.Link>
-            <Nav.Link as={Link} to="/bulkupload" onClick={() => handleNavItemSelect(false)}>
-              <FontAwesomeIcon icon={faUpload} /> DMICP
-            </Nav.Link>
-            <Nav.Link as={Link} to="/beergarden" onClick={() => handleNavItemSelect(true)}>
-              <FontAwesomeIcon icon={faBeer} /> BEER
-            </Nav.Link>
-            <NavDropdown
-              title={<span><FontAwesomeIcon icon={faBrain} /> VitalsIQ API</span>}
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item as={Link} to="/ipsoffroad" onClick={() => handleNavItemSelect(false)}>
-                <FontAwesomeIcon icon={faUpload} /> VitalsIQ GET
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/offroadpost" onClick={() => handleNavItemSelect(true)}>
-                <FontAwesomeIcon icon={faDownload} /> VitalsIQ POST
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown
-              title={<span><FontAwesomeIcon icon={faCloud} /> NLD API</span>}
-              id="basic-nav-dropdown"
-            >
-              <NavDropdown.Item as={Link} to="/pushipsnld" onClick={() => handleNavItemSelect(true)}>
-                <FontAwesomeIcon icon={faDownload} /> NLD POST
-              </NavDropdown.Item>
-            </NavDropdown>
             <NavDropdown title="Info" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/about" onClick={() => handleNavItemSelect(false)}>
-                About IPS
+                About SNOMED CT
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/aboutwebapp" onClick={() => handleNavItemSelect(false)}>
                 About Web App
@@ -104,10 +73,6 @@ function NavigationBar() {
               <NavDropdown.Divider />
               <NavDropdown.Item as={Link} to="/changelog" onClick={() => handleNavItemSelect(false)}>
                 Change Log
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/apidocumentation" onClick={() => handleNavItemSelect(false)}>
-                API Documentation
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

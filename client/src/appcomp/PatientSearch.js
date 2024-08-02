@@ -51,7 +51,7 @@ function PatientSearch({ collapseNavbar }) { // Accept collapseNavbar prop
     <Form inline onSubmit={handleSearchSubmit} className="search-form">
       <Form.Control
         type="text"
-        placeholder="Find Patient"
+        placeholder="Search Code or Term"
         value={searchTerm}
         onChange={handleSearchChange}
         className="mr-sm-2 form-control"
