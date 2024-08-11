@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
-import { SnomedContext } from '../SnomedContext'; // Updated context import
+import { SnomedContext } from '../SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
-import SnomedSearch from './SnomedSearch'; // Updated component import
+import SnomedSearch from './SnomedSearch';
 
 function NavigationBar() {
-  const { selectedSnomedCodes, setSelectedSnomedCode, selectedSnomedCode } = useContext(SnomedContext); // Updated context usage
+  const { selectedSnomedCodes, setSelectedSnomedCode, selectedSnomedCode } = useContext(SnomedContext);
   const [expanded, setExpanded] = useState(false);
   const { startLoading } = useLoading();
   //const location = useLocation();
@@ -20,8 +20,8 @@ function NavigationBar() {
     }
   }, [selectedSnomedCodes, setSelectedSnomedCode]);
 
-  const handleSnomedSelect = (snomedCode) => { // Updated function name
-    setSelectedSnomedCode(snomedCode); // Updated state setter
+  const handleSnomedSelect = (snomedCode) => {
+    setSelectedSnomedCode(snomedCode);
     setExpanded(false); // Collapse Navbar on SNOMED code select
 
     // Check if the current path matches one of the specified routes
@@ -35,7 +35,7 @@ function NavigationBar() {
 
   const handleNavItemSelect = (startLoad) => {
     setExpanded(false); // Collapse Navbar on any item select
-    if (startLoad && selectedSnomedCode) { // Updated condition
+    if (startLoad && selectedSnomedCode) {
       startLoading();
     }
   };
@@ -75,18 +75,18 @@ function NavigationBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          {selectedSnomedCodes.length > 0 && ( // Updated condition
+          {selectedSnomedCodes.length > 0 && (
             <Nav>
               <NavDropdown
-                title={selectedSnomedCode ? `${selectedSnomedCode.code} ${selectedSnomedCode.term}` : "Selected SNOMED Codes"} // Updated title
-                id="selected-snomed-codes-dropdown" // Updated ID
+                title={selectedSnomedCode ? `${selectedSnomedCode.conceptId} ${selectedSnomedCode.term}` : "Selected SNOMED Codes"}
+                id="selected-snomed-codes-dropdown"
               >
-                {selectedSnomedCodes.map((snomedCode) => ( // Updated mapping
+                {selectedSnomedCodes.map((snomedCode) => (
                   <NavDropdown.Item
-                    key={snomedCode.id} // Updated key
-                    onClick={() => handleSnomedSelect(snomedCode)} // Updated onClick
+                    key={snomedCode.id}
+                    onClick={() => handleSnomedSelect(snomedCode)}
                   >
-                    {snomedCode.code} {snomedCode.term} // Updated display
+                    {snomedCode.conceptId} {snomedCode.term}
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>

@@ -1,22 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const axios = require('axios');
 const cors = require("cors");
 const path = require("path");
 const xmlparser = require("express-xml-bodyparser");
-const { Sequelize } = require("sequelize");
 const db = require("./models");  // import the models
-
-// const { DB_USER, DB_PASSWORD, DB_NAME, DB_HOST } = process.env;
-
-// const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
-//     host: DB_HOST,
-//     dialect: 'mysql'
-// });
-
-// sequelize.authenticate()
-//     .then(() => console.log("DB connection successful"))
-//     .catch(console.error);
+const snomedRouter = require("./routes/snomedRouter"); // Import the router
 
 const api = express();
 api.use(cors()); // enable CORS on all our requests 
@@ -30,13 +18,8 @@ db.sequelize.sync({ force: false }).then(() => {
     console.log('Database & tables created!');
 }).catch(console.error);
 
-// API POST - CRUD Create/Convert
-
-// API GET - CRUD Read
-  
-// API PUT - CRUD Update
-
-// API DELETE - CRUD Delete
+// Use the snomedRouter for all SNOMED-related API endpoints
+api.use('/snomed', snomedRouter);
 
 api.use(express.static(path.join(__dirname, "client", "build")));
 api.get("/*", (req, res) => {
