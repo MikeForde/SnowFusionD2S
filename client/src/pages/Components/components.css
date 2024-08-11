@@ -40,5 +40,10 @@ ul {
   max-width: 1000px; /* Adjust the width as needed */
 }
 
+.snomed-code {
+  font-size: 1rem;
+  color: #333;
+}
+
   
   
