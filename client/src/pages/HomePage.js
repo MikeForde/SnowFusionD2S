@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Page.css";
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form, Button, Alert } from "react-bootstrap"; // Import Alert component
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { SnomedContext } from '../SnomedContext';
@@ -13,12 +13,14 @@ const server = process.env.REACT_APP_API_BASE_URL
 
 function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [showAlert, setShowAlert] = useState(false); // State to manage alert visibility
   const { selectedSnomedCodes, setSelectedSnomedCodes, setSelectedSnomedCode } = useContext(SnomedContext);
   const { startLoading, stopLoading } = useLoading();
 
   const searchSnomedCodes = () => {
     if (searchTerm.length < 3) {
-      // Handle search term too short (could add a warning or message here)
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000); // Hide alert after 3 seconds
       return;
     }
 
@@ -69,6 +71,11 @@ function HomePage() {
             Search
           </Button>
         </Form>
+        {showAlert && (
+          <Alert variant="warning" className="floating-alert">
+            Please enter at least 3 characters to search.
+          </Alert>
+        )}
         <h3>Matching Codes</h3>
         <div>
           {selectedSnomedCodes.map((snomedCode) => (
