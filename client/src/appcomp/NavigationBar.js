@@ -1,29 +1,28 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
-import { PatientContext } from '../PatientContext';
+import { SnomedContext } from '../SnomedContext'; // Updated context import
 import { useLoading } from '../contexts/LoadingContext';
-import PatientSearch from './PatientSearch'; // Import the new component
-
+import SnomedSearch from './SnomedSearch'; // Updated component import
 
 function NavigationBar() {
-  const { selectedPatients, setSelectedPatient, selectedPatient } = useContext(PatientContext);
+  const { selectedSnomedCodes, setSelectedSnomedCode, selectedSnomedCode } = useContext(SnomedContext); // Updated context usage
   const [expanded, setExpanded] = useState(false);
   const { startLoading } = useLoading();
   //const location = useLocation();
 
   useEffect(() => {
-    // Update selectedPatient when selectedPatients change
-    if (selectedPatients.length > 0) {
-      setSelectedPatient(selectedPatients[0]);
+    // Update selectedSnomedCode when selectedSnomedCodes change
+    if (selectedSnomedCodes.length > 0) {
+      setSelectedSnomedCode(selectedSnomedCodes[0]);
     }
-  }, [selectedPatients, setSelectedPatient]);
+  }, [selectedSnomedCodes, setSelectedSnomedCode]);
 
-  const handlePatientSelect = (patient) => {
-    setSelectedPatient(patient);
-    setExpanded(false); // Collapse Navbar on patient select
+  const handleSnomedSelect = (snomedCode) => { // Updated function name
+    setSelectedSnomedCode(snomedCode); // Updated state setter
+    setExpanded(false); // Collapse Navbar on SNOMED code select
 
     // Check if the current path matches one of the specified routes
     //const currentPath = location.pathname;
@@ -36,7 +35,7 @@ function NavigationBar() {
 
   const handleNavItemSelect = (startLoad) => {
     setExpanded(false); // Collapse Navbar on any item select
-    if (startLoad && selectedPatient) {
+    if (startLoad && selectedSnomedCode) { // Updated condition
       startLoading();
     }
   };
@@ -76,24 +75,24 @@ function NavigationBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          {selectedPatients.length > 0 && (
+          {selectedSnomedCodes.length > 0 && ( // Updated condition
             <Nav>
               <NavDropdown
-                title={selectedPatient ? `${selectedPatient.patient.given} ${selectedPatient.patient.name}` : "Selected Patients"}
-                id="selected-patients-dropdown"
+                title={selectedSnomedCode ? `${selectedSnomedCode.code} ${selectedSnomedCode.term}` : "Selected SNOMED Codes"} // Updated title
+                id="selected-snomed-codes-dropdown" // Updated ID
               >
-                {selectedPatients.map((patient) => (
+                {selectedSnomedCodes.map((snomedCode) => ( // Updated mapping
                   <NavDropdown.Item
-                    key={patient._id}
-                    onClick={() => handlePatientSelect(patient)}
+                    key={snomedCode.id} // Updated key
+                    onClick={() => handleSnomedSelect(snomedCode)} // Updated onClick
                   >
-                    {patient.patient.given} {patient.patient.name}
+                    {snomedCode.code} {snomedCode.term} // Updated display
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>
             </Nav>
           )}
-          <PatientSearch collapseNavbar={collapseNavbar}/>
+          <SnomedSearch collapseNavbar={collapseNavbar}/> {/* Updated component usage */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

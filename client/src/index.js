@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { PatientProvider } from './PatientContext';
+import { SnomedProvider } from './SnomedContext'; // Updated import
 
 ReactDOM.render(
-  <PatientProvider>
+  <SnomedProvider> {/* Updated provider */}
     <App />
-  </PatientProvider>,
+  </SnomedProvider>,
   document.getElementById('root')
 );
+

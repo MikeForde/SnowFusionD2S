@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -6,13 +5,13 @@ import AboutPage from './pages/AboutPage';
 import NavigationBar from './appcomp/NavigationBar';
 import ChangeLogPage from './pages/ChangelogPage';
 import AboutWebAppPage from './pages/AboutWebappPage';
-import { PatientProvider } from './PatientContext';
+import { SnomedProvider } from './SnomedContext'; // Updated import
 import { LoadingProvider } from './contexts/LoadingContext';
 import LoadingSpinner from './components/LoadingSpinner';
 
 function App() {
   return (
-    <PatientProvider>
+    <SnomedProvider> {/* Updated provider */}
       <LoadingProvider>
         <Router>
           <div style={{ paddingTop: '56px' }}> {/* Adjust the padding-top value based on your Navbar height */}
@@ -27,7 +26,7 @@ function App() {
           </div>
         </Router>
       </LoadingProvider>
-    </PatientProvider>
+    </SnomedProvider>
   );
 }
 
