@@ -11,5 +11,26 @@
 .navbar {
     background-color: rgb(212, 212, 47);
     padding: 1rem;
-  }
-  
+}
+
+/* New CSS for reducing font size in SNOMED search results */
+.snomed-search-result {
+    font-size: 0.8rem; /* Adjust font size as needed */
+}
+
+.snomed-search-displayed {
+    font-size: 0.8rem; /* Adjust font size as needed */
+}
+
+.floating-alert {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}

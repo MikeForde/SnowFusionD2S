@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';  // Import Alert component
 import axios from 'axios';
 import { SnomedContext } from '../SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
@@ -11,10 +11,17 @@ const server = process.env.REACT_APP_API_BASE_URL
 
 function SnomedSearch({ collapseNavbar }) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [showAlert, setShowAlert] = useState(false);  // State to manage alert visibility
   const { setSelectedSnomedCodes, setSelectedSnomedCode } = useContext(SnomedContext);
   const { startLoading, stopLoading } = useLoading();
 
   const searchSnomedCodes = () => { 
+    if (searchTerm.length < 3) {
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);  // Hide alert after 3 seconds
+      return;
+    }
+    
     startLoading();
     server
       .get(`/snomed/search/${searchTerm}`)
@@ -46,18 +53,25 @@ function SnomedSearch({ collapseNavbar }) {
   };
 
   return (
-    <Form inline onSubmit={handleSearchSubmit} className="search-form">
-      <Form.Control
-        type="text"
-        placeholder="Search SNOMED Code or Term"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className="mr-sm-2 form-control"
-      />
-      <Button variant="outline-light" type="submit">
-        Search
-      </Button>
-    </Form>
+    <>
+      <Form inline onSubmit={handleSearchSubmit} className="search-form">
+        <Form.Control
+          type="text"
+          placeholder="Search SNOMED Code or Term"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="mr-sm-2 form-control"
+        />
+        <Button variant="outline-light" type="submit">
+          Search
+        </Button>
+      </Form>
+      {showAlert && (
+        <Alert variant="warning" className="floating-alert">
+          Please enter at least 3 characters to search.
+        </Alert>
+      )}
+    </>
   );
 }
 

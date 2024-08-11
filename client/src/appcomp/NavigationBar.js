@@ -6,6 +6,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { SnomedContext } from '../SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
 import SnomedSearch from './SnomedSearch';
+import './AppComp.css';
 
 function NavigationBar() {
   const { selectedSnomedCodes, setSelectedSnomedCode, selectedSnomedCode } = useContext(SnomedContext);
@@ -27,7 +28,7 @@ function NavigationBar() {
     // Check if the current path matches one of the specified routes
     //const currentPath = location.pathname;
     // const shouldStartLoading = ['/api', '/qr', '/beergarden', '/offroadpost'].includes(currentPath);
-    
+
     // if (shouldStartLoading) {
     //   startLoading();
     // }
@@ -80,11 +81,13 @@ function NavigationBar() {
               <NavDropdown
                 title={selectedSnomedCode ? `${selectedSnomedCode.conceptId} ${selectedSnomedCode.term}` : "Selected SNOMED Codes"}
                 id="selected-snomed-codes-dropdown"
+                className="snomed-search-displayed"
               >
                 {selectedSnomedCodes.map((snomedCode) => (
                   <NavDropdown.Item
                     key={snomedCode.id}
                     onClick={() => handleSnomedSelect(snomedCode)}
+                    className="snomed-search-result"  // Added class for custom styling
                   >
                     {snomedCode.conceptId} {snomedCode.term}
                   </NavDropdown.Item>
@@ -92,7 +95,7 @@ function NavigationBar() {
               </NavDropdown>
             </Nav>
           )}
-          <SnomedSearch collapseNavbar={collapseNavbar}/> {/* Updated component usage */}
+          <SnomedSearch collapseNavbar={collapseNavbar} /> {/* Updated component usage */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
