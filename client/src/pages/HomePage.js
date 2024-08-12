@@ -134,7 +134,7 @@ function HomePage() {
                 <SNOMEDCode
                   key={child.id}
                   snomedCode={child}
-                  onClick={() => setSelectedSnomedCode(child)}
+                  onClick={() => {setSelectedSnomedCode(child)}}
                   className="clickable"  // Add a class for styling
                 />
               ))}

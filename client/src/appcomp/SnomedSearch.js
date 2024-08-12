@@ -57,7 +57,7 @@ function SnomedSearch({ collapseNavbar }) {
       <Form inline onSubmit={handleSearchSubmit} className="search-form">
         <Form.Control
           type="text"
-          placeholder="Search SNOMED Code or Term"
+          placeholder="Code or Term"
           value={searchTerm}
           onChange={handleSearchChange}
           className="mr-sm-2 form-control"

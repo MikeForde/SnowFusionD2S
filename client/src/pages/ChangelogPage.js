@@ -19,6 +19,9 @@ function ChangeLogPage() {
                                 <li>
                                     <p>Single page with Search and Display.</p>
                                 </li>
+                                <li>
+                                    <p>Framework code based on IPS SERN WebApp.</p>
+                                </li>
                             </ul>
                         </li>
                         <li className="mb-5">
@@ -32,6 +35,20 @@ function ChangeLogPage() {
                                 </li>
                                 <li>
                                     <p>Improved the search functionality to handle both terms and concept IDs.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_3 - 12 Aug 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Extra Info and Better Navigation</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added more information about SNOMED in general.</p>
+                                </li>
+                                <li>
+                                    <p>Clicking on Parent or Child code centers view on that code.</p>
                                 </li>
                             </ul>
                         </li>
