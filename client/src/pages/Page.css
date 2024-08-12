@@ -67,6 +67,41 @@
   align-items: center;
 } 
 
+.scrollable-area {
+  overflow-y: auto;
+  height: 80vh; /* Adjust the height as needed */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.selected-code {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.related-codes {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.floating-alert {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1050;
+  width: auto;
+  padding: 10px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+
 
 
 

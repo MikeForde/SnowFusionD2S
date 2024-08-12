@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
 
     SnomedIntDescription.associate = models => {
         SnomedIntDescription.belongsTo(models.SnomedIntConcept, { foreignKey: 'conceptId' });
+
+        // Add associations to the SnomedIntRelationship model
+        SnomedIntDescription.hasMany(models.SnomedIntRelationship, { foreignKey: 'sourceId', as: 'SourceRelationships' });
+        SnomedIntDescription.hasMany(models.SnomedIntRelationship, { foreignKey: 'destinationId', as: 'DestinationRelationships' });
     };
 
     return SnomedIntDescription;

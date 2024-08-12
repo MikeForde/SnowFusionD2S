@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 function SNOMEDCode({ snomedCode }) {
   return (
     <div className="snomed-code">
-      <p><strong>Concept ID:</strong> {snomedCode.conceptId}</p>
-      <p><strong>Term:</strong> {snomedCode.term}</p>
+      <p>{snomedCode.conceptId} {snomedCode.term}</p>
     </div>
   );
 }

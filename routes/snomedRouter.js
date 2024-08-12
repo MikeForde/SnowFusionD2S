@@ -1,9 +1,16 @@
 const express = require('express');
-const { searchSnomedTerm } = require('../controllers/snomedController'); // Import the controller function
+const {
+    searchSnomedTerm,
+    getSnomedDescriptionsByConceptId,
+    getParentCodes,
+    getChildCodes
+} = require('../controllers/snomedController');
 
 const router = express.Router();
 
-// Define the route for searching SNOMED terms
 router.get('/search/:searchTerm', searchSnomedTerm);
+router.get('/descriptions/:conceptId', getSnomedDescriptionsByConceptId);
+router.get('/parents/:conceptId', getParentCodes);
+router.get('/children/:conceptId', getChildCodes);
 
 module.exports = router;

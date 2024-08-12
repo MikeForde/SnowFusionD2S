@@ -52,8 +52,8 @@ function NavigationBar() {
         <Navbar.Brand as={Link} to="/" onClick={() => handleNavItemSelect(false)}>
           <img
             src="/ipsnavbar.ico"
-            width="25"
-            height="25"
+            width="32"
+            height="32"
             className="d-inline-block align-center"
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
