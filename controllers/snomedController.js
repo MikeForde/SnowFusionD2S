@@ -75,7 +75,7 @@ const getParentCodes = async (req, res) => {
     const { conceptId } = req.params;
 
     try {
-        console.log(`Received conceptId: ${conceptId}`);
+        // console.log(`Received conceptId: ${conceptId}`);
 
         // Step 1: Find all entries in the relationship table where sourceId matches the conceptId
         const relationships = await db.SnomedIntRelationship.findAll({
@@ -86,7 +86,7 @@ const getParentCodes = async (req, res) => {
             }
         });
 
-        console.log(`Relationships found for conceptId ${conceptId}:`, relationships);
+        // console.log(`Relationships found for conceptId ${conceptId}:`, relationships);
 
         // Step 2: Check if the destinationIds correspond with active ids in the concepts table
         const activeDestinationIds = await Promise.all(relationships.map(async (relationship) => {
@@ -119,7 +119,7 @@ const getParentCodes = async (req, res) => {
                 },
                 attributes: ['term', 'conceptId']
             });
-            console.log(`Description found for active destinationId ${destinationId}:`, description);
+            // console.log(`Description found for active destinationId ${destinationId}:`, description);
             return description;
         }));
 

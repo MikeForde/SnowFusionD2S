@@ -131,9 +131,9 @@ function HomePage() {
                 />
               ))}
             </div>
-            <h2 className="selected-code">
+            <h3 className="selected-code">
               {selectedSnomedCode ? `${selectedSnomedCode.conceptId} - ${selectedSnomedCode.term}` : ""}
-            </h2>
+            </h3>
             <h4>Children ({children.length})</h4>
             <div className="related-codes">
               {children.map((child) => (

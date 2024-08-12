@@ -42,13 +42,16 @@ function ChangeLogPage() {
                             <h3 className="text-primary">Version 0_3 - 12 Aug 2024</h3>
                             <ul>
                                 <li>
-                                    <p><strong>Extra Info and Better Navigation</strong></p>
+                                    <p><strong>Extra Info, Better Navigation and Fixes</strong></p>
                                 </li>
                                 <li>
                                     <p>Added more information about SNOMED in general.</p>
                                 </li>
                                 <li>
                                     <p>Clicking on Parent or Child code centers view on that code.</p>
+                                </li>
+                                <li>
+                                    <p>Fixes to search returns so confined to active descriptions and accepting codes ending in 0</p>
                                 </li>
                             </ul>
                         </li>
