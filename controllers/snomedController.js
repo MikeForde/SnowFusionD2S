@@ -8,13 +8,14 @@ const searchSnomedTerm = async (req, res) => {
         let results;
 
         // Regular expression to match conceptId format (greater than 5 digits, ends with "00" followed by 1-9)
-        const conceptIdPattern = /^\d{3,}00[1-9]$/;
+        const conceptIdPattern = /^\d{3,}00[0-9]$/;
 
         if (conceptIdPattern.test(searchTerm)) {
             // If the searchTerm matches the conceptId pattern, search by conceptId
             results = await db.SnomedIntDescription.findAll({
                 where: {
-                    conceptId: searchTerm
+                    conceptId: searchTerm,
+                    active: true
                 },
                 include: [{
                     model: db.SnomedIntConcept,
@@ -32,6 +33,7 @@ const searchSnomedTerm = async (req, res) => {
                     term: {
                         [db.Sequelize.Op.like]: `%${searchTerm}%`
                     },
+                    active: true
                 },
                 include: [{
                     model: db.SnomedIntConcept,

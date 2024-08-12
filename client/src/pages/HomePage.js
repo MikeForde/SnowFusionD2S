@@ -54,18 +54,24 @@ function HomePage() {
   };
 
   const fetchRelatedCodes = (conceptId) => {
-    // Fetch parents
-    server
-      .get(`/snomed/parents/${conceptId}`)
-      .then((response) => setParents(response.data))
-      .catch((error) => console.error('Error fetching parents:', error));
+    startLoading();
 
-    // Fetch children
-    server
-      .get(`/snomed/children/${conceptId}`)
-      .then((response) => setChildren(response.data))
-      .catch((error) => console.error('Error fetching children:', error));
-  };
+    Promise.all([
+        server.get(`/snomed/parents/${conceptId}`),
+        server.get(`/snomed/children/${conceptId}`)
+    ])
+    .then(([parentsResponse, childrenResponse]) => {
+        setParents(parentsResponse.data);
+        setChildren(childrenResponse.data);
+    })
+    .catch((error) => {
+        console.error('Error fetching related codes:', error);
+    })
+    .finally(() => {
+        stopLoading();
+    });
+};
+
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -114,7 +120,7 @@ function HomePage() {
             </div>
           </div>
           <div className="col-md-8 scrollable-area">
-            <h4>Parents</h4>
+            <h4>Parents ({parents.length})</h4>
             <div className="related-codes">
               {parents.map((parent) => (
                 <SNOMEDCode
@@ -128,18 +134,19 @@ function HomePage() {
             <h2 className="selected-code">
               {selectedSnomedCode ? `${selectedSnomedCode.conceptId} - ${selectedSnomedCode.term}` : ""}
             </h2>
-            <h4>Children</h4>
+            <h4>Children ({children.length})</h4>
             <div className="related-codes">
               {children.map((child) => (
                 <SNOMEDCode
                   key={child.id}
                   snomedCode={child}
-                  onClick={() => {setSelectedSnomedCode(child)}}
+                  onClick={() => { setSelectedSnomedCode(child) }}
                   className="clickable"  // Add a class for styling
                 />
               ))}
             </div>
           </div>
+
 
         </div>
       </div>
