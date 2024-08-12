@@ -92,9 +92,9 @@ function HomePage() {
                   onChange={handleSearchChange}
                 />
               </Form.Group>
-              <Button style={{ backgroundColor: 'rgb(47, 47, 212)', borderColor: 'rgb(102, 51, 153)' }} type="submit" className="mb-3">
-    Search
-</Button>
+              <Button type="submit" className="custom-button mb-3">
+                Search
+              </Button>
 
             </Form>
             {showAlert && (
@@ -117,7 +117,12 @@ function HomePage() {
             <h4>Parents</h4>
             <div className="related-codes">
               {parents.map((parent) => (
-                <SNOMEDCode key={parent.id} snomedCode={parent} />
+                <SNOMEDCode
+                  key={parent.id}
+                  snomedCode={parent}
+                  onClick={() => setSelectedSnomedCode(parent)}
+                  className="clickable"  // Add a class for styling
+                />
               ))}
             </div>
             <h2 className="selected-code">
@@ -126,10 +131,16 @@ function HomePage() {
             <h4>Children</h4>
             <div className="related-codes">
               {children.map((child) => (
-                <SNOMEDCode key={child.id} snomedCode={child} />
+                <SNOMEDCode
+                  key={child.id}
+                  snomedCode={child}
+                  onClick={() => setSelectedSnomedCode(child)}
+                  className="clickable"  // Add a class for styling
+                />
               ))}
             </div>
           </div>
+
         </div>
       </div>
     </div>

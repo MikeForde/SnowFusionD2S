@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
 function AboutWebAppPage() {
-    const isHostedOnAzure = window.location.href.includes("snomed-d2s.azurewebsites.net");
+    const isHostedOnAzure = window.location.href.includes("snomed-d2s");
     return (
         <Container className="mt-5">
             <Row>
@@ -35,13 +35,13 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 {isHostedOnAzure ? (
                                     <>
-                                        This web application is currently being hosted on Microsoft Azure.<br />
+                                        This web application is currently being hosted on MODNET D2S.<br />
                                         It can be hosted easily on a closed network, and stood-up via standalone Linux, virtual machine (VM), or a container e.g. Docker.
                                     </>
                                 ) : (
                                     <>
                                         This web application is currently being hosted on a closed network.<br />
-                                        It can be hosted easily on a cloud service, for example Microsoft Azure.
+                                        It can be hosted easily on a cloud service, for example OpenShift/D2S.
                                     </>
                                 )}
                             </Card.Text>

@@ -6,13 +6,33 @@ function ChangeLogPage() {
         <Container className="mt-5">
             <Row>
                 <Col>
-                    <h3>ChangeLog - Versions refer to Cloud Deployments</h3>
-                    <ul>
-                        <li>
-                            <h5>Version 0_1 (Initial Release) - 01 Aug 2024</h5>
+                    <h1 className="display-4 text-center mb-4">ChangeLog</h1>
+                    <p className="text-center text-muted">Versions refer to D2S Deployments</p>
+                    <hr />
+                    <ul className="list-unstyled">
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_1 (Initial Release) - 11 Aug 2024</h3>
                             <ul>
-                                <li><strong>Implemented basic functionality for the SERN SNOMED web app.</strong></li>
-                                <li>Single page with Search and Display</li>
+                                <li>
+                                    <p><strong>Implemented basic functionality for the SERN SNOMED web app.</strong></p>
+                                </li>
+                                <li>
+                                    <p>Single page with Search and Display.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_2 (Enhanced Search) - 12 Aug 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Parent and Child Hierarchy.</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added display of Parent and Child codes on the main page.</p>
+                                </li>
+                                <li>
+                                    <p>Improved the search functionality to handle both terms and concept IDs.</p>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -23,3 +43,4 @@ function ChangeLogPage() {
 }
 
 export default ChangeLogPage;
+
