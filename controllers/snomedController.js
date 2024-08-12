@@ -82,7 +82,8 @@ const getParentCodes = async (req, res) => {
             where: { 
                 sourceId: conceptId,
                 active: true,
-                relationshipGroup: false
+                relationshipGroup: false,
+                typeId: '116680003'
             }
         });
 
@@ -146,7 +147,8 @@ const getChildCodes = async (req, res) => {
             where: { 
                 destinationId: conceptId,
                 active: true,
-                relationshipGroup: false
+                relationshipGroup: false,
+                typeId: '116680003'
             }
         });
 
