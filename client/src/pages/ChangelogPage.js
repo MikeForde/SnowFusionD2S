@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import "./Page.css";
 
 function ChangeLogPage() {
     return (
-        <Container className="mt-5">
+        <Container className="mt-5 ChangeLogPage">
             <Row>
                 <Col>
                     <h1 className="display-4 text-center mb-4">ChangeLog</h1>
