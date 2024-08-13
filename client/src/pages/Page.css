@@ -115,6 +115,13 @@
   background-color: #f0f0f0; /* Light grey background on hover */
 }
 
+.selected {
+  font-size: x-large;
+}
+
+.selected .flagimage {
+  width: 40px;
+}
 
 
 

@@ -55,6 +55,26 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_4 - 13 Aug 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>UK Extension Features</strong></p>
+                                </li>
+                                <li>
+                                    <p>Integrated UK-specific SNOMED CT extensions alongside the International dataset.</p>
+                                </li>
+                                <li>
+                                    <p>Added functionality to display a UK flag next to codes originating from the UK module.</p>
+                                </li>
+                                <li>
+                                    <p>Enhanced search to include both UK and International SNOMED CT terms.</p>
+                                </li>
+                                <li>
+                                    <p>Updated the parent/child relationship views to account for UK extensions, showing relationships across both datasets.</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>

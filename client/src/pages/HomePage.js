@@ -57,20 +57,20 @@ function HomePage() {
     startLoading();
 
     Promise.all([
-        server.get(`/snomed/parents/${conceptId}`),
-        server.get(`/snomed/children/${conceptId}`)
+      server.get(`/snomed/parents/${conceptId}`),
+      server.get(`/snomed/children/${conceptId}`)
     ])
-    .then(([parentsResponse, childrenResponse]) => {
+      .then(([parentsResponse, childrenResponse]) => {
         setParents(parentsResponse.data);
         setChildren(childrenResponse.data);
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error('Error fetching related codes:', error);
-    })
-    .finally(() => {
+      })
+      .finally(() => {
         stopLoading();
-    });
-};
+      });
+  };
 
 
   const handleSearchChange = (event) => {
@@ -131,9 +131,15 @@ function HomePage() {
                 />
               ))}
             </div>
-            <h3 className="selected-code">
-              {selectedSnomedCode ? `${selectedSnomedCode.conceptId} - ${selectedSnomedCode.term}` : ""}
-            </h3>
+            <div className="selected-code">
+              {selectedSnomedCode && (
+                <SNOMEDCode
+                  snomedCode={selectedSnomedCode}
+                  className="selected" // You can style this separately if needed
+                  isSelected={true}
+                />
+              )}
+            </div>
             <h4>Children ({children.length})</h4>
             <div className="related-codes">
               {children.map((child) => (

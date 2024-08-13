@@ -1,27 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SNOMEDCode({ snomedCode, onClick, className }) {
+function SNOMEDCode({ snomedCode, onClick, className, isSelected }) {
   return (
     <div className={`snomed-code ${className}`} onClick={onClick}>
-      <p>{snomedCode.conceptId} - {snomedCode.term}</p>
+      <p>
+        {snomedCode.conceptId} - {snomedCode.term}{" "}
+        {snomedCode.moduleId === '999000011000000103' && (
+          <img
+            src="/uk-flag.svg"
+            alt="UK Flag"
+            style={{
+              width: isSelected ? '40px' : '20px',  // Larger flag if selected
+              marginLeft: '5px'
+            }}
+          />
+        )}
+      </p>
     </div>
   );
 }
 
 SNOMEDCode.propTypes = {
   snomedCode: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     conceptId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     term: PropTypes.string.isRequired,
+    moduleId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Add moduleId to props
   }).isRequired,
-  onClick: PropTypes.func, // Accept an onClick function
-  className: PropTypes.string, // Accept an optional className
+  onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 SNOMEDCode.defaultProps = {
-  onClick: () => {}, // Default to an empty function if onClick is not provided
-  className: '', // Default to an empty string if className is not provided
+  onClick: () => { },
+  className: '',
 };
 
 export default SNOMEDCode;
+
 
