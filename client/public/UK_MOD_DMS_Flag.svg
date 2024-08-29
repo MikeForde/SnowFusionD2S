@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="tiny" height="800" version="1.2" width="1200">
+  <defs/>
+  <rect fill="#00247D" height="800" width="400.0" x="0.0" y="0"/>
+  <rect fill="#CF142B" height="800" width="400.0" x="400.0" y="0"/>
+  <rect fill="#00A2E8" height="800" width="400.0" x="800.0" y="0"/>
+</svg>

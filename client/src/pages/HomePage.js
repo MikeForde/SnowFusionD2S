@@ -87,13 +87,13 @@ function HomePage() {
       <div className="container">
         <div className="row">
           <div className="col-md-4 scrollable-area">
-            <h3>Find SNOMED Code</h3>
+            <h3>Search</h3>
             <Form onSubmit={handleSearchSubmit}>
               <Form.Group controlId="searchTerm">
-                <Form.Label>SNOMED Code or Term</Form.Label>
+                <Form.Label>SNOMED Code/Term or DMS Local Term</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter SNOMED code or term"
+                  placeholder="Enter SNOMED code/term or DMS Local"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
@@ -108,7 +108,7 @@ function HomePage() {
                 Please enter at least 3 characters to search.
               </Alert>
             )}
-            <h3>Matching Codes</h3>
+            <h3>Matching Concepts</h3>
             <div>
               {selectedSnomedCodes.map((snomedCode) => (
                 <Card key={snomedCode.id} onClick={() => setSelectedSnomedCode(snomedCode)}>

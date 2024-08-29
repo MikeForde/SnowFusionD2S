@@ -76,6 +76,26 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_5 - 29 Aug 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>DMS Local Code Integration</strong></p>
+                                </li>
+                                <li>
+                                    <p>Incorporated DMS Local Codes into the application, allowing them to be displayed alongside UK and International SNOMED CT codes.</p>
+                                </li>
+                                <li>
+                                    <p>Added functionality to display "DMS Local Code" and a flag icon when the moduleId corresponds to DMS codes.</p>
+                                </li>
+                                <li>
+                                    <p>Enhanced the parent/child relationship logic to include DMS Local Codes, integrating them into the hierarchical views.</p>
+                                </li>
+                                <li>
+                                    <p>Updated the About Web App page to reflect the inclusion of DMS Local Codes and the purpose of the application in demonstrating how these codes might relate to established SNOMED codes.</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>
@@ -84,4 +104,3 @@ function ChangeLogPage() {
 }
 
 export default ChangeLogPage;
-

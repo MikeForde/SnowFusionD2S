@@ -7,7 +7,7 @@ const searchSnomedTerm = async (req, res) => {
     console.log(`Searching for SNOMED term: ${searchTerm}`);
 
     try {
-        let intResults, ukResults;
+        let intResults, ukResults, dmsResults;
 
         // Regular expression to match conceptId format (greater than 5 digits, ends with "00" followed by 1-9)
         const conceptIdPattern = /^\d{3,}[0-9]0[0-9]$/;
@@ -41,7 +41,22 @@ const searchSnomedTerm = async (req, res) => {
                     },
                     attributes: []
                 }],
-                attributes: ['id', 'term', 'conceptId',  'moduleId']
+                attributes: ['id', 'term', 'conceptId', 'moduleId']
+            });
+
+            dmsResults = await db.SnomedDMSDescription.findAll({
+                where: {
+                    conceptId: searchTerm,
+                    active: true
+                },
+                include: [{
+                    model: db.SnomedDMSConcept,
+                    where: {
+                        active: true
+                    },
+                    attributes: []
+                }],
+                attributes: ['id', 'term', 'conceptId', 'moduleId']
             });
 
         } else {
@@ -79,12 +94,29 @@ const searchSnomedTerm = async (req, res) => {
                 }],
                 attributes: ['id', 'term', 'conceptId', 'moduleId']
             });
+
+            dmsResults = await db.SnomedDMSDescription.findAll({
+                where: {
+                    term: {
+                        [db.Sequelize.Op.like]: `%${searchTerm}%`
+                    },
+                    active: true
+                },
+                include: [{
+                    model: db.SnomedDMSConcept,
+                    where: {
+                        active: true
+                    },
+                    attributes: []
+                }],
+                attributes: ['id', 'term', 'conceptId', 'moduleId']
+            });
         }
 
-        // Combine the results from both databases
-        console.log(`Found ${intResults.length} results from SNOMED-INT and ${ukResults.length} results from SNOMED-UK`);
+        // Combine the results from all three databases
+        console.log(`Found ${intResults.length} results from SNOMED-INT, ${ukResults.length} results from SNOMED-UK, and ${dmsResults.length} results from SNOMED-DMS`);
 
-        const results = [...ukResults, ...intResults];
+        const results = [...dmsResults, ...ukResults, ...intResults];
 
         res.json(results); // Return the combined results as JSON
     } catch (error) {
@@ -93,24 +125,32 @@ const searchSnomedTerm = async (req, res) => {
     }
 };
 
-
-
-
 const getSnomedDescriptionsByConceptId = async (req, res) => {
     const { conceptId } = req.params;
 
     try {
+        // Fetch descriptions from the International dataset
         const intDescriptions = await db.SnomedIntDescription.findAll({
             where: { conceptId },
             attributes: ['id', 'term', 'conceptId', 'moduleId']
         });
 
+        // Fetch descriptions from the UK dataset
         const ukDescriptions = await db.SnomedUKDescription.findAll({
             where: { conceptId },
             attributes: ['id', 'term', 'conceptId', 'moduleId']
         });
 
-        const descriptions = [...intDescriptions, ...ukDescriptions];
+        // Fetch descriptions from the DMS dataset
+        const dmsDescriptions = await db.SnomedDMSDescription.findAll({
+            where: { conceptId },
+            attributes: ['id', 'term', 'conceptId', 'moduleId']
+        });
+
+        // Combine the descriptions from all three datasets
+        const descriptions = [...intDescriptions, ...ukDescriptions, ...dmsDescriptions];
+
+        // Return the combined descriptions as JSON
         res.json(descriptions);
     } catch (error) {
         console.error('Error fetching SNOMED descriptions:', error);
@@ -118,11 +158,12 @@ const getSnomedDescriptionsByConceptId = async (req, res) => {
     }
 };
 
+
 const getParentCodes = async (req, res) => {
     const { conceptId } = req.params;
 
     try {
-        // Fetch relationships from International and UK datasets
+        // Fetch relationships from International, UK, and DMS datasets
         const intRelationships = await db.SnomedIntRelationship.findAll({
             where: { 
                 sourceId: conceptId,
@@ -141,9 +182,18 @@ const getParentCodes = async (req, res) => {
             }
         });
 
-        const relationships = [...intRelationships, ...ukRelationships];
+        const dmsRelationships = await db.SnomedDMSRelationship.findAll({
+            where: { 
+                sourceId: conceptId,
+                active: true,
+                relationshipGroup: false,
+                typeId: '116680003'
+            }
+        });
 
-        // Check if the destinationIds correspond with active ids in the concepts table
+        const relationships = [...intRelationships, ...ukRelationships, ...dmsRelationships];
+
+        // Check if the destinationIds correspond with active ids in the concepts table (across all datasets)
         const activeDestinationIds = await Promise.all(relationships.map(async (relationship) => {
             const concept = await db.SnomedIntConcept.findOne({
                 where: {
@@ -157,6 +207,12 @@ const getParentCodes = async (req, res) => {
                     active: true
                 },
                 attributes: ['id']
+            }) || await db.SnomedDMSConcept.findOne({
+                where: {
+                    id: relationship.destinationId,
+                    active: true
+                },
+                attributes: ['id']
             });
 
             return concept ? relationship.destinationId : null;
@@ -164,7 +220,7 @@ const getParentCodes = async (req, res) => {
 
         const validDestinationIds = activeDestinationIds.filter(id => id !== null);
 
-        // Fetch descriptions for valid destinationIds
+        // Fetch descriptions for valid destinationIds (across all datasets)
         const descriptions = await Promise.all(validDestinationIds.map(async (destinationId) => {
             const description = await db.SnomedIntDescription.findOne({
                 where: {
@@ -178,12 +234,20 @@ const getParentCodes = async (req, res) => {
                     typeId: '900000000000003001'
                 },
                 attributes: ['term', 'conceptId', 'moduleId']
+            }) || await db.SnomedDMSDescription.findOne({
+                where: {
+                    conceptId: destinationId,
+                    typeId: '900000000000003001'
+                },
+                attributes: ['term', 'conceptId', 'moduleId']
             });
 
             return description;
         }));
 
+
         const validDescriptions = descriptions.filter(desc => desc !== null);
+
         res.json(validDescriptions);
     } catch (error) {
         console.error('Error fetching parent codes:', error);
@@ -192,11 +256,12 @@ const getParentCodes = async (req, res) => {
 };
 
 
+
 const getChildCodes = async (req, res) => {
     const { conceptId } = req.params;
 
     try {
-        // Fetch relationships from International and UK datasets
+        // Fetch relationships from International, UK, and DMS datasets
         const intRelationships = await db.SnomedIntRelationship.findAll({
             where: { 
                 destinationId: conceptId,
@@ -215,9 +280,18 @@ const getChildCodes = async (req, res) => {
             }
         });
 
-        const relationships = [...intRelationships, ...ukRelationships];
+        const dmsRelationships = await db.SnomedDMSRelationship.findAll({
+            where: { 
+                destinationId: conceptId,
+                active: true,
+                relationshipGroup: false,
+                typeId: '116680003'
+            }
+        });
 
-        // Check if the sourceIds correspond with active ids in the concepts table
+        const relationships = [...intRelationships, ...ukRelationships, ...dmsRelationships];
+
+        // Check if the sourceIds correspond with active ids in the concepts table (across all datasets)
         const activeSourceIds = await Promise.all(relationships.map(async (relationship) => {
             const concept = await db.SnomedIntConcept.findOne({
                 where: {
@@ -231,6 +305,12 @@ const getChildCodes = async (req, res) => {
                     active: true
                 },
                 attributes: ['id']
+            }) || await db.SnomedDMSConcept.findOne({
+                where: {
+                    id: relationship.sourceId,
+                    active: true
+                },
+                attributes: ['id']
             });
 
             return concept ? relationship.sourceId : null;
@@ -238,7 +318,7 @@ const getChildCodes = async (req, res) => {
 
         const validSourceIds = activeSourceIds.filter(id => id !== null);
 
-        // Fetch descriptions for valid sourceIds
+        // Fetch descriptions for valid sourceIds (across all datasets)
         const descriptions = await Promise.all(validSourceIds.map(async (sourceId) => {
             const description = await db.SnomedIntDescription.findOne({
                 where: {
@@ -247,6 +327,12 @@ const getChildCodes = async (req, res) => {
                 },
                 attributes: ['term', 'conceptId', 'moduleId']
             }) || await db.SnomedUKDescription.findOne({
+                where: {
+                    conceptId: sourceId,
+                    typeId: '900000000000003001'
+                },
+                attributes: ['term', 'conceptId', 'moduleId']
+            }) || await db.SnomedDMSDescription.findOne({
                 where: {
                     conceptId: sourceId,
                     typeId: '900000000000003001'
@@ -264,13 +350,6 @@ const getChildCodes = async (req, res) => {
         res.status(500).json({ error: 'An error occurred while fetching child codes.' });
     }
 };
-
-
-module.exports = {
-    getChildCodes,
-    // other functions...
-};
-
 
 
 module.exports = {

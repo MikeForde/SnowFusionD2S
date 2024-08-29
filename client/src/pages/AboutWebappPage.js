@@ -9,7 +9,7 @@ function AboutWebAppPage() {
                 <Col>
                     <h2>About This Web Application</h2>
                     <p>
-                        This web application is a prototype designed for searching and exploring SNOMED CT codes, particularly focusing on their hierarchical relationships (parent/child) and integrating both the UK and International datasets. It provides a user-friendly interface for healthcare professionals and developers to interact with SNOMED CT data, supporting experimentation, demonstration, and further development.
+                        This web application is a prototype designed to demonstrate how DMS Local Codes may relate to established International and UK SNOMED CT codes. The intent is not to create a DMS SNOMED extension but rather to highlight that these DMS codes do not currently exist in SNOMED (International or UK). In any future electronic health record (EHR) system, such codes would need to be created as local codes.
                     </p>
                 </Col>
             </Row>
@@ -21,9 +21,10 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 This application offers several key features:
                                 <ul>
-                                    <li><strong>SNOMED CT Searching</strong>: Easily search for SNOMED CT codes by term or concept ID.</li>
+                                    <li><strong>DMS Local Code Representation</strong>: Demonstrates how DMS Local Codes relate to existing SNOMED CT codes.</li>
+                                    <li><strong>SNOMED CT Searching</strong>: Easily search for SNOMED CT codes by term or concept ID, including DMS Local Codes.</li>
                                     <li><strong>Parent/Child Relationships</strong>: Visualize the hierarchical relationships between SNOMED CT codes.</li>
-                                    <li><strong>UK and International Dataset Integration</strong>: Simultaneously search and display results from both the UK-specific and International SNOMED CT datasets.</li>
+                                    <li><strong>UK, International, and DMS Dataset Integration</strong>: Simultaneously search and display results from UK-specific, International, and DMS datasets.</li>
                                     <li><strong>Responsive Interface</strong>: A user-friendly and responsive design that adapts to various screen sizes.</li>
                                 </ul>
                             </Card.Text>
@@ -78,9 +79,9 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 This application is ideal for:
                                 <ul>
-                                    <li><strong>Healthcare Professionals</strong>: Quickly searching and exploring SNOMED CT codes to support clinical decision-making and patient record management.</li>
-                                    <li><strong>Developers</strong>: Integrating SNOMED CT data into healthcare applications, testing SNOMED CT-based algorithms, or developing new SNOMED CT-based features.</li>
-                                    <li><strong>Researchers</strong>: Analyzing SNOMED CT data, particularly in the context of relationships between different medical concepts.</li>
+                                    <li><strong>Healthcare Professionals</strong>: Exploring how DMS Local Codes may relate to established SNOMED CT codes, aiding in clinical decision-making and patient record management.</li>
+                                    <li><strong>Developers</strong>: Integrating DMS Local Codes and SNOMED CT data into healthcare applications, testing code relationships, or developing new features.</li>
+                                    <li><strong>Researchers</strong>: Analyzing the relationships between DMS Local Codes and SNOMED CT data, particularly in the context of hierarchical structures between medical concepts.</li>
                                 </ul>
                             </Card.Text>
                         </Card.Body>
