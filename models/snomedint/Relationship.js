@@ -16,12 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     SnomedIntRelationship.associate = models => {
-        SnomedIntRelationship.belongsTo(models.SnomedIntConcept, { as: 'sourceConcept', foreignKey: 'sourceId' });
-        SnomedIntRelationship.belongsTo(models.SnomedIntConcept, { as: 'destinationConcept', foreignKey: 'destinationId' });
+        if (process.env.DISABLE_ASSOCIATIONS !== 'true') {
+            SnomedIntRelationship.belongsTo(models.SnomedIntConcept, { as: 'sourceConcept', foreignKey: 'sourceId' });
+            SnomedIntRelationship.belongsTo(models.SnomedIntConcept, { as: 'destinationConcept', foreignKey: 'destinationId' });
 
-        // Add associations to the SnomedIntDescription model
-        SnomedIntRelationship.belongsTo(models.SnomedIntDescription, { foreignKey: 'sourceId', targetKey: 'conceptId', as: 'SourceDescription' });
-        SnomedIntRelationship.belongsTo(models.SnomedIntDescription, { foreignKey: 'destinationId', targetKey: 'conceptId', as: 'DestinationDescription' });
+            // Add associations to the SnomedIntDescription model
+            SnomedIntRelationship.belongsTo(models.SnomedIntDescription, { foreignKey: 'sourceId', targetKey: 'conceptId', as: 'SourceDescription' });
+            SnomedIntRelationship.belongsTo(models.SnomedIntDescription, { foreignKey: 'destinationId', targetKey: 'conceptId', as: 'DestinationDescription' });
+        }
     };
 
     return SnomedIntRelationship;

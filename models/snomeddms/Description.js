@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     SnomedDMSDescription.associate = models => {
-        SnomedDMSDescription.belongsTo(models.SnomedDMSConcept, { foreignKey: 'conceptId' });
+        console.log('process.env.DISABLE_ASSOCIATIONS', process.env.DISABLE_ASSOCIATIONS);
+        if (process.env.DISABLE_ASSOCIATIONS !== 'true') {
+            SnomedDMSDescription.belongsTo(models.SnomedDMSConcept, { foreignKey: 'conceptId' });
+        }
     };
 
     return SnomedDMSDescription;

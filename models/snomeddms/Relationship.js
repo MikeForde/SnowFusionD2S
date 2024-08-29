@@ -16,8 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     SnomedDMSRelationship.associate = models => {
-        SnomedDMSRelationship.belongsTo(models.SnomedDMSConcept, { as: 'sourceConcept', foreignKey: 'sourceId' });
-        SnomedDMSRelationship.belongsTo(models.SnomedDMSConcept, { as: 'destinationConcept', foreignKey: 'destinationId' });
+        if (process.env.DISABLE_ASSOCIATIONS !== 'true') {
+            SnomedDMSRelationship.belongsTo(models.SnomedDMSConcept, { as: 'sourceConcept', foreignKey: 'sourceId' });
+            SnomedDMSRelationship.belongsTo(models.SnomedDMSConcept, { as: 'destinationConcept', foreignKey: 'destinationId' });
+        }
     };
 
     return SnomedDMSRelationship;

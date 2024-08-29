@@ -16,14 +16,16 @@ module.exports = (sequelize, DataTypes) => {
 
     SnomedUKDescription.associate = models => {
         // Associate with UK concepts (existing)
-        SnomedUKDescription.belongsTo(models.SnomedUKConcept, { foreignKey: 'conceptId' });
+        if (process.env.DISABLE_ASSOCIATIONS !== 'true') {
+            SnomedUKDescription.belongsTo(models.SnomedUKConcept, { foreignKey: 'conceptId' });
 
-        // Add associations to both UK and International relationships
-        SnomedUKDescription.hasMany(models.SnomedUKRelationship, { foreignKey: 'sourceId', as: 'SourceRelationshipsUK' });
-        SnomedUKDescription.hasMany(models.SnomedIntRelationship, { foreignKey: 'sourceId', as: 'SourceRelationshipsInt' });
+            // Add associations to both UK and International relationships
+            SnomedUKDescription.hasMany(models.SnomedUKRelationship, { foreignKey: 'sourceId', as: 'SourceRelationshipsUK' });
+            SnomedUKDescription.hasMany(models.SnomedIntRelationship, { foreignKey: 'sourceId', as: 'SourceRelationshipsInt' });
 
-        SnomedUKDescription.hasMany(models.SnomedUKRelationship, { foreignKey: 'destinationId', as: 'DestinationRelationshipsUK' });
-        SnomedUKDescription.hasMany(models.SnomedIntRelationship, { foreignKey: 'destinationId', as: 'DestinationRelationshipsInt' });
+            SnomedUKDescription.hasMany(models.SnomedUKRelationship, { foreignKey: 'destinationId', as: 'DestinationRelationshipsUK' });
+            SnomedUKDescription.hasMany(models.SnomedIntRelationship, { foreignKey: 'destinationId', as: 'DestinationRelationshipsInt' });
+        }
     };
 
     return SnomedUKDescription;
