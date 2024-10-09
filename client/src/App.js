@@ -5,6 +5,7 @@ import AboutPage from './pages/AboutPage';
 import NavigationBar from './appcomp/NavigationBar';
 import ChangeLogPage from './pages/ChangelogPage';
 import AboutWebAppPage from './pages/AboutWebappPage';
+import DMICPReadReviewPage from './pages/DMICPReadReviewPage';
 import { SnomedProvider } from './SnomedContext'; // Updated import
 import { LoadingProvider } from './contexts/LoadingContext';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -19,6 +20,7 @@ function App() {
             <LoadingSpinner />
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/review" element={<DMICPReadReviewPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/changelog" element={<ChangeLogPage />} />
               <Route path="/aboutwebapp" element={<AboutWebAppPage />} />

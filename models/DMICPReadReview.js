@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const DMICPReadReview = sequelize.define("DMICPReadReview", {
-        OrigId: {
+        id: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            primaryKey: true
         },
         Drop: {
             type: DataTypes.TEXT,
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         DMICPCode: {
-            type: DataTypes.STRING(255),  // Changed from TEXT to STRING
+            type: DataTypes.STRING(255),
             allowNull: true
         },
         Description: {
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         ManualMapCode: {
-            type: DataTypes.STRING(255),  // Changed from TEXT to STRING
+            type: DataTypes.STRING(255),
             allowNull: true
         },
         ManualMapFSN: {
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         APIMapCode: {
-            type: DataTypes.STRING(255),  // Changed from TEXT to STRING
+            type: DataTypes.STRING(255),
             allowNull: true
         },
         APIMapTerm: {
@@ -57,16 +57,151 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         SNOMEDCode: {
-            type: DataTypes.STRING(255),  // Changed from TEXT to STRING
+            type: DataTypes.STRING(255),
             allowNull: true
         },
         SNOMEDParent: {
-            type: DataTypes.STRING(255),  // Changed from TEXT to STRING
+            type: DataTypes.STRING(255),
             allowNull: true
         },
-        // other fields...
+        ParentInDataset: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        ParentsDecision: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Parent: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Parent_Term: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        DecisionForSCTParent: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        ManualParentCode: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        ManualParentFSN: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        APISelectedParentCode: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        APISelectedParentFSN: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        SNOMED_Parent_CHS: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        SNOMED_Parent_CHS_Term: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Parent1Code: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        Parent1Term: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Parent2Code: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        Parent2Term: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Parent3Code: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        Parent3Term: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Parent4Code: {
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        Parent4Term: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        CGI_Read: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        SNOMED_ChildOf_in_INT: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        SNOMED_ChildOf_in_UK: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
         SCT_ID: {
-            type: DataTypes.STRING(255),  // Changed from TEXT to STRING
+            type: DataTypes.STRING(255),
+            allowNull: true
+        },
+        ChildOf_Hash: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Value_required: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        UsageCount: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Templates: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        TemplateNames: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Searches: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        SearchNames: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Documents: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        DocumentNames: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Cat: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        Cat2: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
+        PreviousParentIfChanged: {
+            type: DataTypes.TEXT,
             allowNull: true
         }
     });
