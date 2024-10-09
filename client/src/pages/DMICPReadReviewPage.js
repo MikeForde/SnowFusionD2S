@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Col, Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons'; // Add the necessary icons
 import axios from 'axios';
+import "./Page.css";
 
 function DMICPReadReviewPage() {
     const [searchReadTerm, setSearchReadTerm] = useState(''); // Updated search term variable
@@ -46,7 +49,7 @@ function DMICPReadReviewPage() {
                                 onChange={handleSearchChange}
                             />
                         </Form.Group>
-                        <Button type="submit" className="mb-3">Search</Button>
+                        <Button type="submit" className="custom-button mb-3">Search</Button>
                     </Form>
 
                     <h4>Results</h4>
@@ -55,7 +58,39 @@ function DMICPReadReviewPage() {
                             reviewList.map((review) => (
                                 <Card key={review.OrigId} onClick={() => setSelectedReview(review)}>
                                     <Card.Body>
-                                        <Card.Title>{review.DMICPCode || 'No Code'}</Card.Title>
+                                        <Card.Title>
+                                            {review.DMICPCode || 'No Code'}
+                                            {' '}
+                                            {/* Conditionally render FontAwesome icons based on the Decision */}
+                                            {review.Decision === 'DMSCreate' && (
+                                                <>
+                                                    <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />
+
+                                                    {/* Conditionally render based on the first 5 characters of Drop */}
+                                                    {review.Drop && review.Drop.startsWith('Drop1') && (
+                                                        <FontAwesomeIcon icon={faExclamationTriangle} style={{ color: 'purple', marginLeft: '10px' }} />
+                                                    )}
+                                                    {review.Drop && review.Drop.startsWith('Drop2') && (
+                                                        <FontAwesomeIcon icon={faStar} style={{ color: 'blue', marginLeft: '10px' }} /> /* Orange exclamation mark */
+                                                    )}
+                                                    {review.Drop && review.Drop.startsWith('Drop3') && (
+                                                        <FontAwesomeIcon icon={faTools} style={{ color: 'gray', marginLeft: '10px' }} /> /* Grey "in-use" symbol */
+                                                    )}
+                                                    {review.Drop && review.Drop.startsWith('Drop4') && (
+                                                        <FontAwesomeIcon icon={faCogs} style={{ color: 'black', marginLeft: '10px' }} /> /* Black "manufactured" symbol */
+                                                    )}
+                                                </>
+                                            )}
+                                            {review.Decision === 'Inactivate' && (
+                                                <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} />
+                                            )}
+                                            {review.Decision === 'Investigate' && (
+                                                <FontAwesomeIcon icon={faQuestionCircle} style={{ color: 'orange', marginLeft: '10px' }} />
+                                            )}
+                                            {!['DMSCreate', 'Inactivate', 'Investigate'].includes(review.Decision) && (
+                                                <FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} />
+                                            )}
+                                        </Card.Title>
                                         <Card.Text>{review.Description}</Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -70,7 +105,7 @@ function DMICPReadReviewPage() {
                     {selectedReview && (
                         <div className="details">
                             <h3>Review Details</h3>
-                            <p><strong>Parent Code:</strong> {selectedReview.Parent} - {selectedReview.Parent_Term} </p>
+                            <p><strong>Parent Code:</strong> {selectedReview.Parent} - {selectedReview.Parent_Term}</p>
                             <p><strong>DMICP Code:</strong> {selectedReview.DMICPCode}</p>
                             <p><strong>Description:</strong> {selectedReview.Description}</p>
                             <p><strong>Decision:</strong> {selectedReview.Decision}</p>
@@ -79,11 +114,12 @@ function DMICPReadReviewPage() {
                             {selectedReview.NewDescription && (
                                 <p><strong>New Description:</strong> {selectedReview.NewDescription}</p>
                             )}
+
                             {/* Conditionally render ManualMapTerm if ManualMapCode exists */}
                             {selectedReview.ManualMapCode && (
                                 <div>
                                     <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode}</p>
-                                    <p><strong>Manual Map Term:</strong> {selectedReview.ManualMapTerm}</p>
+                                    <p><strong>Manual Map Term:</strong> {selectedReview.ManualMapFSN}</p>
                                 </div>
                             )}
 
@@ -94,17 +130,57 @@ function DMICPReadReviewPage() {
                                     <p><strong>API Map Term:</strong> {selectedReview.APIMapTerm}</p>
                                 </div>
                             )}
+
                             {/* Conditionally render SNOMEDCode if it exists */}
-                            {selectedReview.SNOMEDCode && (
+                            {selectedReview.SNOMEDCode && selectedReview.Decision === 'DMSCreate' && (
                                 <div>
-                                <p><strong>Example DMS SNOMED Code (for illustration):</strong> {selectedReview.SNOMEDCode}</p>
-                                <p><strong>Suggested SNOMED Parent:</strong> {selectedReview.SNOMEDParent}</p>
+                                    <p><strong>Example DMS SNOMED Code (for illustration):</strong> {selectedReview.SNOMEDCode}</p>
+                                    <p><strong>Suggested SNOMED Parent:</strong> {selectedReview.SNOMEDParent} - {selectedReview.SNOMEDParentTerm}</p>
                                 </div>
                             )}
-                            {/* Add more fields as needed */}
+
+                            {/* Additional Conditions based on the Drop field */}
+                            {selectedReview.Decision === 'DMSCreate' && selectedReview.Drop && (
+                                <div>
+                                    {selectedReview.Drop.substring(0, 5) === 'Drop1' && selectedReview.Cat2 && (
+                                        <p><strong>High Priority:</strong> {selectedReview.Cat2}</p>
+                                    )}
+
+                                    {selectedReview.Drop.substring(0, 5) === 'Drop2' && (
+                                        <div>
+                                            {/* Display Template-related data if exists */}
+                                            {selectedReview.Templates && (
+                                                <p><strong>Templates:</strong> {selectedReview.Templates}</p>
+                                            )}
+                                            {selectedReview.TemplateNames && (
+                                                <p><strong>Template Names:</strong> {selectedReview.TemplateNames}</p>
+                                            )}
+
+                                            {/* Display Document-related data if exists */}
+                                            {selectedReview.Documents && (
+                                                <p><strong>Documents:</strong> {selectedReview.Documents}</p>
+                                            )}
+                                            {selectedReview.DocumentNames && (
+                                                <p><strong>Document Names:</strong> {selectedReview.DocumentNames}</p>
+                                            )}
+
+                                            {/* Display Search-related data if exists */}
+                                            {selectedReview.Searches && (
+                                                <p><strong>Searches:</strong> {selectedReview.Searches}</p>
+                                            )}
+                                            {selectedReview.SearchNames && (
+                                                <p><strong>Search Names:</strong> {selectedReview.SearchNames}</p>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {selectedReview.Drop.substring(0, 5) === 'Drop3' && selectedReview.UsageCount && (
+                                        <p><strong>Usage in last 5 years:</strong> {selectedReview.UsageCount}</p>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     )}
-
                 </Col>
             </Row>
         </div>
