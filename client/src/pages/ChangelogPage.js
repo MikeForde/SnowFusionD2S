@@ -96,6 +96,29 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_6 - 09 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>DMICP Read Review Feature</strong></p>
+                                </li>
+                                <li>
+                                    <p>Introduced the DMICP Read Review page, allowing users to search for DMICP Codes and view their details.</p>
+                                </li>
+                                <li>
+                                    <p>Added conditional icons for the Decision field in the review list, including visual indicators for "DMSCreate," "Inactivate," and "Investigate" decisions, with appropriate FontAwesome icons.</p>
+                                </li>
+                                <li>
+                                    <p>Implemented additional visual cues for Drop values, displaying extra icons based on the Drop level when the Decision is "DMSCreate."</p>
+                                </li>
+                                <li>
+                                    <p>Extended review details to include High-Priority Category when Drop1, template, document, and search-related data when Drop2, and UsageCount when Drop3 is detected.</p>
+                                </li>
+                                <li>
+                                    <p>Improved the backend API to fetch and display the SNOMEDParent term from the appropriate SNOMED set (International, UK, or DMS) for DMSCreate decisions.</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>
