@@ -26,6 +26,9 @@ db.SnomedDMSConcept = require("./snomeddms/Concept")(sequelize, DataTypes);
 db.SnomedDMSDescription = require("./snomeddms/Description")(sequelize, DataTypes);
 db.SnomedDMSRelationship = require("./snomeddms/Relationship")(sequelize, DataTypes);
 
+// DMICP Read Review Model
+db.DMICPReadReview = require("./DMICPReadReview")(sequelize, DataTypes);
+
 // Define relationships
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
