@@ -1,44 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Form, Button, Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons'; // Add the necessary icons
+import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs, faEye } from '@fortawesome/free-solid-svg-icons';
+import { useLoading } from '../contexts/LoadingContext';
+import { SnomedContext } from '../SnomedContext'; // Import the context
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./Page.css";
 
 function DMICPReadReviewPage() {
-    const [searchReadTerm, setSearchReadTerm] = useState(''); // Updated search term variable
-    const [reviewList, setReviewList] = useState([]); // Ensure this is an array by default
+    const [searchReadTerm, setSearchReadTerm] = useState('');
+    const [reviewList, setReviewList] = useState([]);
     const [selectedReview, setSelectedReview] = useState(null);
+    const { startLoading, stopLoading } = useLoading();
+    const navigate = useNavigate();
+
+    // Access the SNOMED context
+    const { setSelectedSnomedCode } = useContext(SnomedContext); 
 
     useEffect(() => {
         if (Array.isArray(reviewList) && reviewList.length > 0) {
-            setSelectedReview(reviewList[0]); // Default to the first item if array is not empty
+            setSelectedReview(reviewList[0]);
         }
     }, [reviewList]);
 
     const handleSearchChange = (e) => {
-        setSearchReadTerm(e.target.value); // Update searchReadTerm
+        setSearchReadTerm(e.target.value);
     };
 
     const handleSearchSubmit = async (e) => {
         e.preventDefault();
-
-        // Log the search term
-        console.log("Search term submitted:", searchReadTerm);
-
         try {
+            startLoading();
             const response = await axios.get(`/review/search/${searchReadTerm}`);
-            console.log("Response from API:", response.data); // Add logging for the API response
-            setReviewList(response.data || []); // Ensure an empty array is set if response.data is null or undefined
+            setReviewList(response.data || []);
         } catch (error) {
             console.error('Error fetching review data:', error);
+        } finally {
+            stopLoading();
         }
     };
+
+    const handleViewCodeClick = (code, term) => {
+        // Set the selected SNOMED code in the context with both conceptId and term
+        setSelectedSnomedCode({ conceptId: code, term: term });
+        // Navigate to HomePage using internal routing
+        navigate('/');
+    };
+    
 
     return (
         <div className="container mt-4">
             <Row>
-                <Col md={4}>
+                <Col md={4} className="search-section">
                     <h3>Search Reviews</h3>
                     <Form onSubmit={handleSearchSubmit}>
                         <Form.Group controlId="searchReadTerm">
@@ -60,24 +74,20 @@ function DMICPReadReviewPage() {
                                     <Card.Body>
                                         <Card.Title>
                                             {review.DMICPCode || 'No Code'}
-                                            {' '}
-                                            {/* Conditionally render FontAwesome icons based on the Decision */}
                                             {review.Decision === 'DMSCreate' && (
                                                 <>
                                                     <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />
-
-                                                    {/* Conditionally render based on the first 5 characters of Drop */}
                                                     {review.Drop && review.Drop.startsWith('Drop1') && (
                                                         <FontAwesomeIcon icon={faExclamationTriangle} style={{ color: 'purple', marginLeft: '10px' }} />
                                                     )}
                                                     {review.Drop && review.Drop.startsWith('Drop2') && (
-                                                        <FontAwesomeIcon icon={faStar} style={{ color: 'blue', marginLeft: '10px' }} /> /* Orange exclamation mark */
+                                                        <FontAwesomeIcon icon={faStar} style={{ color: 'blue', marginLeft: '10px' }} />
                                                     )}
                                                     {review.Drop && review.Drop.startsWith('Drop3') && (
-                                                        <FontAwesomeIcon icon={faTools} style={{ color: 'gray', marginLeft: '10px' }} /> /* Grey "in-use" symbol */
+                                                        <FontAwesomeIcon icon={faTools} style={{ color: 'gray', marginLeft: '10px' }} />
                                                     )}
                                                     {review.Drop && review.Drop.startsWith('Drop4') && (
-                                                        <FontAwesomeIcon icon={faCogs} style={{ color: 'black', marginLeft: '10px' }} /> /* Black "manufactured" symbol */
+                                                        <FontAwesomeIcon icon={faCogs} style={{ color: 'black', marginLeft: '10px' }} />
                                                     )}
                                                 </>
                                             )}
@@ -101,82 +111,50 @@ function DMICPReadReviewPage() {
                     </div>
                 </Col>
 
-                <Col md={8}>
+                <Col md={8} className="details-section">
                     {selectedReview && (
                         <div className="details">
                             <h3>Review Details</h3>
                             <p><strong>Parent Code:</strong> {selectedReview.Parent} - {selectedReview.Parent_Term}</p>
-                            <p><strong>DMICP Code:</strong> {selectedReview.DMICPCode}</p>
-                            <p><strong>Description:</strong> {selectedReview.Description}</p>
+                            <p><strong>DMICP Code:</strong> {selectedReview.DMICPCode} - {selectedReview.Description}</p>
                             <p><strong>Decision:</strong> {selectedReview.Decision}</p>
-
-                            {/* Conditionally render NewDescription if it exists */}
-                            {selectedReview.NewDescription && (
-                                <p><strong>New Description:</strong> {selectedReview.NewDescription}</p>
-                            )}
-
-                            {/* Conditionally render ManualMapTerm if ManualMapCode exists */}
+                            {selectedReview.NewDescription && <p><strong>New Description:</strong> {selectedReview.NewDescription}</p>}
                             {selectedReview.ManualMapCode && (
-                                <div>
-                                    <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode}</p>
-                                    <p><strong>Manual Map Term:</strong> {selectedReview.ManualMapFSN}</p>
-                                </div>
+                                    <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
+                                    <FontAwesomeIcon
+                                            icon={faEye}
+                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                            onClick={() => handleViewCodeClick(selectedReview.ManualMapCode, selectedReview.ManualMapFSN)} // Set the selected SNOMED code
+                                        /></p>
                             )}
-
-                            {/* Conditionally render APIMapTerm if APIMapCode exists */}
                             {selectedReview.APIMapCode && selectedReview.Decision === 'APIMap' && (
-                                <div>
-                                    <p><strong>API Map Code:</strong> {selectedReview.APIMapCode}</p>
-                                    <p><strong>API Map Term:</strong> {selectedReview.APIMapTerm}</p>
-                                </div>
+                                    <p><strong>API Map Code:</strong> {selectedReview.APIMapCode} - {selectedReview.APIMapTerm}
+                                    <FontAwesomeIcon
+                                            icon={faEye}
+                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                            onClick={() => handleViewCodeClick(selectedReview.APIMapCode, selectedReview.APIMapTerm)} // Set the selected SNOMED code
+                                        /></p>
                             )}
-
-                            {/* Conditionally render SNOMEDCode if it exists */}
                             {selectedReview.SNOMEDCode && selectedReview.Decision === 'DMSCreate' && (
                                 <div>
-                                    <p><strong>Example DMS SNOMED Code (for illustration):</strong> {selectedReview.SNOMEDCode}</p>
-                                    <p><strong>Suggested SNOMED Parent:</strong> {selectedReview.SNOMEDParent} - {selectedReview.SNOMEDParentTerm}</p>
-                                </div>
-                            )}
-
-                            {/* Additional Conditions based on the Drop field */}
-                            {selectedReview.Decision === 'DMSCreate' && selectedReview.Drop && (
-                                <div>
-                                    {selectedReview.Drop.substring(0, 5) === 'Drop1' && selectedReview.Cat2 && (
-                                        <p><strong>High Priority:</strong> {selectedReview.Cat2}</p>
-                                    )}
-
-                                    {selectedReview.Drop.substring(0, 5) === 'Drop2' && (
-                                        <div>
-                                            {/* Display Template-related data if exists */}
-                                            {selectedReview.Templates && (
-                                                <p><strong>Templates:</strong> {selectedReview.Templates}</p>
-                                            )}
-                                            {selectedReview.TemplateNames && (
-                                                <p><strong>Template Names:</strong> {selectedReview.TemplateNames}</p>
-                                            )}
-
-                                            {/* Display Document-related data if exists */}
-                                            {selectedReview.Documents && (
-                                                <p><strong>Documents:</strong> {selectedReview.Documents}</p>
-                                            )}
-                                            {selectedReview.DocumentNames && (
-                                                <p><strong>Document Names:</strong> {selectedReview.DocumentNames}</p>
-                                            )}
-
-                                            {/* Display Search-related data if exists */}
-                                            {selectedReview.Searches && (
-                                                <p><strong>Searches:</strong> {selectedReview.Searches}</p>
-                                            )}
-                                            {selectedReview.SearchNames && (
-                                                <p><strong>Search Names:</strong> {selectedReview.SearchNames}</p>
-                                            )}
-                                        </div>
-                                    )}
-
-                                    {selectedReview.Drop.substring(0, 5) === 'Drop3' && selectedReview.UsageCount && (
-                                        <p><strong>Usage in last 5 years:</strong> {selectedReview.UsageCount}</p>
-                                    )}
+                                    <p>
+                                        <strong>Example DMS SNOMED Code (for illustration):</strong> 
+                                        {selectedReview.SNOMEDCode}
+                                        <FontAwesomeIcon
+                                            icon={faEye}
+                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                            onClick={() => handleViewCodeClick(selectedReview.SNOMEDCode, selectedReview.Description)} // Set the selected SNOMED code
+                                        />
+                                    </p>
+                                    <p>
+                                        <strong>Suggested SNOMED Parent:</strong> 
+                                        {selectedReview.SNOMEDParent} - {selectedReview.SNOMEDParentTerm}
+                                        <FontAwesomeIcon
+                                            icon={faEye}
+                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                            onClick={() => handleViewCodeClick(selectedReview.SNOMEDParent, selectedReview.SNOMEDParentTerm)} // Set the selected SNOMED parent
+                                        />
+                                    </p>
                                 </div>
                             )}
                         </div>

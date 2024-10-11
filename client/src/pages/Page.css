@@ -127,6 +127,32 @@
   width: 40px;
 }
 
+/* By default, show the details section beside the search results */
+.search-section {
+  order: 1;
+}
+
+.details-section {
+  order: 2;
+}
+
+/* For mobile aspect (small screens), stack the details above the search results */
+@media (max-width: 768px) {
+  .search-section {
+      order: 2;
+  }
+
+  .details-section {
+      order: 1;  /* Details will appear below search on mobile screens */
+  }
+
+  .scrollable-area {
+    max-height: 300px; /* Adjust height for mobile, if necessary */
+    overflow-y: auto;
+}
+}
+
+
 
 
 
