@@ -157,6 +157,46 @@ function DMICPReadReviewPage() {
                                     </p>
                                 </div>
                             )}
+                            {/* Additional Conditions based on the Drop field */}
+                            {selectedReview.Decision === 'DMSCreate' && selectedReview.Drop && (
+                                <div>
+                                    {selectedReview.Drop.substring(0, 5) === 'Drop1' && selectedReview.Cat2 && (
+                                        <p><strong>High Priority:</strong> {selectedReview.Cat2}</p>
+                                    )}
+
+                                    {selectedReview.Drop.substring(0, 5) === 'Drop2' && (
+                                        <div>
+                                            {/* Display Template-related data if exists */}
+                                            {selectedReview.Templates && (
+                                                <p><strong>Templates:</strong> {selectedReview.Templates}</p>
+                                            )}
+                                            {selectedReview.TemplateNames && (
+                                                <p><strong>Template Names:</strong> {selectedReview.TemplateNames}</p>
+                                            )}
+
+                                            {/* Display Document-related data if exists */}
+                                            {selectedReview.Documents && (
+                                                <p><strong>Documents:</strong> {selectedReview.Documents}</p>
+                                            )}
+                                            {selectedReview.DocumentNames && (
+                                                <p><strong>Document Names:</strong> {selectedReview.DocumentNames}</p>
+                                            )}
+
+                                            {/* Display Search-related data if exists */}
+                                            {selectedReview.Searches && (
+                                                <p><strong>Searches:</strong> {selectedReview.Searches}</p>
+                                            )}
+                                            {selectedReview.SearchNames && (
+                                                <p><strong>Search Names:</strong> {selectedReview.SearchNames}</p>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {selectedReview.Drop.substring(0, 5) === 'Drop3' && selectedReview.UsageCount && (
+                                        <p><strong>Usage in last 5 years:</strong> {selectedReview.UsageCount}</p>
+                                    )}
+                                </div>
+                            )}
                         </div>
                     )}
                 </Col>
