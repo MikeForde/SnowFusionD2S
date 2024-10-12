@@ -58,7 +58,7 @@ function NavigationBar() {
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
           />
-          SnowFusion D2S 0_7
+          SnowFusion D2S 0_8
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">

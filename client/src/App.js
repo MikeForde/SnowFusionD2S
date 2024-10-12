@@ -20,7 +20,7 @@ function App() {
             <LoadingSpinner />
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/review" element={<DMICPReadReviewPage />} />
+              <Route path="/review/:code?" element={<DMICPReadReviewPage />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/changelog" element={<ChangeLogPage />} />
               <Route path="/aboutwebapp" element={<AboutWebAppPage />} />

@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useLoading } from '../contexts/LoadingContext';
 import { SnomedContext } from '../SnomedContext'; // Import the context
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./Page.css";
 
 function DMICPReadReviewPage() {
+    const { code } = useParams(); // Get the code from the URL
     const [searchReadTerm, setSearchReadTerm] = useState('');
     const [reviewList, setReviewList] = useState([]);
     const [selectedReview, setSelectedReview] = useState(null);
@@ -24,6 +25,14 @@ function DMICPReadReviewPage() {
         }
     }, [reviewList]);
 
+    useEffect(() => {
+        if (code) {
+            setSearchReadTerm(code);
+            handleSearchBySNOMEDCode(code);
+        }
+    }, [code]);
+
+
     const handleSearchChange = (e) => {
         setSearchReadTerm(e.target.value);
     };
@@ -34,12 +43,31 @@ function DMICPReadReviewPage() {
             startLoading();
             const response = await axios.get(`/review/search/${searchReadTerm}`);
             setReviewList(response.data || []);
+            if (response.data && response.data.length > 0) {
+                setSelectedReview(response.data[0]);
+            }
         } catch (error) {
             console.error('Error fetching review data:', error);
         } finally {
             stopLoading();
         }
     };
+
+    const handleSearchBySNOMEDCode = async (snomedCode) => {
+        try {
+            startLoading();
+            const response = await axios.get(`/review/searchBySNOMEDCode/${snomedCode}`);
+            setReviewList(response.data || []);
+            if (response.data && response.data.length > 0) {
+                setSelectedReview(response.data[0]);
+            }
+        } catch (error) {
+            console.error('Error fetching review data by SNOMEDCode:', error);
+        } finally {
+            stopLoading();
+        }
+    };
+
 
     const handleViewCodeClick = async (code) => {
         try {

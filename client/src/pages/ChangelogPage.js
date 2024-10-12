@@ -139,6 +139,29 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_8 - 12 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Enhanced Navigation Between HomePage and DMICP Review</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added a feature where, on the HomePage, DMS Local Codes now display a view icon next to them.</p>
+                                </li>
+                                <li>
+                                    <p>Clicking the view icon next to a DMS Local Code navigates users to the DMICP Read Review page, automatically displaying detailed information about that code.</p>
+                                </li>
+                                <li>
+                                    <p>Implemented a new API endpoint to search DMICP Read Review entries by SNOMED Code, ensuring accurate retrieval of related reviews.</p>
+                                </li>
+                                <li>
+                                    <p>Updated the DMICP Read Review page to handle SNOMED Codes, searching for associated DMICP Codes using the SNOMED Code provided.</p>
+                                </li>
+                                <li>
+                                    <p>Improved the overall integration between the HomePage and DMICP Read Review page, enhancing user experience and data accessibility.</p>
+                                </li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </Col>

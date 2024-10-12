@@ -62,4 +62,20 @@ router.get('/search/:searchTerm', async (req, res) => {
     }
 });
 
+router.get('/searchBySNOMEDCode/:snomedCode', async (req, res) => {
+    const { snomedCode } = req.params;
+
+    try {
+        const reviews = await db.DMICPReadReview.findAll({
+            where: {
+                SNOMEDCode: snomedCode
+            }
+        });
+        res.json(reviews);
+    } catch (error) {
+        console.error('Error fetching reviews by SNOMEDCode:', error);
+        res.status(500).json({ error: 'An error occurred while searching by SNOMEDCode.' });
+    }
+});
+
 module.exports = router;
