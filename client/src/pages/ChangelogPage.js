@@ -119,6 +119,27 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_7 - 12 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>View SNOMED Code from DMICP Review</strong></p>
+                                </li>
+                                <li>
+                                    <p>Enabled the feature to allow users to select and view a SNOMED code from the DMICP Review details by clicking a view icon next to DMSCreate codes, which navigates them to the HomePage with the selected code's details.</p>
+                                </li>
+                                <li>
+                                    <p>Utilized the SNOMED context feature to store and update the selected SNOMED code (including the term and moduleId), improving the integration with the HomePage display.</p>
+                                </li>
+                                <li>
+                                    <p>Extended the API functionality to retrieve SNOMED code details from the appropriate datasets (International, UK, or DMS) for use in context and navigation.</p>
+                                </li>
+                                <li>
+                                    <p>Updated the review list and details sections to seamlessly integrate with this new feature, ensuring smooth user navigation and consistent display across the app.</p>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </Col>
             </Row>

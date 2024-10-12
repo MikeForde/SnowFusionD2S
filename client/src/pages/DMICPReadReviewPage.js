@@ -16,7 +16,7 @@ function DMICPReadReviewPage() {
     const navigate = useNavigate();
 
     // Access the SNOMED context
-    const { setSelectedSnomedCode } = useContext(SnomedContext); 
+    const { setSelectedSnomedCode } = useContext(SnomedContext);
 
     useEffect(() => {
         if (Array.isArray(reviewList) && reviewList.length > 0) {
@@ -41,13 +41,27 @@ function DMICPReadReviewPage() {
         }
     };
 
-    const handleViewCodeClick = (code, term) => {
-        // Set the selected SNOMED code in the context with both conceptId and term
-        setSelectedSnomedCode({ conceptId: code, term: term });
-        // Navigate to HomePage using internal routing
-        navigate('/');
+    const handleViewCodeClick = async (code) => {
+        try {
+            // Call the API to get the SNOMED code details
+            const response = await axios.get(`/snomed/searchCode/${code}`);
+
+            if (response.data && response.data.length > 0) {
+                const { conceptId, term, moduleId } = response.data[0];
+
+                // Set the selected SNOMED code in the context with conceptId, term, and moduleId
+                setSelectedSnomedCode({ conceptId, term, moduleId });
+
+                // Navigate to HomePage using internal routing
+                navigate('/');
+            } else {
+                console.error("SNOMED code not found");
+            }
+        } catch (error) {
+            console.error("Error fetching SNOMED code details:", error);
+        }
     };
-    
+
 
     return (
         <div className="container mt-4">
@@ -120,39 +134,39 @@ function DMICPReadReviewPage() {
                             <p><strong>Decision:</strong> {selectedReview.Decision}</p>
                             {selectedReview.NewDescription && <p><strong>New Description:</strong> {selectedReview.NewDescription}</p>}
                             {selectedReview.ManualMapCode && (
-                                    <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
+                                <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
                                     <FontAwesomeIcon
-                                            icon={faEye}
-                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
-                                            onClick={() => handleViewCodeClick(selectedReview.ManualMapCode, selectedReview.ManualMapFSN)} // Set the selected SNOMED code
-                                        /></p>
+                                        icon={faEye}
+                                        style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                        onClick={() => handleViewCodeClick(selectedReview.ManualMapCode)} // Set the selected SNOMED code
+                                    /></p>
                             )}
                             {selectedReview.APIMapCode && selectedReview.Decision === 'APIMap' && (
-                                    <p><strong>API Map Code:</strong> {selectedReview.APIMapCode} - {selectedReview.APIMapTerm}
+                                <p><strong>API Map Code:</strong> {selectedReview.APIMapCode} - {selectedReview.APIMapTerm}
                                     <FontAwesomeIcon
-                                            icon={faEye}
-                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
-                                            onClick={() => handleViewCodeClick(selectedReview.APIMapCode, selectedReview.APIMapTerm)} // Set the selected SNOMED code
-                                        /></p>
+                                        icon={faEye}
+                                        style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                        onClick={() => handleViewCodeClick(selectedReview.APIMapCode)} // Set the selected SNOMED code
+                                    /></p>
                             )}
                             {selectedReview.SNOMEDCode && selectedReview.Decision === 'DMSCreate' && (
                                 <div>
                                     <p>
-                                        <strong>Example DMS SNOMED Code (for illustration):</strong> 
+                                        <strong>Example DMS SNOMED Code (for illustration):</strong>
                                         {selectedReview.SNOMEDCode}
                                         <FontAwesomeIcon
                                             icon={faEye}
                                             style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
-                                            onClick={() => handleViewCodeClick(selectedReview.SNOMEDCode, selectedReview.Description)} // Set the selected SNOMED code
+                                            onClick={() => handleViewCodeClick(selectedReview.SNOMEDCode)} // Set the selected SNOMED code
                                         />
                                     </p>
                                     <p>
-                                        <strong>Suggested SNOMED Parent:</strong> 
+                                        <strong>Suggested SNOMED Parent:</strong>
                                         {selectedReview.SNOMEDParent} - {selectedReview.SNOMEDParentTerm}
                                         <FontAwesomeIcon
                                             icon={faEye}
                                             style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
-                                            onClick={() => handleViewCodeClick(selectedReview.SNOMEDParent, selectedReview.SNOMEDParentTerm)} // Set the selected SNOMED parent
+                                            onClick={() => handleViewCodeClick(selectedReview.SNOMEDParent)} // Set the selected SNOMED parent
                                         />
                                     </p>
                                 </div>

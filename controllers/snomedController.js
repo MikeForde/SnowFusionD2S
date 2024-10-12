@@ -17,7 +17,8 @@ const searchSnomedTerm = async (req, res) => {
             intResults = await db.SnomedIntDescription.findAll({
                 where: {
                     conceptId: searchTerm,
-                    active: true
+                    active: true,
+                    typeId: '900000000000003001'
                 },
                 include: [{
                     model: db.SnomedIntConcept,
@@ -32,7 +33,8 @@ const searchSnomedTerm = async (req, res) => {
             ukResults = await db.SnomedUKDescription.findAll({
                 where: {
                     conceptId: searchTerm,
-                    active: true
+                    active: true,
+                    typeId: '900000000000003001'
                 },
                 include: [{
                     model: db.SnomedUKConcept,
@@ -47,7 +49,8 @@ const searchSnomedTerm = async (req, res) => {
             dmsResults = await db.SnomedDMSDescription.findAll({
                 where: {
                     conceptId: searchTerm,
-                    active: true
+                    active: true,
+                    typeId: '900000000000003001'
                 },
                 include: [{
                     model: db.SnomedDMSConcept,
@@ -66,7 +69,8 @@ const searchSnomedTerm = async (req, res) => {
                     term: {
                         [db.Sequelize.Op.like]: `%${searchTerm}%`
                     },
-                    active: true
+                    active: true,
+                    typeId: '900000000000003001'
                 },
                 include: [{
                     model: db.SnomedIntConcept,
@@ -83,7 +87,8 @@ const searchSnomedTerm = async (req, res) => {
                     term: {
                         [db.Sequelize.Op.like]: `%${searchTerm}%`
                     },
-                    active: true
+                    active: true,
+                    typeId: '900000000000003001'
                 },
                 include: [{
                     model: db.SnomedUKConcept,
@@ -100,7 +105,8 @@ const searchSnomedTerm = async (req, res) => {
                     term: {
                         [db.Sequelize.Op.like]: `%${searchTerm}%`
                     },
-                    active: true
+                    active: true,
+                    typeId: '900000000000003001'
                 },
                 include: [{
                     model: db.SnomedDMSConcept,
@@ -122,6 +128,76 @@ const searchSnomedTerm = async (req, res) => {
     } catch (error) {
         console.error('Error searching SNOMED term:', error);
         res.status(500).json({ error: 'An error occurred while searching for SNOMED terms.' });
+    }
+};
+
+const searchSnomedCode = async (req, res) => {
+    const { searchCode } = req.params;
+
+    console.log(`Searching for SNOMED code: ${searchCode}`);
+
+    try {
+        let intResults, ukResults, dmsResults;
+
+
+        // Search by conceptId
+        intResults = await db.SnomedIntDescription.findAll({
+            where: {
+                conceptId: searchCode,
+                active: true,
+                typeId: '900000000000003001'
+            },
+            include: [{
+                model: db.SnomedIntConcept,
+                where: {
+                    active: true
+                },
+                attributes: []
+            }],
+            attributes: ['id', 'term', 'conceptId', 'moduleId']
+        });
+
+        ukResults = await db.SnomedUKDescription.findAll({
+            where: {
+                conceptId: searchCode,
+                active: true,
+                typeId: '900000000000003001'
+            },
+            include: [{
+                model: db.SnomedUKConcept,
+                where: {
+                    active: true
+                },
+                attributes: []
+            }],
+            attributes: ['id', 'term', 'conceptId', 'moduleId']
+        });
+
+        dmsResults = await db.SnomedDMSDescription.findAll({
+            where: {
+                conceptId: searchCode,
+                active: true,
+                typeId: '900000000000003001'
+            },
+            include: [{
+                model: db.SnomedDMSConcept,
+                where: {
+                    active: true
+                },
+                attributes: []
+            }],
+            attributes: ['id', 'term', 'conceptId', 'moduleId']
+        });
+
+        // Combine the results from all three databases
+        console.log(`Found ${intResults.length} results from SNOMED-INT, ${ukResults.length} results from SNOMED-UK, and ${dmsResults.length} results from SNOMED-DMS`);
+
+        const results = [...dmsResults, ...ukResults, ...intResults];
+
+        res.json(results); // Return the combined results as JSON
+    } catch (error) {
+        console.error('Error searching SNOMED code:', error);
+        res.status(500).json({ error: 'An error occurred while searching for SNOMED codes.' });
     }
 };
 
@@ -165,7 +241,7 @@ const getParentCodes = async (req, res) => {
     try {
         // Fetch relationships from International, UK, and DMS datasets
         const intRelationships = await db.SnomedIntRelationship.findAll({
-            where: { 
+            where: {
                 sourceId: conceptId,
                 active: true,
                 relationshipGroup: false,
@@ -174,7 +250,7 @@ const getParentCodes = async (req, res) => {
         });
 
         const ukRelationships = await db.SnomedUKRelationship.findAll({
-            where: { 
+            where: {
                 sourceId: conceptId,
                 active: true,
                 relationshipGroup: false,
@@ -183,7 +259,7 @@ const getParentCodes = async (req, res) => {
         });
 
         const dmsRelationships = await db.SnomedDMSRelationship.findAll({
-            where: { 
+            where: {
                 sourceId: conceptId,
                 active: true,
                 relationshipGroup: false,
@@ -263,7 +339,7 @@ const getChildCodes = async (req, res) => {
     try {
         // Fetch relationships from International, UK, and DMS datasets
         const intRelationships = await db.SnomedIntRelationship.findAll({
-            where: { 
+            where: {
                 destinationId: conceptId,
                 active: true,
                 relationshipGroup: false,
@@ -272,7 +348,7 @@ const getChildCodes = async (req, res) => {
         });
 
         const ukRelationships = await db.SnomedUKRelationship.findAll({
-            where: { 
+            where: {
                 destinationId: conceptId,
                 active: true,
                 relationshipGroup: false,
@@ -281,7 +357,7 @@ const getChildCodes = async (req, res) => {
         });
 
         const dmsRelationships = await db.SnomedDMSRelationship.findAll({
-            where: { 
+            where: {
                 destinationId: conceptId,
                 active: true,
                 relationshipGroup: false,
@@ -453,5 +529,6 @@ module.exports = {
     getSnomedDescriptionsByConceptId,
     getParentCodes,
     getChildCodes,
-    searchSnomedTermType
+    searchSnomedTermType,
+    searchSnomedCode
 };
