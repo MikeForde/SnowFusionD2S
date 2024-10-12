@@ -129,9 +129,24 @@ function DMICPReadReviewPage() {
                     {selectedReview && (
                         <div className="details">
                             <h3>Review Details</h3>
-                            <p><strong>Parent Code:</strong> {selectedReview.Parent} - {selectedReview.Parent_Term}</p>
-                            <p><strong>DMICP Code:</strong> {selectedReview.DMICPCode} - {selectedReview.Description}</p>
-                            <p><strong>Decision:</strong> {selectedReview.Decision}</p>
+                            <p><strong>Parent:</strong> {selectedReview.Parent} - {selectedReview.Parent_Term}</p>
+                            <p><strong>Code: {selectedReview.DMICPCode} - {selectedReview.Description}</strong> </p>
+                            <p><strong>Decision:</strong> {selectedReview.Decision}
+                                {selectedReview.Decision === 'DMSCreate' && (
+                                    <>
+                                        <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />
+                                    </>
+                                )}
+                                {selectedReview.Decision === 'Inactivate' && (
+                                    <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} />
+                                )}
+                                {selectedReview.Decision === 'Investigate' && (
+                                    <FontAwesomeIcon icon={faQuestionCircle} style={{ color: 'orange', marginLeft: '10px' }} />
+                                )}
+                                {!['DMSCreate', 'Inactivate', 'Investigate'].includes(selectedReview.Decision) && (
+                                    <FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} />
+                                )}
+                            </p>
                             {selectedReview.NewDescription && <p><strong>New Description:</strong> {selectedReview.NewDescription}</p>}
                             {selectedReview.ManualMapCode && (
                                 <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
@@ -152,7 +167,7 @@ function DMICPReadReviewPage() {
                             {selectedReview.SNOMEDCode && selectedReview.Decision === 'DMSCreate' && (
                                 <div>
                                     <p>
-                                        <strong>Example DMS SNOMED Code (for illustration):</strong>
+                                        <strong>DMS SNOMED Code (for illustration):</strong>
                                         {selectedReview.SNOMEDCode}
                                         <FontAwesomeIcon
                                             icon={faEye}
