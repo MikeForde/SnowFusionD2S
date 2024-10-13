@@ -36,8 +36,8 @@ function SNOMEDCode({ snomedCode, onClick, className, isSelected }) {
           </>
         ) : (
           <>
-            {snomedCode.conceptId} - {snomedCode.term}
-            {snomedCode.moduleId === '999000011000000103' && (
+            {snomedCode.conceptId} - {snomedCode.term} 
+            {(snomedCode.moduleId === '999000011000000103' || snomedCode.moduleId === '999000041000000102') && (
               <img
                 src="/uk-flag.svg"
                 alt="UK Flag"

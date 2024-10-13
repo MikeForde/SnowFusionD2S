@@ -4,28 +4,47 @@ const router = express.Router();
 
 // Function to get the SNOMED Parent term
 const getSNOMEDParentTerm = async (snomedParent) => {
-    // Try fetching from SnomedIntDescription, SnomedUKDescription, and SnomedDMSDescription
-    let parentTerm = await db.SnomedIntDescription.findOne({
-        where: { conceptId: snomedParent, typeId: '900000000000003001' },
-        attributes: ['term'],
-    });
-
-    if (!parentTerm) {
-        parentTerm = await db.SnomedUKDescription.findOne({
-            where: { conceptId: snomedParent, typeId: '900000000000003001' },
-            attributes: ['term'],
-        });
+    // First, check if the concept is active in any dataset
+    const isActiveConcept = await isConceptActiveInAnyDataset(snomedParent);
+    if (!isActiveConcept) {
+        return null; // Concept is not active in any dataset
     }
 
-    if (!parentTerm) {
-        parentTerm = await db.SnomedDMSDescription.findOne({
-            where: { conceptId: snomedParent, typeId: '900000000000003001' },
+    // Fetch active descriptions from all datasets
+    const descriptions = await Promise.all([
+        db.SnomedIntDescription.findOne({
+            where: { conceptId: snomedParent, active: true, typeId: '900000000000003001' },
             attributes: ['term'],
-        });
-    }
+        }),
+        db.SnomedUKDescription.findOne({
+            where: { conceptId: snomedParent, active: true, typeId: '900000000000003001' },
+            attributes: ['term'],
+        }),
+        db.SnomedDMSDescription.findOne({
+            where: { conceptId: snomedParent, active: true, typeId: '900000000000003001' },
+            attributes: ['term'],
+        }),
+    ]);
+
+    // Find the first available active term
+    const parentTerm = descriptions.find(desc => desc !== null);
 
     return parentTerm ? parentTerm.term : null; // Return the term or null if not found
 };
+
+const isConceptActiveInAnyDataset = async (conceptId) => {
+    const intConcept = await db.SnomedIntConcept.findOne({ where: { id: conceptId, active: true } });
+    if (intConcept) return true;
+
+    const ukConcept = await db.SnomedUKConcept.findOne({ where: { id: conceptId, active: true } });
+    if (ukConcept) return true;
+
+    const dmsConcept = await db.SnomedDMSConcept.findOne({ where: { id: conceptId, active: true } });
+    if (dmsConcept) return true;
+
+    return false;
+};
+
 
 // Search reviews and include SNOMEDParentTerm if applicable
 router.get('/search/:searchTerm', async (req, res) => {
@@ -71,7 +90,17 @@ router.get('/searchBySNOMEDCode/:snomedCode', async (req, res) => {
                 SNOMEDCode: snomedCode
             }
         });
-        res.json(reviews);
+
+        // Fetch the SNOMEDParentTerm for each review that has a SNOMEDParent
+        const enhancedReviews = await Promise.all(reviews.map(async (review) => {
+            const reviewData = review.toJSON(); // Convert Sequelize instance to plain JSON
+            if (review.SNOMEDParent) {
+                const snomedParentTerm = await getSNOMEDParentTerm(review.SNOMEDParent);
+                reviewData.SNOMEDParentTerm = snomedParentTerm; // Add SNOMEDParentTerm to the review data
+            }
+            return reviewData;
+        }));
+        res.json(enhancedReviews);
     } catch (error) {
         console.error('Error fetching reviews by SNOMEDCode:', error);
         res.status(500).json({ error: 'An error occurred while searching by SNOMEDCode.' });
