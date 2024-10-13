@@ -77,6 +77,8 @@ function DMICPReadReviewPage() {
             if (response.data && response.data.length > 0) {
                 const { conceptId, term, moduleId } = response.data[0];
 
+                console.log("SNOMED code details:", { conceptId, term, moduleId });
+
                 // Set the selected SNOMED code in the context with conceptId, term, and moduleId
                 setSelectedSnomedCode({ conceptId, term, moduleId });
 

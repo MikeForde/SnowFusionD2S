@@ -170,71 +170,88 @@ const searchSnomedCode = async (req, res) => {
     console.log(`Searching for SNOMED code: ${searchCode}`);
 
     try {
-        let conceptIds = new Set();
-
-        // Check for active concepts across all datasets
-        const intConcept = await db.SnomedIntConcept.findOne({ where: { id: searchCode, active: true } });
-        const ukConcept = await db.SnomedUKConcept.findOne({ where: { id: searchCode, active: true } });
-        const dmsConcept = await db.SnomedDMSConcept.findOne({ where: { id: searchCode, active: true } });
-
-        if (intConcept) conceptIds.add(intConcept.id);
-        if (ukConcept) conceptIds.add(ukConcept.id);
-        if (dmsConcept) conceptIds.add(dmsConcept.id);
-
-        // For each active conceptId, get the active description(s) from any dataset
         let results = [];
+        const conceptId = searchCode;
 
-        for (let conceptId of conceptIds) {
-            const descriptions = await Promise.all([
-                db.SnomedIntDescription.findAll({
-                    where: {
-                        conceptId,
-                        active: true,
-                        typeId: '900000000000003001'
-                    },
-                    attributes: ['id', 'term', 'conceptId', 'moduleId']
-                }),
-                db.SnomedUKDescription.findAll({
-                    where: {
-                        conceptId,
-                        active: true,
-                        typeId: '900000000000003001'
-                    },
-                    attributes: ['id', 'term', 'conceptId', 'moduleId']
-                }),
-                db.SnomedDMSDescription.findAll({
-                    where: {
-                        conceptId,
-                        active: true,
-                        typeId: '900000000000003001'
-                    },
-                    attributes: ['id', 'term', 'conceptId', 'moduleId']
-                })
-            ]);
-
-            // Flatten and add to results
-            results.push(...descriptions.flat());
+        // 1. Check in DMS dataset
+        const dmsConcept = await db.SnomedDMSConcept.findOne({ where: { id: conceptId, active: true } });
+        if (dmsConcept) {
+            const dmsDescriptions = await db.SnomedDMSDescription.findAll({
+                where: { conceptId, active: true, typeId: '900000000000003001' },
+                attributes: ['id', 'term', 'conceptId', 'moduleId'],
+            });
+            results.push(...dmsDescriptions);
+            res.json(results);
+            return;
         }
 
-        // Remove duplicates based on description ID
-        const uniqueResults = [];
-        const seenIds = new Set();
+        // 2. Check in UK dataset
+        const ukConcept = await db.SnomedUKConcept.findOne({ where: { id: conceptId, active: true } });
+        if (ukConcept) {
+            let ukDescriptions = await db.SnomedUKDescription.findAll({
+                where: { conceptId, active: true, typeId: '900000000000003001' },
+                attributes: ['id', 'term', 'conceptId', 'moduleId'],
+            });
+            if (ukDescriptions.length > 0) {
+                results.push(...ukDescriptions);
+            } else {
+                // Exception: No description in UK, look in International descriptions
+                const intDescriptions = await db.SnomedIntDescription.findAll({
+                    where: { conceptId, active: true, typeId: '900000000000003001' },
+                    attributes: ['id', 'term', 'conceptId'], // Exclude original moduleId
+                });
 
-        for (let desc of results) {
-            if (!seenIds.has(desc.id)) {
-                seenIds.add(desc.id);
-                uniqueResults.push(desc);
+                // Set moduleId to UK moduleId (999000041000000102)
+                intDescriptions.forEach(desc => {
+                    desc.moduleId = '999000041000000102';
+                });
+
+                results.push(...intDescriptions);
+            }
+            res.json(results);
+            return;
+        }
+
+        // 3. Check in International dataset
+        const intConcept = await db.SnomedIntConcept.findOne({ where: { id: conceptId, active: true } });
+        if (intConcept) {
+            const intDescriptions = await db.SnomedIntDescription.findAll({
+                where: { conceptId, active: true, typeId: '900000000000003001' },
+                attributes: ['id', 'term', 'conceptId', 'moduleId'],
+            });
+            results.push(...intDescriptions);
+            res.json(results);
+            return;
+        }
+
+        // Exception: If description exists in International but concept inactive, check if concept is active in UK
+        const intDescriptions = await db.SnomedIntDescription.findAll({
+            where: { conceptId, active: true, typeId: '900000000000003001' },
+            attributes: ['id', 'term', 'conceptId'], // Exclude original moduleId
+        });
+        if (intDescriptions.length > 0) {
+            const ukConceptInactive = await db.SnomedUKConcept.findOne({ where: { id: conceptId, active: true } });
+            if (ukConceptInactive) {
+                // Set moduleId to UK moduleId (999000041000000102)
+                intDescriptions.forEach(desc => {
+                    desc.moduleId = '999000041000000102';
+                });
+                results.push(...intDescriptions);
+                res.json(results);
+                return;
             }
         }
 
-        console.log(`Found ${uniqueResults.length} active descriptions for active concepts.`);
+        // No active concept found
+        res.json([]);
+        return;
 
-        res.json(uniqueResults);
     } catch (error) {
         console.error('Error searching SNOMED code:', error);
         res.status(500).json({ error: 'An error occurred while searching for SNOMED codes.' });
     }
 };
+
 
 
 const getSnomedDescriptionsByConceptId = async (req, res) => {
