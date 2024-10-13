@@ -9,7 +9,7 @@ function AboutWebAppPage() {
                 <Col>
                     <h2>About This Web Application</h2>
                     <p>
-                        This web application is a prototype designed to demonstrate how DMS Local Codes may relate to established International and UK SNOMED CT codes. The intent is not to create a DMS SNOMED extension but rather to highlight that these DMS codes do not currently exist in SNOMED (International or UK). In any future electronic health record (EHR) system, such codes would need to be created as local codes.
+                        This web application is a prototype designed to demonstrate the relationships between DMS Local Codes and established International and UK SNOMED CT codes. It highlights codes that are unique to DMS and do not currently exist in SNOMED (International or UK). In any future electronic health record (EHR) system, such codes would need to be created as local extensions.
                     </p>
                 </Col>
             </Row>
@@ -21,10 +21,11 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 This application offers several key features:
                                 <ul>
-                                    <li><strong>DMS Local Code Representation</strong>: Demonstrates how DMS Local Codes relate to existing SNOMED CT codes.</li>
-                                    <li><strong>SNOMED CT Searching</strong>: Easily search for SNOMED CT codes by term or concept ID, including DMS Local Codes.</li>
-                                    <li><strong>Parent/Child Relationships</strong>: Visualize the hierarchical relationships between SNOMED CT codes.</li>
-                                    <li><strong>UK, International, and DMS Dataset Integration</strong>: Simultaneously search and display results from UK-specific, International, and DMS datasets.</li>
+                                    <li><strong>Comprehensive SNOMED CT Searching</strong>: Simultaneously search for SNOMED CT codes by term or concept ID across DMS Local, UK, and International datasets.</li>
+                                    <li><strong>DMS Local Code Integration</strong>: Visualize how DMS Local Codes relate to existing SNOMED CT codes and access detailed information about them.</li>
+                                    <li><strong>Parent/Child Relationships</strong>: Explore hierarchical relationships between SNOMED CT codes, including handling cases where concepts and descriptions are active in different datasets.</li>
+                                    <li><strong>Enhanced Navigation</strong>: Easily navigate between the HomePage and the DMICP Read Review page using intuitive view icons.</li>
+                                    <li><strong>Accurate Dataset Representation</strong>: The application correctly displays the origin of codes using flags based on module IDs, ensuring clarity between DMS, UK, and International codes.</li>
                                     <li><strong>Responsive Interface</strong>: A user-friendly and responsive design that adapts to various screen sizes.</li>
                                 </ul>
                             </Card.Text>
@@ -79,9 +80,9 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 This application is ideal for:
                                 <ul>
-                                    <li><strong>Healthcare Professionals</strong>: Exploring how DMS Local Codes may relate to established SNOMED CT codes, aiding in clinical decision-making and patient record management.</li>
-                                    <li><strong>Developers</strong>: Integrating DMS Local Codes and SNOMED CT data into healthcare applications, testing code relationships, or developing new features.</li>
-                                    <li><strong>Researchers</strong>: Analyzing the relationships between DMS Local Codes and SNOMED CT data, particularly in the context of hierarchical structures between medical concepts.</li>
+                                    <li><strong>Healthcare Professionals</strong>: Exploring comprehensive relationships between DMS Local Codes and SNOMED CT codes, aiding in clinical decision-making and patient record management.</li>
+                                    <li><strong>Developers</strong>: Integrating DMS Local Codes and SNOMED CT data into healthcare applications, testing code relationships, and leveraging enhanced search functionalities.</li>
+                                    <li><strong>Researchers</strong>: Analyzing the relationships and hierarchical structures between medical concepts across different datasets.</li>
                                 </ul>
                             </Card.Text>
                         </Card.Body>
@@ -96,10 +97,10 @@ function AboutWebAppPage() {
                             <Card.Text>
                                 While this prototype is fully functional, future improvements may include:
                                 <ul>
-                                    <li><strong>Enhanced User Interface</strong>: Further refining the UI to improve usability and user experience.</li>
-                                    <li><strong>Extended Dataset Support</strong>: Including more regional datasets or other medical ontologies to provide a more comprehensive tool.</li>
                                     <li><strong>Advanced Search Capabilities</strong>: Implementing more sophisticated search algorithms, including natural language processing (NLP) to better understand user queries.</li>
+                                    <li><strong>Extended Dataset Support</strong>: Including more regional datasets or other medical ontologies to provide a more comprehensive tool.</li>
                                     <li><strong>Integration with Other Systems</strong>: Expanding the application to integrate with electronic health record (EHR) systems or other healthcare applications.</li>
+                                    <li><strong>Enhanced User Interface</strong>: Further refining the UI to improve usability and user experience.</li>
                                 </ul>
                                 We welcome feedback and ideas for further development!
                             </Card.Text>

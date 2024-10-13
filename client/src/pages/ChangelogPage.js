@@ -162,7 +162,32 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
-
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_9 - 14 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Enhanced SNOMED CT Search and Data Integration</strong></p>
+                                </li>
+                                <li>
+                                    <p>Improved the SNOMED term search functionality to collect results from all datasets (DMS, UK, International) when searching by term, ensuring comprehensive search results.</p>
+                                </li>
+                                <li>
+                                    <p>Adjusted backend APIs to handle cases where concepts might be active in one dataset but their active descriptions are in another, ensuring accurate data retrieval.</p>
+                                </li>
+                                <li>
+                                    <p>Updated <code>searchSnomedTerm</code>, <code>getParentCodes</code>, <code>getChildCodes</code>, and <code>searchSnomedCode</code> functions to optimize database queries and improve performance.</p>
+                                </li>
+                                <li>
+                                    <p>Modified module IDs in exception cases to ensure correct flag displays on the frontend, enhancing visual consistency and user experience.</p>
+                                </li>
+                                <li>
+                                    <p>Updated the <strong>About This Web Application</strong> page to reflect the new functionalities and improvements made to the application.</p>
+                                </li>
+                                <li>
+                                    <p>Added a new page <strong>About DMICP and Read Codes</strong> providing detailed information about DMICP and Read Codes, enhancing user understanding of these systems.</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>

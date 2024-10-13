@@ -125,7 +125,7 @@ function DMICPReadReviewPage() {
                                                         <FontAwesomeIcon icon={faExclamationTriangle} style={{ color: 'purple', marginLeft: '10px' }} />
                                                     )}
                                                     {review.Drop && review.Drop.startsWith('Drop2') && (
-                                                        <FontAwesomeIcon icon={faStar} style={{ color: 'blue', marginLeft: '10px' }} />
+                                                        <FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />
                                                     )}
                                                     {review.Drop && review.Drop.startsWith('Drop3') && (
                                                         <FontAwesomeIcon icon={faTools} style={{ color: 'gray', marginLeft: '10px' }} />
@@ -220,39 +220,54 @@ function DMICPReadReviewPage() {
                             {selectedReview.Decision === 'DMSCreate' && selectedReview.Drop && (
                                 <div>
                                     {selectedReview.Drop.substring(0, 5) === 'Drop1' && selectedReview.Cat2 && (
-                                        <p><strong>High Priority:</strong> {selectedReview.Cat2}</p>
+                                        <p><strong>High Priority:</strong> {selectedReview.Cat2}<FontAwesomeIcon icon={faExclamationTriangle} style={{ color: 'purple', marginLeft: '10px' }} /></p>
                                     )}
 
-                                    {selectedReview.Drop.substring(0, 5) === 'Drop2' && (
-                                        <div>
-                                            {/* Display Template-related data if exists */}
-                                            {selectedReview.Templates && (
-                                                <p><strong>Templates:</strong> {selectedReview.Templates}</p>
-                                            )}
-                                            {selectedReview.TemplateNames && (
-                                                <p><strong>Template Names:</strong> {selectedReview.TemplateNames}</p>
-                                            )}
+                                    {
+                                        selectedReview.Drop.substring(0, 5) === 'Drop2' && (
+                                            <div>
+                                                {/* Display Template-related data if exists */}
+                                                {selectedReview.TemplateNames && (
+                                                    <div>
+                                                        <strong>Templates ({selectedReview.Templates})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
+                                                        <ul>
+                                                            {selectedReview.TemplateNames.split(';').map((name, index) => (
+                                                                <li key={index}>{name.replace(/_/g, ' ')}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
 
-                                            {/* Display Document-related data if exists */}
-                                            {selectedReview.Documents && (
-                                                <p><strong>Documents:</strong> {selectedReview.Documents}</p>
-                                            )}
-                                            {selectedReview.DocumentNames && (
-                                                <p><strong>Document Names:</strong> {selectedReview.DocumentNames}</p>
-                                            )}
+                                                {/* Display Document-related data if exists */}
+                                                {selectedReview.DocumentNames && (
+                                                    <div>
+                                                        <strong>Documents ({selectedReview.Documents})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
+                                                        <ul>
+                                                            {selectedReview.DocumentNames.split(';').map((name, index) => (
+                                                                <li key={index}>{name.replace(/_/g, ' ')}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
 
-                                            {/* Display Search-related data if exists */}
-                                            {selectedReview.Searches && (
-                                                <p><strong>Searches:</strong> {selectedReview.Searches}</p>
-                                            )}
-                                            {selectedReview.SearchNames && (
-                                                <p><strong>Search Names:</strong> {selectedReview.SearchNames}</p>
-                                            )}
-                                        </div>
-                                    )}
+                                                {/* Display Search-related data if exists */}
+                                                {selectedReview.SearchNames && (
+                                                    <div>
+                                                        <strong>Searches ({selectedReview.Searches})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
+                                                        <ul>
+                                                            {selectedReview.SearchNames.split(';').map((name, index) => (
+                                                                <li key={index}>{name.replace(/_/g, ' ')}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    }
+
 
                                     {selectedReview.Drop.substring(0, 5) === 'Drop3' && selectedReview.UsageCount && (
-                                        <p><strong>Usage in last 5 years:</strong> {selectedReview.UsageCount}</p>
+                                        <p><strong>Usage in last 5 years:</strong> {selectedReview.UsageCount}<FontAwesomeIcon icon={faTools} style={{ color: 'gray', marginLeft: '10px' }} /></p>
                                     )}
                                 </div>
                             )}

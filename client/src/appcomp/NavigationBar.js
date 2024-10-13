@@ -58,7 +58,7 @@ function NavigationBar() {
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
           />
-          SnowFusion D2S 0_8
+          SnowFusion D2S 0_9
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -70,6 +70,9 @@ function NavigationBar() {
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/about" onClick={() => handleNavItemSelect(false)}>
                 About SNOMED CT
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/about-dmicp" onClick={() => handleNavItemSelect(false)}>
+                About DMICP and Read
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item as={Link} to="/changelog" onClick={() => handleNavItemSelect(false)}>
