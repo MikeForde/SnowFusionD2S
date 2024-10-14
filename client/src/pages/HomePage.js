@@ -86,29 +86,40 @@ function HomePage() {
     <div className="app">
       <div className="container">
         <div className="row">
-          <div className="col-md-4 scrollable-area">
-            <h3>Search</h3>
             <Form onSubmit={handleSearchSubmit}>
-              <Form.Group controlId="searchTerm">
-                <Form.Label>SNOMED Code/Term or DMS Local Term</Form.Label>
+              {/* Mobile Layout */}
+              <div className="d-flex d-sm-none">
                 <Form.Control
                   type="text"
-                  placeholder="Enter SNOMED code/term or DMS Local"
+                  placeholder="SNOMED code/term or DMS Local"
                   value={searchTerm}
                   onChange={handleSearchChange}
+                  className="mr-2"
                 />
-              </Form.Group>
-              <Button type="submit" className="custom-button mb-3">
-                Search
-              </Button>
+                <Button type="submit" className="custom-button">Search</Button>
+              </div>
 
+              {/* Desktop Layout */}
+              <div className="d-none d-sm-block">
+                <Form.Group controlId="searchTerm">
+                  <Form.Control
+                    type="text"
+                    placeholder="SNOMED code/term or DMS Local"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                  />
+                </Form.Group>
+                <Button type="submit" className="custom-button mb-3">Search</Button>
+              </div>
             </Form>
+
             {showAlert && (
               <Alert variant="warning" className="floating-alert">
                 Please enter at least 3 characters to search.
               </Alert>
             )}
-            <h3>Matching Concepts</h3>
+            <h4>Matching Concepts</h4>
+            <div className="col-md-4 scrollable-area">
             <div>
               {selectedSnomedCodes.map((snomedCode) => (
                 <Card key={snomedCode.id} onClick={() => setSelectedSnomedCode(snomedCode)}>
@@ -152,8 +163,6 @@ function HomePage() {
               ))}
             </div>
           </div>
-
-
         </div>
       </div>
     </div>

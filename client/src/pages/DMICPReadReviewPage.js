@@ -97,17 +97,30 @@ function DMICPReadReviewPage() {
         <div className="container mt-4">
             <Row>
                 <Col md={4} className="search-section">
-                    <h3>Search Reviews</h3>
                     <Form onSubmit={handleSearchSubmit}>
-                        <Form.Group controlId="searchReadTerm">
+                        {/* Mobile Layout */}
+                        <div className="d-flex d-sm-none">
                             <Form.Control
                                 type="text"
-                                placeholder="Search by DMICP Code or Description"
+                                placeholder="DMICP Code or Description"
                                 value={searchReadTerm}
                                 onChange={handleSearchChange}
+                                className="mr-2"
                             />
-                        </Form.Group>
-                        <Button type="submit" className="custom-button mb-3">Search</Button>
+                            <Button type="submit" className="custom-button">Search</Button>
+                        </div>
+                        {/* Desktop Layout */}
+                        <div className="d-none d-sm-flex flex-column">
+                            <Form.Group controlId="searchReadTerm">
+                                <Form.Control
+                                    type="text"
+                                    placeholder="DMICP Code or Description"
+                                    value={searchReadTerm}
+                                    onChange={handleSearchChange}
+                                />
+                            </Form.Group>
+                            <Button type="submit" className="custom-button mb-3">Search</Button>
+                        </div>
                     </Form>
 
                     <h4>Results</h4>
@@ -117,7 +130,9 @@ function DMICPReadReviewPage() {
                                 <Card key={review.OrigId} onClick={() => setSelectedReview(review)}>
                                     <Card.Body>
                                         <Card.Title>
-                                            {review.DMICPCode || 'No Code'}
+                                            <span className="dmicp-code">
+                                                {review.DMICPCode || 'No Code'}
+                                            </span>
                                             {review.Decision === 'DMSCreate' && (
                                                 <>
                                                     <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />
@@ -229,7 +244,7 @@ function DMICPReadReviewPage() {
                                                 {/* Display Template-related data if exists */}
                                                 {selectedReview.TemplateNames && (
                                                     <div>
-                                                        <strong>Templates ({selectedReview.Templates})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
+                                                        <strong className="drop2-titles">Templates ({selectedReview.Templates})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
                                                         <ul>
                                                             {selectedReview.TemplateNames.split(';').map((name, index) => (
                                                                 <li key={index}>{name.replace(/_/g, ' ')}</li>
@@ -241,7 +256,7 @@ function DMICPReadReviewPage() {
                                                 {/* Display Document-related data if exists */}
                                                 {selectedReview.DocumentNames && (
                                                     <div>
-                                                        <strong>Documents ({selectedReview.Documents})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
+                                                        <strong className="drop2-titles">Documents ({selectedReview.Documents})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
                                                         <ul>
                                                             {selectedReview.DocumentNames.split(';').map((name, index) => (
                                                                 <li key={index}>{name.replace(/_/g, ' ')}</li>
@@ -253,7 +268,7 @@ function DMICPReadReviewPage() {
                                                 {/* Display Search-related data if exists */}
                                                 {selectedReview.SearchNames && (
                                                     <div>
-                                                        <strong>Searches ({selectedReview.Searches})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
+                                                        <strong className="drop2-titles">Searches ({selectedReview.Searches})<FontAwesomeIcon icon={faStar} style={{ color: 'slateblue', marginLeft: '10px' }} />:</strong>
                                                         <ul>
                                                             {selectedReview.SearchNames.split(';').map((name, index) => (
                                                                 <li key={index}>{name.replace(/_/g, ' ')}</li>

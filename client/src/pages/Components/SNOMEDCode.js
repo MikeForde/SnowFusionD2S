@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons'; // Import the view icon
+import "../Page.css"; 
 
 function SNOMEDCode({ snomedCode, onClick, className, isSelected }) {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function SNOMEDCode({ snomedCode, onClick, className, isSelected }) {
       <p>
         {snomedCode.moduleId === 991006900109 ? (
           <>
-            (DMS Local Code) - {snomedCode.term}
+            (DMS) - {snomedCode.term}
             <img
               src="/UK_MOD_DMS_Flag.svg"
               alt="UK MOD DMS Flag"

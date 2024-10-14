@@ -16,7 +16,7 @@
 
 .text-area {
   width: 100%;
-  height: calc(100vh - 350px); 
+  height: calc(100vh - 350px);
 }
 
 .text-area textarea {
@@ -26,12 +26,12 @@
 
 /* Adjust the height and padding for dropdown buttons */
 .dropdown-container {
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
 }
 
 .dropdown-button {
-  height: 30px; 
-  margin-bottom: 5px; 
+  height: 30px;
+  margin-bottom: 5px;
 }
 
 .mb-3 {
@@ -58,7 +58,7 @@
 }
 
 .ChangeLogPage .text-primary {
-  color:rgb(127, 120, 22) !important
+  color: rgb(127, 120, 22) !important
 }
 
 .message {
@@ -69,11 +69,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-} 
+}
 
 .scrollable-area {
   overflow-y: auto;
-  height: 80vh; /* Adjust the height as needed */
+  height: 80vh;
+  /* Adjust the height as needed */
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -106,7 +107,7 @@
 }
 
 .custom-button {
-  background-color: rgb(47, 47, 212) !important; 
+  background-color: rgb(47, 47, 212) !important;
   border-color: rgb(102, 51, 153) !important;
 }
 
@@ -116,7 +117,8 @@
 }
 
 .clickable:hover {
-  background-color: #f0f0f0; /* Light grey background on hover */
+  background-color: #f0f0f0;
+  /* Light grey background on hover */
 }
 
 .selected {
@@ -139,23 +141,44 @@
 /* For mobile aspect (small screens), stack the details above the search results */
 @media (max-width: 768px) {
   .search-section {
-      order: 2;
+    order: 2;
   }
 
   .details-section {
-      order: 1;  /* Details will appear below search on mobile screens */
+    order: 1;
+    /* Details will appear below search on mobile screens */
   }
 
   .scrollable-area {
-    max-height: 300px; /* Adjust height for mobile, if necessary */
+    max-height: 300px;
+    /* Adjust height for mobile, if necessary */
     overflow-y: auto;
+  }
+
+  p {
+    font-size: small;
+  }
+
+  h3 {
+    font-size: large !important;
+  }
+
+  h4 {
+    font-size: medium !important;
+  }
+
+  .dmicp-code {
+    font-size: medium !important;
+    /* Adjust this value as needed */
+  }
+
+  .drop2-titles {
+    font-size: small !important;
+    /* Adjust this value as needed */
+  }
+
+  ul {
+    font-size: small !important;
+    /* Adjust this value as needed */
+  }
 }
-}
-
-
-
-
-
-
-
-
