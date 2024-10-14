@@ -28,9 +28,31 @@ function DMICPReadReviewPage() {
     useEffect(() => {
         if (code) {
             setSearchReadTerm(code);
+            const isSNOMEDCode = /^\d+$/.test(code); // Regex checks if code is all digits
+
+        if (isSNOMEDCode) {
             handleSearchBySNOMEDCode(code);
+        } else {
+            handleSearchSubmitDMICP(code); // New function for DMICP codes
+        }
         }
     }, [code]);
+
+    const handleSearchSubmitDMICP = async (dmicpCode) => {
+        try {
+            startLoading();
+            const response = await axios.get(`/review/search/${dmicpCode}`); // Assuming a new endpoint for DMICP code
+            setReviewList(response.data || []);
+            if (response.data && response.data.length > 0) {
+                setSelectedReview(response.data[0]);
+            }
+        } catch (error) {
+            console.error('Error fetching review data by DMICPCode:', error);
+        } finally {
+            stopLoading();
+        }
+    };
+    
 
 
     const handleSearchChange = (e) => {
@@ -99,7 +121,7 @@ function DMICPReadReviewPage() {
                 <Col md={4} className="search-section">
                     <Form onSubmit={handleSearchSubmit}>
                         {/* Mobile Layout */}
-                        <div className="d-flex d-sm-none">
+                        <div className="d-flex d-sm-none mb-3">
                             <Form.Control
                                 type="text"
                                 placeholder="DMICP Code or Description"

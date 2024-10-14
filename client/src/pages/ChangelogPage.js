@@ -188,6 +188,39 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_10 - 14 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Introduced PurposePage for Enhanced Data Presentation</strong></p>
+                                </li>
+                                <li>
+                                    <p>Created a new page, <strong>PurposePage</strong>, to display <code>DMICPReadReview</code> data in a tabular format with advanced filtering options based on the <code>Purpose</code> field, improving data accessibility and user navigation.</p>
+                                </li>
+                                <li>
+                                    <p>Implemented comprehensive filtering logic to showcase data slices such as <em>"Children of INT or UK"</em> and <em>"Children of DMS"</em>, including subgroups like <em>"OccMed"</em>, <em>"Admin"</em>, and <em>"Clinical"</em>, enhancing data analysis capabilities.</p>
+                                </li>
+                                <li>
+                                    <p>Enhanced the user interface with buttons and dropdown menus to allow users to switch between different data slices and subgroups, improving usability and user experience.</p>
+                                </li>
+                                <li>
+                                    <p>Integrated detailed tooltips that display additional information when hovering over category icons, including data from the <code>DMICPReadReview</code> results, enhancing data transparency and user understanding.</p>
+                                </li>
+                                <li>
+                                    <p>Enabled navigation from the DMICP code to the <strong>DMICPReadReviewPage</strong> by making the code clickable, facilitating quick access to detailed information.</p>
+                                </li>
+                                <li>
+                                    <p>Optimized data fetching by implementing a context to store static data, reducing unnecessary API calls during internal navigation and improving overall application performance.</p>
+                                </li>
+                                <li>
+                                    <p>Adjusted the frontend to ensure tooltip text is left-aligned, enhancing readability and visual consistency.</p>
+                                </li>
+                                <li>
+                                    <p>Made various user interface enhancements, including adjusting font sizes, arranging buttons for better responsiveness, and handling mobile aspect layouts to improve user experience across devices.</p>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </Col>
             </Row>

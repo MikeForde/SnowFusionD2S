@@ -138,6 +138,11 @@
   order: 2;
 }
 
+.custom-tooltip li {
+  text-align: left !important;
+}
+
+
 /* For mobile aspect (small screens), stack the details above the search results */
 @media (max-width: 768px) {
   .search-section {
@@ -178,6 +183,16 @@
   }
 
   ul {
+    font-size: small !important;
+    /* Adjust this value as needed */
+  }
+
+  th {
+    font-size: small !important;
+    /* Adjust this value as needed */
+  }
+
+  td {
     font-size: small !important;
     /* Adjust this value as needed */
   }

@@ -58,12 +58,13 @@ function NavigationBar() {
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
           />
-          SnowFusion D2S 0_9
+          SnowFusion D2S 0_10
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}>Review</Nav.Link>
+          <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}>Purpose</Nav.Link>
             <NavDropdown title="Info" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/aboutwebapp" onClick={() => handleNavItemSelect(false)}>
                 About Web App

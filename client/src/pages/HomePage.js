@@ -88,7 +88,7 @@ function HomePage() {
         <div className="row">
             <Form onSubmit={handleSearchSubmit}>
               {/* Mobile Layout */}
-              <div className="d-flex d-sm-none">
+              <div className="d-flex d-sm-none mb-3">
                 <Form.Control
                   type="text"
                   placeholder="SNOMED code/term or DMS Local"
