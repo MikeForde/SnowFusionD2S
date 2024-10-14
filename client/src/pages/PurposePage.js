@@ -3,7 +3,6 @@ import { Table, ButtonGroup, Button, Dropdown, Tooltip, OverlayTrigger } from 'r
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
 import "./Page.css" // Import the CSS file
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { PurposeDataContext } from '../PurposeDataContext';
 
@@ -66,10 +65,8 @@ const renderTooltip = (item) => (
 );
 
 function PurposePage() {
-    const { purposeData } = useContext(PurposeDataContext);
+    const { purposeData, filterType, setFilterType, subFilterType, setSubFilterType } = useContext(PurposeDataContext); 
     const [filteredData, setFilteredData] = useState([]);
-    const [filterType, setFilterType] = useState('Children of INT or UK');
-    const [subFilterType, setSubFilterType] = useState(null);
     const [recordCount, setRecordCount] = useState(0);
     const navigate = useNavigate();
 
