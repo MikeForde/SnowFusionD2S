@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faExchangeAlt, faTimesCircle, faEye } from '@fortawesome/free-solid-svg-icons';
 import { SnomedContext } from '../contexts/SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
 import SnomedSearch from './SnomedSearch';
@@ -58,14 +58,15 @@ function NavigationBar() {
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
           />
-          SnowFusion D2S 0_10
+          SnowFusion D2S 0_11
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}>Review</Nav.Link>
-          <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}>Create</Nav.Link>
-          <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)}>Map</Nav.Link>
+            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}/> Review</Nav.Link>
+            <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />  Create</Nav.Link>
+            <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Map</Nav.Link>
+            <Nav.Link as={Link} to="/inactivate" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Inactivate</Nav.Link>
             <NavDropdown title="Info" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/aboutwebapp" onClick={() => handleNavItemSelect(false)}>
                 About Web App
@@ -82,7 +83,7 @@ function NavigationBar() {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          {selectedSnomedCodes.length > 0 && (
+          {/* {selectedSnomedCodes.length > 0 && (
             <Nav>
               <NavDropdown
                 title={selectedSnomedCode ? `${selectedSnomedCode.conceptId} ${selectedSnomedCode.term}` : "Selected SNOMED Codes"}
@@ -101,7 +102,7 @@ function NavigationBar() {
               </NavDropdown>
             </Nav>
           )}
-          <SnomedSearch collapseNavbar={collapseNavbar} /> {/* Updated component usage */}
+          <SnomedSearch collapseNavbar={collapseNavbar} /> Updated component usage */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

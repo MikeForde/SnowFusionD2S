@@ -1,68 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, ButtonGroup, Button, Dropdown, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Table, ButtonGroup, Button, Dropdown, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
 import "./Page.css" // Import the CSS file
 import { useNavigate } from 'react-router-dom';
 import { PurposeDataContext } from '../contexts/PurposeDataContext';
-
-// Helper function to render the floating info box
-const renderTooltip = (item) => (
-    <Tooltip id={`tooltip-${item.id}`} className="custom-tooltip">
-        <div className="details">
-            {item.NewDescription && <p><strong>New Description:</strong> {item.NewDescription}</p>}
-            {item.SNOMEDParent && <p><strong>Suggested SNOMED Parent:</strong> {item.SNOMEDParent}</p>}
-
-            {/* Drop-related extra information */}
-            {item.Drop.startsWith('Drop1') && item.Cat2 && (<div>
-                <strong>High Priority:</strong>
-                <ul>
-                    {item.Cat2.split(';').map((name, index) => (
-                        <li key={index}>{name}</li>
-                    ))}
-                </ul>
-            </div>
-            )}
-            {item.Drop.startsWith('Drop2') && (
-                <>
-                    {item.TemplateNames && (
-                        <div>
-                            <strong>Templates:</strong>
-                            <ul>
-                                {item.TemplateNames.split(';').map((name, index) => (
-                                    <li key={index}>{name.replace(/_/g, ' ')}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {item.DocumentNames && (
-                        <div>
-                            <strong>Documents:</strong>
-                            <ul>
-                                {item.DocumentNames.split(';').map((name, index) => (
-                                    <li key={index}>{name.replace(/_/g, ' ')}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {item.SearchNames && (
-                        <div>
-                            <strong>Searches:</strong>
-                            <ul>
-                                {item.SearchNames.split(';').map((name, index) => (
-                                    <li key={index}>{name.replace(/_/g, ' ')}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </>
-            )}
-            {item.Drop.startsWith('Drop3') && item.UsageCount && (
-                <p><strong>Usage in last 5 years:</strong> {item.UsageCount}</p>
-            )}
-        </div>
-    </Tooltip>
-);
+import renderTooltip from '../components/renderTooltip'; // Import the shared renderTooltip function
 
 function PurposePage() {
     const { purposeData, filterType, setFilterType, subFilterType, setSubFilterType, dropFilter, setDropFilter } = useContext(PurposeDataContext);
@@ -259,7 +202,7 @@ function PurposePage() {
                 <Button variant={dropFilter === 'Drop1' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
                 <Button variant={dropFilter === 'Drop2' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
                 <Button variant={dropFilter === 'Drop3' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
-                <Button variant={dropFilter === 'Drop4' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Added</Button>
+                <Button variant={dropFilter === 'Drop4' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
                 <Button variant={dropFilter === null ? 'primary' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
             </ButtonGroup>
 

@@ -7,6 +7,7 @@ export const MapDataContext = createContext();
 export const MapDataProvider = ({ children }) => {
     const [mapData, setMapData] = useState([]);
     const [dropFilter, setDropFilter] = useState(null);
+    const [filterType, setFilterType] = useState('All');
 
     useEffect(() => {
         // Fetch data for APIMap and ManualMap decisions
@@ -25,7 +26,9 @@ export const MapDataProvider = ({ children }) => {
     return (
         <MapDataContext.Provider value={{ 
             mapData, 
-            setMapData, 
+            setMapData,
+            filterType, 
+            setFilterType, 
             dropFilter, 
             setDropFilter 
         }}>

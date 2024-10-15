@@ -157,6 +157,7 @@ const getDMICPReadReviewsByMapDecision = async (req, res) => {
             attributes: [
                 'id',
                 'Drop',
+                'Decision',
                 'DMICPCode',
                 'Description',
                 'FSNType',
@@ -186,6 +187,42 @@ const getDMICPReadReviewsByMapDecision = async (req, res) => {
 
 // In your controller (e.g., readReviewController.js)
 router.get('/mapdecision/', getDMICPReadReviewsByMapDecision);
+
+// In your controller (e.g., readReviewController.js)
+const getDMICPReadReviewsByInactivateDecision = async (req, res) => {
+    try {
+        const reviews = await db.DMICPReadReview.findAll({
+            where: {
+                Decision: 'Inactivate'
+            },
+            attributes: [
+                'id',
+                'Drop',
+                'Decision',
+                'DMICPCode',
+                'Description',
+                'NewDescription',
+                'Parent',
+                'Parent_Term',
+                'Purpose',
+                'SNOMEDCode',
+                'SNOMEDParent',
+                'TemplateNames',
+                'DocumentNames',
+                'SearchNames',
+                'UsageCount',
+                'Cat2' // Include any additional fields required for rendering
+            ]
+        });
+        res.json(reviews);
+    } catch (error) {
+        console.error('Error fetching Inactivate reviews:', error);
+        res.status(500).json({ error: 'An error occurred while fetching reviews' });
+    }
+};
+
+// Add the route in your routes file
+router.get('/inactivatedecision/', getDMICPReadReviewsByInactivateDecision);
 
 
 module.exports = router;

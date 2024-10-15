@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Form, Button, Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs, faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import { useLoading } from '../contexts/LoadingContext';
 import { SnomedContext } from '../contexts/SnomedContext'; // Import the context
 import { useParams, useNavigate } from 'react-router-dom';
@@ -218,7 +218,7 @@ function DMICPReadReviewPage() {
                             {selectedReview.ManualMapCode && (
                                 <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
                                     <FontAwesomeIcon
-                                        icon={faEye}
+                                        icon={faNetworkWired}
                                         style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
                                         onClick={() => handleViewCodeClick(selectedReview.ManualMapCode)} // Set the selected SNOMED code
                                     /></p>
@@ -226,7 +226,7 @@ function DMICPReadReviewPage() {
                             {selectedReview.APIMapCode && selectedReview.Decision === 'APIMap' && (
                                 <p><strong>API Map Code:</strong> {selectedReview.APIMapCode} - {selectedReview.APIMapTerm}
                                     <FontAwesomeIcon
-                                        icon={faEye}
+                                        icon={faNetworkWired}
                                         style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
                                         onClick={() => handleViewCodeClick(selectedReview.APIMapCode)} // Set the selected SNOMED code
                                     /></p>
@@ -237,7 +237,7 @@ function DMICPReadReviewPage() {
                                         <strong>DMS SNOMED Code (for illustration):</strong>
                                         {selectedReview.SNOMEDCode}
                                         <FontAwesomeIcon
-                                            icon={faEye}
+                                            icon={faNetworkWired}
                                             style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
                                             onClick={() => handleViewCodeClick(selectedReview.SNOMEDCode)} // Set the selected SNOMED code
                                         />
@@ -246,7 +246,7 @@ function DMICPReadReviewPage() {
                                         <strong>Suggested SNOMED Parent:</strong>
                                         {selectedReview.SNOMEDParent} - {selectedReview.SNOMEDParentTerm}
                                         <FontAwesomeIcon
-                                            icon={faEye}
+                                            icon={faNetworkWired}
                                             style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
                                             onClick={() => handleViewCodeClick(selectedReview.SNOMEDParent)} // Set the selected SNOMED parent
                                         />

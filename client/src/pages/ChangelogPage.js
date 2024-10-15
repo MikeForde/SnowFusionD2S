@@ -220,7 +220,38 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
-
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_11 - 15 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Separated Tooltip Rendering into a Reusable Component</strong></p>
+                                </li>
+                                <li>
+                                    <p>Refactored the Tooltip rendering logic into a separate <code>renderTooltip.js</code> file to be reused across multiple pages, improving code maintainability and consistency.</p>
+                                </li>
+                                <li>
+                                    <p><strong>MapPage Implementation</strong></p>
+                                </li>
+                                <li>
+                                    <p>Introduced a new <code>MapPage</code> to display DMICP codes filtered by Pre-Map Priority (1, 2, 3, 4), including decisions like APIMap and ManualMap with filtering capabilities.</p>
+                                </li>
+                                <li>
+                                    <p><strong>InactivatePage Setup</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added <code>InactivatePage</code> to display codes marked for inactivation, with a focus on Pre-Inactivation Priority (1, 2, 3, 4), removing unnecessary columns and including new descriptions.</p>
+                                </li>
+                                <li>
+                                    <p>Updated the <strong>PurposePage</strong> with enhanced filtering options and Drop filters to improve user navigation and data visualization.</p>
+                                </li>
+                                <li>
+                                    <p>Introduced new context and API calls for handling different data sets, improving performance and separation of concerns.</p>
+                                </li>
+                                <li>
+                                    <p>Removed the <strong>Nav Bar search feature</strong> as no shared pan-app SNOMED context</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>

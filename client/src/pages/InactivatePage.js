@@ -1,14 +1,14 @@
-// MapPage.js
+// InactivatePage.js
 import React, { useContext, useState, useEffect } from 'react';
 import { Table, ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { MapDataContext } from '../contexts/MapDataContext';
+import { InactivateDataContext } from '../contexts/InactivateDataContext';
 import renderTooltip from '../components/renderTooltip';
 
-function MapPage() {
-    const { mapData, filterType, setFilterType, dropFilter, setDropFilter } = useContext(MapDataContext);
+function InactivatePage() {
+    const { inactivateData, dropFilter, setDropFilter } = useContext(InactivateDataContext);
     const [filteredData, setFilteredData] = useState([]);
     const [recordCount, setRecordCount] = useState(0);
 
@@ -19,20 +19,11 @@ function MapPage() {
     };
 
     useEffect(() => {
-        applyFilter(filterType);
-    }, [filterType, dropFilter, mapData]);
+        applyFilter();
+    }, [dropFilter, inactivateData]);
 
-    const applyFilter = (filterType) => {
-        let filtered = [];
-
-        // Filter by Decision (APIMap or ManualMap)
-        if (filterType === 'All') {
-            filtered = mapData;
-        } else if (filterType === 'API') {
-            filtered = mapData.filter(item => item.Decision === 'APIMap');
-        } else if (filterType === 'Manual') {
-            filtered = mapData.filter(item => item.Decision === 'ManualMap');
-        }
+    const applyFilter = () => {
+        let filtered = inactivateData;
 
         // Apply Drop filter
         if (dropFilter) {
@@ -45,16 +36,9 @@ function MapPage() {
 
     return (
         <div className="container mt-4">
-            <h3>Mapped Codes by Pre-Map Priority</h3>
+            <h3>Codes by Pre-Inactivation Priority</h3>
 
-            {/* Filter by Decision */}
-            <ButtonGroup className="mb-3">
-                <Button variant={filterType === 'All' ? 'primary' : 'secondary'} onClick={() => setFilterType('All')}>All</Button>
-                <Button variant={filterType === 'API' ? 'primary' : 'secondary'} onClick={() => setFilterType('API')}>API</Button>
-                <Button variant={filterType === 'Manual' ? 'primary' : 'secondary'} onClick={() => setFilterType('Manual')}>Manual</Button>
-            </ButtonGroup>
-
-            {/* Filter by Drop */}
+            {/* Filter by Drop (Pre-Inactivation Priority) */}
             <ButtonGroup className="mb-3">
                 <Button variant={dropFilter === 'Drop1' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
                 <Button variant={dropFilter === 'Drop2' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
@@ -68,10 +52,10 @@ function MapPage() {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Pre-Map</th>
+                        <th>Pre-Inactivate</th>
                         <th>DMICP Code</th>
                         <th>Description</th>
-                        <th>Term</th>
+                        <th>New Description</th>
                         <th>Read Parent</th>
                     </tr>
                 </thead>
@@ -90,15 +74,14 @@ function MapPage() {
                                         {item.Drop.startsWith('Drop4') && <p>4 <FontAwesomeIcon icon={faCogs} style={{ color: 'lightgray' }} /></p>}
                                     </span>
 
-                                </OverlayTrigger>
-                            </td>
+                                </OverlayTrigger> </td>
                             <td>
                                 <span style={{ color: 'blue', cursor: 'pointer' }} onClick={() => handleDMICPCodeClick(item.DMICPCode)}>
                                     {item.DMICPCode}
                                 </span>
                             </td>
                             <td>{item.Description}</td>
-                            <td>{item.Decision === 'APIMap' ? item.APIMapTerm : item.ManualMapFSN}</td>
+                            <td>{item.NewDescription}</td>
                             <td>{item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent}</td>
                         </tr>
                     ))}
@@ -108,4 +91,4 @@ function MapPage() {
     );
 }
 
-export default MapPage;
+export default InactivatePage;
