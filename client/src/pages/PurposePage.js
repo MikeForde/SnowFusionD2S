@@ -65,9 +65,10 @@ const renderTooltip = (item) => (
 );
 
 function PurposePage() {
-    const { purposeData, filterType, setFilterType, subFilterType, setSubFilterType } = useContext(PurposeDataContext); 
+    const { purposeData, filterType, setFilterType, subFilterType, setSubFilterType, dropFilter, setDropFilter } = useContext(PurposeDataContext);
     const [filteredData, setFilteredData] = useState([]);
     const [recordCount, setRecordCount] = useState(0);
+
     const navigate = useNavigate();
 
     const handleDMICPCodeClick = (dmicpCode) => {
@@ -79,8 +80,9 @@ function PurposePage() {
         if (purposeData.length > 0) {
             applyFilter(filterType, subFilterType);
         }
-    }, [filterType, subFilterType, purposeData]);
-    
+    }, [filterType, subFilterType, dropFilter, purposeData]);
+
+
 
     const applyFilter = (filterType, subFilterType = null) => {
         let filtered = [];
@@ -89,6 +91,8 @@ function PurposePage() {
             filtered = purposeData.filter(item => !item.Purpose);
         } else if (filterType === 'Children of DMS') {
             filtered = purposeData.filter(item => item.Purpose);
+        } else if (filterType === 'All') {
+            filtered = purposeData;
         } else if (filterType === 'OccMed') {
             if (subFilterType) {
                 filtered = purposeData.filter(item => item.Purpose === subFilterType);
@@ -100,10 +104,6 @@ function PurposePage() {
                 filtered = purposeData.filter(item => item.Purpose === subFilterType);
             } else {
                 filtered = purposeData.filter(item => ['Admin', 'MilAdmin', 'RehabAdmin', 'DentalAdmin'].includes(item.Purpose));
-                filtered = filtered.map(item => ({
-                    ...item,
-                    PurposeDisplay: item.Purpose === 'Admin' ? 'MilAdmin' : item.Purpose,
-                }));
             }
         } else if (filterType === 'Clinical') {
             if (subFilterType) {
@@ -111,24 +111,26 @@ function PurposePage() {
             } else {
                 filtered = purposeData.filter(item => {
                     return !['OccMed', 'CivOccMed', 'Admin', 'MilAdmin', 'RehabAdmin', 'DentalAdmin', null].includes(item.Purpose);
-                }).map(item => {
-                    let PurposeDisplay = item.Purpose;
-                    if (PurposeDisplay === 'Clinical') PurposeDisplay = 'Other';
-                    if (PurposeDisplay === 'MilMed') PurposeDisplay = 'MilClinical';
-                    if (PurposeDisplay === 'DCMH') PurposeDisplay = 'DCMH/Mental Health';
-                    return { ...item, PurposeDisplay };
                 });
             }
+        }
+
+        // Apply Drop filter from context
+        if (dropFilter) {
+            filtered = filtered.filter(item => item.Drop.startsWith(dropFilter));
         }
 
         setFilteredData(filtered);
         setRecordCount(filtered.length);
     };
 
+
+
     return (
         <div className="container mt-4">
-            <h2>Local DMS Create by Purpose</h2>
+            <h3>"DMS Create" Codes by Purpose</h3>
             <ButtonGroup className="mb-3">
+                <Button variant={filterType === 'All' ? 'primary' : 'secondary'} onClick={() => { setFilterType('All'); setSubFilterType(null); }}>All</Button>
                 <Button variant={filterType === 'Children of INT or UK' ? 'primary' : 'secondary'} onClick={() => { setFilterType('Children of INT or UK'); setSubFilterType(null); }}>Children of INT or UK</Button>
                 <Button variant={filterType === 'Children of DMS' ? 'primary' : 'secondary'} onClick={() => { setFilterType('Children of DMS'); setSubFilterType(null); }}>Children of DMS</Button>
             </ButtonGroup>
@@ -253,6 +255,14 @@ function PurposePage() {
                     </Dropdown.Menu>
                 </Dropdown>
             </ButtonGroup>
+            <ButtonGroup className="mb-3">
+                <Button variant={dropFilter === 'Drop1' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
+                <Button variant={dropFilter === 'Drop2' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
+                <Button variant={dropFilter === 'Drop3' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
+                <Button variant={dropFilter === 'Drop4' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Added</Button>
+                <Button variant={dropFilter === null ? 'primary' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
+            </ButtonGroup>
+
 
             <p>Total Records: {recordCount}</p>
 
@@ -263,7 +273,7 @@ function PurposePage() {
                         <th>DMICP Code</th>
                         <th>Description</th>
                         <th>FSN Type</th>
-                        <th>Parent</th>
+                        <th>Read Parent</th>
                     </tr>
                 </thead>
                 <tbody>

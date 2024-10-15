@@ -164,6 +164,18 @@
     font-size: small;
   }
 
+  .lead {
+    font-size: medium !important;
+  }
+
+  h1 {
+    font-size: x-large !important;
+  }
+
+  h2 {
+    font-size: large !important;
+  }
+
   h3 {
     font-size: large !important;
   }
@@ -193,6 +205,12 @@
   }
 
   td {
+    font-size: small !important;
+    /* Adjust this value as needed */
+  }
+
+  /* make the buttons smaller with smaller font size */
+  .btn {
     font-size: small !important;
     /* Adjust this value as needed */
   }

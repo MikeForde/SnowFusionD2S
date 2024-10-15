@@ -8,6 +8,7 @@ export const PurposeDataProvider = ({ children }) => {
     const [purposeData, setPurposeData] = useState([]);
     const [filterType, setFilterType] = useState('Children of INT or UK');
     const [subFilterType, setSubFilterType] = useState(null);
+    const [dropFilter, setDropFilter] = useState(null);
 
     useEffect(() => {
         // Fetch data only once when the provider mounts
@@ -30,7 +31,9 @@ export const PurposeDataProvider = ({ children }) => {
             filterType, 
             setFilterType, 
             subFilterType, 
-            setSubFilterType 
+            setSubFilterType,
+            dropFilter, 
+            setDropFilter
         }}>
             {children}
         </PurposeDataContext.Provider>
