@@ -3,7 +3,7 @@ import { Form, Button, Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faQuestionCircle, faExchangeAlt, faStar, faExclamationTriangle, faTools, faCogs, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useLoading } from '../contexts/LoadingContext';
-import { SnomedContext } from '../SnomedContext'; // Import the context
+import { SnomedContext } from '../contexts/SnomedContext'; // Import the context
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./Page.css";

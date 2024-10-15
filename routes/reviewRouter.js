@@ -144,8 +144,48 @@ const getDMICPReadReviewsByDecision = async (req, res) => {
 // In your routes file (e.g., readReviewRoutes.js)
 router.get('/decision/:decision', getDMICPReadReviewsByDecision);
 
-// In your controller (e.g., readReviewController.js)
+const getDMICPReadReviewsByMapDecision = async (req, res) => {
+    // get where Decision = APIMap or ManualMap
+    try {
+        const reviews = await db.DMICPReadReview.findAll({
+            where: {
+                [db.Sequelize.Op.or]: [
+                    { Decision: 'APIMap' },
+                    { Decision: 'ManualMap' }
+                ]
+            },
+            attributes: [
+                'id',
+                'Drop',
+                'DMICPCode',
+                'Description',
+                'FSNType',
+                'Parent',
+                'Parent_Term',
+                'Purpose',
+                'NewDescription',
+                'ManualMapCode',
+                'ManualMapFSN',
+                'APIMapCode',
+                'APIMapTerm',
+                'SNOMEDCode',
+                'SNOMEDParent',
+                'TemplateNames',
+                'DocumentNames',
+                'SearchNames',
+                'UsageCount',
+                'Cat2' // Include any additional fields required for rendering
+            ]
+        });
+        res.json(reviews);
+    } catch (error) {
+        console.error('Error fetching DMSMap reviews:', error);
+        res.status(500).json({ error: 'An error occurred while fetching reviews' });
+    }
+}
 
+// In your controller (e.g., readReviewController.js)
+router.get('/mapdecision/', getDMICPReadReviewsByMapDecision);
 
 
 module.exports = router;

@@ -3,7 +3,7 @@ import "./Page.css";
 import { Card, Form, Button, Alert } from "react-bootstrap"; // Import necessary components
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { SnomedContext } from '../SnomedContext';
+import { SnomedContext } from '../contexts/SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
 import SNOMEDCode from './Components/SNOMEDCode'; // Import the SNOMEDCode component
 

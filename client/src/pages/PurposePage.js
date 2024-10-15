@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
 import "./Page.css" // Import the CSS file
 import { useNavigate } from 'react-router-dom';
-import { PurposeDataContext } from '../PurposeDataContext';
+import { PurposeDataContext } from '../contexts/PurposeDataContext';
 
 // Helper function to render the floating info box
 const renderTooltip = (item) => (

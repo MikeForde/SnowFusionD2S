@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faBeer, faBrain, faCloud, faDownload, faFileMedical, faQrcode, faUpload } from '@fortawesome/free-solid-svg-icons';
-import { SnomedContext } from '../SnomedContext';
+import { SnomedContext } from '../contexts/SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
 import SnomedSearch from './SnomedSearch';
 import './AppComp.css';
@@ -64,7 +64,8 @@ function NavigationBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}>Review</Nav.Link>
-          <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}>Purpose</Nav.Link>
+          <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}>Create</Nav.Link>
+          <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)}>Map</Nav.Link>
             <NavDropdown title="Info" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/aboutwebapp" onClick={() => handleNavItemSelect(false)}>
                 About Web App

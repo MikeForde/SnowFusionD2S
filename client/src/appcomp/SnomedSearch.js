@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';  // Import Alert component
 import axios from 'axios';
-import { SnomedContext } from '../SnomedContext';
+import { SnomedContext } from '../contexts/SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
 import './AppComp.css';
 
