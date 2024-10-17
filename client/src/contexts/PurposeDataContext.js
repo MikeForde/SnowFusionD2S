@@ -6,9 +6,9 @@ export const PurposeDataContext = createContext();
 
 export const PurposeDataProvider = ({ children }) => {
     const [purposeData, setPurposeData] = useState([]);
-    const [filterType, setFilterType] = useState('All');
+    const [filterType, setFilterType] = useState('OccMed');
     const [subFilterType, setSubFilterType] = useState(null);
-    const [dropFilter, setDropFilter] = useState(null);
+    const [dropFilter, setDropFilter] = useState('Drop1');
 
     useEffect(() => {
         // Fetch data only once when the provider mounts
