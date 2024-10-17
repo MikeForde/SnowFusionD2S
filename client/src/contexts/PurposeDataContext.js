@@ -6,7 +6,7 @@ export const PurposeDataContext = createContext();
 
 export const PurposeDataProvider = ({ children }) => {
     const [purposeData, setPurposeData] = useState([]);
-    const [filterType, setFilterType] = useState('Children of INT or UK');
+    const [filterType, setFilterType] = useState('All');
     const [subFilterType, setSubFilterType] = useState(null);
     const [dropFilter, setDropFilter] = useState(null);
 

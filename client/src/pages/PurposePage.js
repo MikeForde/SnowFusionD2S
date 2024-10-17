@@ -71,7 +71,7 @@ function PurposePage() {
 
     return (
         <div className="container mt-4">
-            <h3>"DMS Create" Codes by Purpose</h3>
+            <h3>DMSCreate Codes by Purpose</h3>
             <ButtonGroup className="mb-3">
                 <Button variant={filterType === 'All' ? 'primary' : 'secondary'} onClick={() => { setFilterType('All'); setSubFilterType(null); }}>All</Button>
                 <Button variant={filterType === 'Children of INT or UK' ? 'primary' : 'secondary'} onClick={() => { setFilterType('Children of INT or UK'); setSubFilterType(null); }}>Children of INT or UK</Button>
@@ -243,7 +243,7 @@ function PurposePage() {
                                     {item.DMICPCode}
                                 </span>
                             </td>
-                            <td>{item.Description}</td>
+                            <td>{item.Description.replace(/"/g, '')}</td>
                             <td>{item.FSNType}</td>
                             <td>{item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent}</td>
                         </tr>

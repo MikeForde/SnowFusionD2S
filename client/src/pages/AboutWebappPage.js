@@ -9,7 +9,7 @@ function AboutWebAppPage() {
                 <Col>
                     <h2>About This Web Application</h2>
                     <p>
-                        This web application is a prototype designed to demonstrate the relationships between DMS Local Codes and established International and UK SNOMED CT codes. It highlights codes that are unique to DMS and do not currently exist in SNOMED (International or UK). In any future electronic health record (EHR) system, such codes would need to be created as local extensions.
+                        This web application is designed to demonstrate the relationships between DMS Local Codes and established International and UK SNOMED CT codes. It highlights codes that are unique to DMS and do not currently exist in SNOMED (International or UK). In any future electronic health record (EHR) system, such codes - if needed - would need to be created in some format and made available.
                     </p>
                 </Col>
             </Row>

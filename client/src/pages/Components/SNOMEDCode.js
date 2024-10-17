@@ -19,7 +19,7 @@ function SNOMEDCode({ snomedCode, onClick, className, isSelected }) {
       <p>
         {snomedCode.moduleId === 991006900109 ? (
           <>
-            (DMS) - {snomedCode.term}
+            (DMS) - {snomedCode.term.replace(/"/g, '')}
             <img
               src="/UK_MOD_DMS_Flag.svg"
               alt="UK MOD DMS Flag"

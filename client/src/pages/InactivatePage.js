@@ -80,8 +80,8 @@ function InactivatePage() {
                                     {item.DMICPCode}
                                 </span>
                             </td>
-                            <td>{item.Description}</td>
-                            <td>{item.NewDescription}</td>
+                            <td>{item.Description.replace(/"/g, '')}</td>
+                            <td>{item.NewDescription ? item.NewDescription.replace(/"/g, '') : ''}</td>
                             <td>{item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent}</td>
                         </tr>
                     ))}

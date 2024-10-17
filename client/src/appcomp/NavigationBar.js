@@ -63,7 +63,7 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}/> Review</Nav.Link>
+            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}/> All</Nav.Link>
             <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />  Create</Nav.Link>
             <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Map</Nav.Link>
             <Nav.Link as={Link} to="/inactivate" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Inactivate</Nav.Link>

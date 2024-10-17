@@ -71,7 +71,7 @@ function MapPage() {
                         <th>Pre-Map</th>
                         <th>DMICP Code</th>
                         <th>Description</th>
-                        <th>Term</th>
+                        <th>Mapped SNOMED Term</th>
                         <th>Read Parent</th>
                     </tr>
                 </thead>
@@ -97,7 +97,7 @@ function MapPage() {
                                     {item.DMICPCode}
                                 </span>
                             </td>
-                            <td>{item.Description}</td>
+                            <td>{item.Description.replace(/"/g, '')}</td>
                             <td>{item.Decision === 'APIMap' ? item.APIMapTerm : item.ManualMapFSN}</td>
                             <td>{item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent}</td>
                         </tr>

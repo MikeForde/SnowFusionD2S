@@ -182,7 +182,7 @@ function DMICPReadReviewPage() {
                                                 <FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} />
                                             )}
                                         </Card.Title>
-                                        <Card.Text>{review.Description}</Card.Text>
+                                        <Card.Text>{review.Description.replace(/"/g, '')}</Card.Text>
                                     </Card.Body>
                                 </Card>
                             ))
@@ -197,7 +197,7 @@ function DMICPReadReviewPage() {
                         <div className="details">
                             <h3>Review Details</h3>
                             <p><strong>Parent:</strong> {selectedReview.Parent} - {selectedReview.Parent_Term}</p>
-                            <p><strong>Code: {selectedReview.DMICPCode} - {selectedReview.Description}</strong> </p>
+                            <p><strong>Code: {selectedReview.DMICPCode} - {selectedReview.Description.replace(/"/g, '')}</strong> </p>
                             <p><strong>Decision:</strong> {selectedReview.Decision}
                                 {selectedReview.Decision === 'DMSCreate' && (
                                     <>
