@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faExchangeAlt, faTimesCircle, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faExchangeAlt, faTimesCircle, faEye, faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import { SnomedContext } from '../contexts/SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
 import SnomedSearch from './SnomedSearch';
@@ -63,7 +63,8 @@ function NavigationBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}/> All</Nav.Link>
+            <Nav.Link as={Link} to="/snomed"onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faNetworkWired} style={{ color: 'black', marginLeft: '10px', cursor: 'pointer' }} /> SNOMED</Nav.Link>
+            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }} /> Search DMS</Nav.Link>
             <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />  Create</Nav.Link>
             <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Map</Nav.Link>
             <Nav.Link as={Link} to="/inactivate" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Inactivate</Nav.Link>

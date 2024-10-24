@@ -9,6 +9,7 @@ import DMICPReadReviewPage from './pages/DMICPReadReviewPage';
 import AboutDMICPPage from './pages/AboutDMICPPage';
 import PurposePage from './pages/PurposePage';
 import MapPage from './pages/MapPage';
+import LandingPage from './pages/LandingPage';
 import InactivatePage from './pages/InactivatePage';
 import { SnomedProvider } from './contexts/SnomedContext'; // Updated import
 import { LoadingProvider } from './contexts/LoadingContext';
@@ -29,7 +30,8 @@ function App() {
                   <NavigationBar />
                   <LoadingSpinner />
                   <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/snomed" element={<HomePage />} />
                     <Route path="/review/:code?" element={<DMICPReadReviewPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/changelog" element={<ChangeLogPage />} />
