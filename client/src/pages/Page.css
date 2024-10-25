@@ -107,6 +107,11 @@
 }
 
 .custom-button {
+  background-color: rgb(27, 27, 112) !important;
+  border-color: rgb(102, 51, 153) !important;
+}
+
+.custom-button:hover {
   background-color: rgb(47, 47, 212) !important;
   border-color: rgb(102, 51, 153) !important;
 }

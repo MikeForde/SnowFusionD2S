@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Table, ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faExclamationTriangle, faTools, faCogs, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { MapDataContext } from '../contexts/MapDataContext';
 import renderTooltip from '../components/renderTooltip';
@@ -45,22 +45,22 @@ function MapPage() {
 
     return (
         <div className="container mt-4">
-            <h3>Mapped Codes by Pre-Map Priority</h3>
+            <h3><FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Mapped Codes with Pre-Map Priority</h3>
 
             {/* Filter by Decision */}
             <ButtonGroup className="mb-3">
-                <Button variant={filterType === 'All' ? 'primary' : 'secondary'} onClick={() => setFilterType('All')}>All</Button>
-                <Button variant={filterType === 'API' ? 'primary' : 'secondary'} onClick={() => setFilterType('API')}>API</Button>
-                <Button variant={filterType === 'Manual' ? 'primary' : 'secondary'} onClick={() => setFilterType('Manual')}>Manual</Button>
+                <Button variant={filterType === 'All' ? 'primary custom-button' : 'secondary'} onClick={() => setFilterType('All')}>All</Button>
+                <Button variant={filterType === 'API' ? 'primary custom-button' : 'secondary'} onClick={() => setFilterType('API')}>API</Button>
+                <Button variant={filterType === 'Manual' ? 'primary custom-button' : 'secondary'} onClick={() => setFilterType('Manual')}>Manual</Button>
             </ButtonGroup>
 
             {/* Filter by Drop */}
             <ButtonGroup className="mb-3">
-                <Button variant={dropFilter === 'Drop1' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
-                <Button variant={dropFilter === 'Drop2' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
-                <Button variant={dropFilter === 'Drop3' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
-                <Button variant={dropFilter === 'Drop4' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
-                <Button variant={dropFilter === null ? 'primary' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
+                <Button variant={dropFilter === 'Drop1' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
+                <Button variant={dropFilter === 'Drop2' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
+                <Button variant={dropFilter === 'Drop3' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
+                <Button variant={dropFilter === 'Drop4' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
+                <Button variant={dropFilter === null ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
             </ButtonGroup>
 
             <p>Total Records: {recordCount}</p>

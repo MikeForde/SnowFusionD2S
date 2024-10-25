@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Table, ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faExclamationTriangle, faTools, faCogs, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { InactivateDataContext } from '../contexts/InactivateDataContext';
 import renderTooltip from '../components/renderTooltip';
@@ -36,15 +36,15 @@ function InactivatePage() {
 
     return (
         <div className="container mt-4">
-            <h3>Codes by Pre-Inactivation Priority</h3>
+            <h3><FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Codes by Pre-Inactivation Priority</h3>
 
             {/* Filter by Drop (Pre-Inactivation Priority) */}
             <ButtonGroup className="mb-3">
-                <Button variant={dropFilter === 'Drop1' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
-                <Button variant={dropFilter === 'Drop2' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
-                <Button variant={dropFilter === 'Drop3' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
-                <Button variant={dropFilter === 'Drop4' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
-                <Button variant={dropFilter === null ? 'primary' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
+                <Button variant={dropFilter === 'Drop1' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
+                <Button variant={dropFilter === 'Drop2' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
+                <Button variant={dropFilter === 'Drop3' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
+                <Button variant={dropFilter === 'Drop4' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
+                <Button variant={dropFilter === null ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
             </ButtonGroup>
 
             <p>Total Records: {recordCount}</p>

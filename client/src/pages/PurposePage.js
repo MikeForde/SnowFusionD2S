@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Table, ButtonGroup, Button, Dropdown, OverlayTrigger } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faExclamationTriangle, faTools, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faExclamationTriangle, faTools, faCogs, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import "./Page.css" // Import the CSS file
 import { useNavigate } from 'react-router-dom';
 import { PurposeDataContext } from '../contexts/PurposeDataContext';
@@ -71,16 +71,16 @@ function PurposePage() {
 
     return (
         <div className="container mt-4">
-            <h3>DMSCreate Codes by Purpose</h3>
+            <h3><FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} /> DMSCreate Codes</h3>
             <ButtonGroup className="mb-3">
-                <Button variant={filterType === 'All' ? 'primary' : 'secondary'} onClick={() => { setFilterType('All'); setSubFilterType(null); }}>All</Button>
-                <Button variant={filterType === 'Children of INT or UK' ? 'primary' : 'secondary'} onClick={() => { setFilterType('Children of INT or UK'); setSubFilterType(null); }}>Children of INT or UK</Button>
-                <Button variant={filterType === 'Children of DMS' ? 'primary' : 'secondary'} onClick={() => { setFilterType('Children of DMS'); setSubFilterType(null); }}>Children of DMS</Button>
+                <Button variant={filterType === 'All' ? 'primary custom-button' : 'secondary'} onClick={() => { setFilterType('All'); setSubFilterType(null); }}>All</Button>
+                <Button variant={filterType === 'Children of INT or UK' ? 'primary custom-button' : 'secondary'} onClick={() => { setFilterType('Children of INT or UK'); setSubFilterType(null); }}>Children of INT or UK</Button>
+                <Button variant={filterType === 'Children of DMS' ? 'primary custom-button' : 'secondary'} onClick={() => { setFilterType('Children of DMS'); setSubFilterType(null); }}>Children of DMS</Button>
             </ButtonGroup>
             <ButtonGroup className="mb-3">
                 <Dropdown as={ButtonGroup}>
                     <Button
-                        variant={filterType === 'OccMed' && !subFilterType ? 'primary' : 'secondary'}
+                        variant={filterType === 'OccMed' && !subFilterType ? 'primary custom-button' : 'secondary'}
                         onClick={() => {
                             setFilterType('OccMed');
                             setSubFilterType(null);
@@ -90,7 +90,7 @@ function PurposePage() {
                     </Button>
                     <Dropdown.Toggle
                         split
-                        variant={filterType === 'OccMed' && subFilterType ? 'primary' : 'secondary'}
+                        variant={filterType === 'OccMed' && subFilterType ? 'primary custom-button' : 'secondary'}
                         id="dropdown-split-occmed"
                     />
                     <Dropdown.Menu>
@@ -107,7 +107,7 @@ function PurposePage() {
 
                 <Dropdown as={ButtonGroup}>
                     <Button
-                        variant={filterType === 'Clinical' && !subFilterType ? 'primary' : 'secondary'}
+                        variant={filterType === 'Clinical' && !subFilterType ? 'primary custom-button' : 'secondary'}
                         onClick={() => {
                             setFilterType('Clinical');
                             setSubFilterType(null); // Reset subFilterType
@@ -117,7 +117,7 @@ function PurposePage() {
                     </Button>
                     <Dropdown.Toggle
                         split
-                        variant={filterType === 'Clinical' && subFilterType ? 'primary' : 'secondary'}
+                        variant={filterType === 'Clinical' && subFilterType ? 'primary custom-button' : 'secondary'}
                         id="dropdown-split-clinical"
                     />
                     <Dropdown.Menu>
@@ -165,7 +165,7 @@ function PurposePage() {
                 </Dropdown>
                 <Dropdown as={ButtonGroup}>
                     <Button
-                        variant={filterType === 'Admin' && !subFilterType ? 'primary' : 'secondary'}
+                        variant={filterType === 'Admin' && !subFilterType ? 'primary custom-button' : 'secondary'}
                         onClick={() => {
                             setFilterType('Admin');
                             setSubFilterType(null); // Reset subFilterType
@@ -175,7 +175,7 @@ function PurposePage() {
                     </Button>
                     <Dropdown.Toggle
                         split
-                        variant={filterType === 'Admin' && subFilterType ? 'primary' : 'secondary'}
+                        variant={filterType === 'Admin' && subFilterType ? 'primary custom-button' : 'secondary'}
                         id="dropdown-split-admin"
                     />
                     <Dropdown.Menu>
@@ -199,11 +199,11 @@ function PurposePage() {
                 </Dropdown>
             </ButtonGroup>
             <ButtonGroup className="mb-3">
-                <Button variant={dropFilter === 'Drop1' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
-                <Button variant={dropFilter === 'Drop2' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
-                <Button variant={dropFilter === 'Drop3' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
-                <Button variant={dropFilter === 'Drop4' ? 'primary' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
-                <Button variant={dropFilter === null ? 'primary' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
+                <Button variant={dropFilter === 'Drop1' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop1')}>High</Button>
+                <Button variant={dropFilter === 'Drop2' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop2')}>Med</Button>
+                <Button variant={dropFilter === 'Drop3' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop3')}>Low</Button>
+                <Button variant={dropFilter === 'Drop4' ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter('Drop4')}>Req</Button>
+                <Button variant={dropFilter === null ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
             </ButtonGroup>
 
 

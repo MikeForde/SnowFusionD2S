@@ -49,7 +49,7 @@ function NavigationBar() {
   return (
     <Navbar expanded={expanded} expand="lg" fixed="top">
       <Container>
-        <Navbar.Brand as={Link} to="/" onClick={() => handleNavItemSelect(false)}>
+        <Navbar.Brand as={Link} to="/" onClick={() => handleNavItemSelect(false)} className="clickable-link">
           <img
             src="/ipsnavbar.ico"
             width="32"
@@ -58,16 +58,29 @@ function NavigationBar() {
             alt="IPS Logo"
             style={{ marginRight: '10px' }}
           />
-          SnowFusion D2S 0_11
+          SnowFusion
+          <span style={{ fontSize: '0.8em', marginLeft: '5px' }}>D2S</span>
+          <span style={{ fontSize: '0.6em', marginLeft: '5px' }}>0_12</span>
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/snomed"onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faNetworkWired} style={{ color: 'black', marginLeft: '10px', cursor: 'pointer' }} /> SNOMED</Nav.Link>
-            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }} /> Search DMS</Nav.Link>
-            <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} />  Create</Nav.Link>
-            <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Map</Nav.Link>
-            <Nav.Link as={Link} to="/inactivate" onClick={() => handleNavItemSelect(false)}><FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Inactivate</Nav.Link>
+            <Nav.Link as={Link} to="/snomed" onClick={() => handleNavItemSelect(false)} className="clickable-link">
+              <FontAwesomeIcon icon={faNetworkWired} style={{ color: 'black', marginLeft: '10px' }} /> SNOMED
+            </Nav.Link>
+            <Nav.Link as={Link} to="/review" onClick={() => handleNavItemSelect(false)} className="clickable-link">
+              <FontAwesomeIcon icon={faEye} style={{ color: 'blue', marginLeft: '10px' }} /> Search DMS
+            </Nav.Link>
+            <Nav.Link as={Link} to="/purpose" onClick={() => handleNavItemSelect(false)} className="clickable-link">
+              <FontAwesomeIcon icon={faCheckCircle} style={{ color: 'green', marginLeft: '10px' }} /> Create
+            </Nav.Link>
+            <Nav.Link as={Link} to="/map" onClick={() => handleNavItemSelect(false)} className="clickable-link">
+              <FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Map
+            </Nav.Link>
+            <Nav.Link as={Link} to="/inactivate" onClick={() => handleNavItemSelect(false)} className="clickable-link">
+              <FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Inactivate
+            </Nav.Link>
             <NavDropdown title="Info" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/aboutwebapp" onClick={() => handleNavItemSelect(false)}>
                 About Web App

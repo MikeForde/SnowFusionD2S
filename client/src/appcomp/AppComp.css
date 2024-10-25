@@ -34,3 +34,16 @@
     border: 1px solid #f5c6cb;
     border-radius: 5px;
 }
+  
+  .clickable-link:hover {
+    /* background-color: rgb(152, 152, 27); Bootstrap primary color */
+    color: white;
+    transform: translateY(-1px); /* Slight lift effect on hover */
+  }
+  
+  .clickable-link:active {
+    transform: translateY(0px); /* Reset lift effect when clicked */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow reduction */
+  }
+  
+  

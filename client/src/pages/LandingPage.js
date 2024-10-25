@@ -10,6 +10,7 @@ import {
   faExchangeAlt,
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
+import "./Page.css" // Import the CSS file
 
 function LandingPage() {
   return (
@@ -18,19 +19,19 @@ function LandingPage() {
       <p>
         The Defence Medical Information Capability Programme (DMICP) includes approximately{' '}
         <strong>40,000</strong> DMS local codes. From these, about <strong>9,000</strong> codes were
-        selected for review based on being in one of three groups:
+        selected for review based on being in one of three priority groups:
       </p>
       <ul>
         <li>
-          <strong>Group 1</strong>: Codes that underpin the core DMS occupational function (e.g.,
+          <strong>Group 1 - High</strong>: Codes that underpin the core DMS occupational function (e.g.,
           grading, limitations, audiometry, and visual acuity).
         </li>
         <li>
-          <strong>Group 2</strong>: Codes, not already in Group 1, that are used in templates,
-          protocols, documents, and/or searches.
+          <strong>Group 2 - Med</strong>: Codes, not already in Group 1, that are used in templates,
+          protocols, centrally shared documents, and/or centrally shared searches.
         </li>
         <li>
-          <strong>Group 3</strong>: Codes used at least once in the last 5 years.
+          <strong>Group 3 - Low</strong>: Codes not captured above but used at least once in the last 5 years.
         </li>
       </ul>
       <p>These codes were reviewed to determine if they needed to be:</p>
@@ -69,7 +70,7 @@ function LandingPage() {
                 See how the recommended DMS local codes might work alongside regular UK and
                 International SNOMED codes.
               </Card.Text>
-              <Link to="/snomed" className="btn btn-primary">
+              <Link to="/snomed" className="btn btn-primary custom-button">
                 Go to SNOMED Page
               </Link>
             </Card.Body>
@@ -89,7 +90,7 @@ function LandingPage() {
                 Search among all the DMS local codes that made it into the review and the decisions
                 made about them.
               </Card.Text>
-              <Link to="/review" className="btn btn-primary">
+              <Link to="/review" className="btn btn-primary custom-button">
                 Go to Review Search Page
               </Link>
             </Card.Body>
@@ -109,7 +110,7 @@ function LandingPage() {
                 View DMICP codes recommended to be created as local codes with various filtering
                 options including clinical purpose.
               </Card.Text>
-              <Link to="/purpose" className="btn btn-primary">
+              <Link to="/purpose" className="btn btn-primary custom-button">
                 Go to DMS Create Page
               </Link>
             </Card.Body>
@@ -129,7 +130,7 @@ function LandingPage() {
                 Explore DMS codes that map to established SNOMED codes and do not therefore need
                 creating.
               </Card.Text>
-              <Link to="/map" className="btn btn-primary">
+              <Link to="/map" className="btn btn-primary custom-button">
                 Go to Map Page
               </Link>
             </Card.Body>
@@ -148,7 +149,7 @@ function LandingPage() {
               <Card.Text>
                 Review codes selected for inactivation and their details.
               </Card.Text>
-              <Link to="/inactivate" className="btn btn-primary">
+              <Link to="/inactivate" className="btn btn-primary custom-button">
                 Go to Inactivate Page
               </Link>
             </Card.Body>

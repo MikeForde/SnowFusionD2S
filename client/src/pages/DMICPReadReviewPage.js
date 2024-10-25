@@ -105,7 +105,7 @@ function DMICPReadReviewPage() {
                 setSelectedSnomedCode({ conceptId, term, moduleId });
 
                 // Navigate to HomePage using internal routing
-                navigate('/');
+                navigate('/snomed');
             } else {
                 console.error("SNOMED code not found");
             }
@@ -219,7 +219,7 @@ function DMICPReadReviewPage() {
                                 <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
                                     <FontAwesomeIcon
                                         icon={faNetworkWired}
-                                        style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                        style={{ color: 'black', marginLeft: '10px', cursor: 'pointer' }}
                                         onClick={() => handleViewCodeClick(selectedReview.ManualMapCode)} // Set the selected SNOMED code
                                     /></p>
                             )}
@@ -227,7 +227,7 @@ function DMICPReadReviewPage() {
                                 <p><strong>API Map Code:</strong> {selectedReview.APIMapCode} - {selectedReview.APIMapTerm}
                                     <FontAwesomeIcon
                                         icon={faNetworkWired}
-                                        style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                        style={{ color: 'black', marginLeft: '10px', cursor: 'pointer' }}
                                         onClick={() => handleViewCodeClick(selectedReview.APIMapCode)} // Set the selected SNOMED code
                                     /></p>
                             )}
@@ -238,7 +238,7 @@ function DMICPReadReviewPage() {
                                         {selectedReview.SNOMEDCode}
                                         <FontAwesomeIcon
                                             icon={faNetworkWired}
-                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                            style={{ color: 'black', marginLeft: '10px', cursor: 'pointer' }}
                                             onClick={() => handleViewCodeClick(selectedReview.SNOMEDCode)} // Set the selected SNOMED code
                                         />
                                     </p>
@@ -247,7 +247,7 @@ function DMICPReadReviewPage() {
                                         {selectedReview.SNOMEDParent} - {selectedReview.SNOMEDParentTerm}
                                         <FontAwesomeIcon
                                             icon={faNetworkWired}
-                                            style={{ color: 'blue', marginLeft: '10px', cursor: 'pointer' }}
+                                            style={{ color: 'black', marginLeft: '10px', cursor: 'pointer' }}
                                             onClick={() => handleViewCodeClick(selectedReview.SNOMEDParent)} // Set the selected SNOMED parent
                                         />
                                     </p>

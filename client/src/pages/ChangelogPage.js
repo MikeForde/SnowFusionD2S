@@ -224,19 +224,13 @@ function ChangeLogPage() {
                             <h3 className="text-primary">Version 0_11 - 15 Oct 2024</h3>
                             <ul>
                                 <li>
-                                    <p><strong>Separated Tooltip Rendering into a Reusable Component</strong></p>
+                                    <p><strong>Introduced MapPage and InactivatePage</strong></p>
                                 </li>
                                 <li>
                                     <p>Refactored the Tooltip rendering logic into a separate <code>renderTooltip.js</code> file to be reused across multiple pages, improving code maintainability and consistency.</p>
                                 </li>
                                 <li>
-                                    <p><strong>MapPage Implementation</strong></p>
-                                </li>
-                                <li>
                                     <p>Introduced a new <code>MapPage</code> to display DMICP codes filtered by Pre-Map Priority (1, 2, 3, 4), including decisions like APIMap and ManualMap with filtering capabilities.</p>
-                                </li>
-                                <li>
-                                    <p><strong>InactivatePage Setup</strong></p>
                                 </li>
                                 <li>
                                     <p>Added <code>InactivatePage</code> to display codes marked for inactivation, with a focus on Pre-Inactivation Priority (1, 2, 3, 4), removing unnecessary columns and including new descriptions.</p>
@@ -252,6 +246,24 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_12 - 28 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Introduced New Landing Page</strong></p>
+                                </li>
+                                <li>
+                                    <p>Revised application flow to add a new <strong>Landing Page</strong> as the default entry point. This page provides an overview and guides users to each core page with explanations and purpose descriptions.</p>
+                                </li>
+                                <li>
+                                    <p>Each section on the <strong>Landing Page</strong> now includes icons that match those used in the Navbar for consistent visual guidance.</p>
+                                </li>
+                                <li>
+                                    <p>Detailed explanations of code groups reviewed, their importance, and the rationale for classification have been added to the Landing Page for improved user understanding.</p>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </Col>
             </Row>
