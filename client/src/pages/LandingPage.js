@@ -15,7 +15,7 @@ import "./Page.css" // Import the CSS file
 function LandingPage() {
   return (
     <Container className="mt-5">
-      <h2>Welcome to the DMS Local Code Review Application</h2>
+      <h2>Welcome to SnowFusion - the DMS Local Code Review WebApp</h2>
       <p>
         The Defence Medical Information Capability Programme (DMICP) includes approximately{' '}
         <strong>40,000</strong> DMS local codes. From these, about <strong>9,000</strong> codes were
