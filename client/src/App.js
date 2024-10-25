@@ -11,6 +11,7 @@ import PurposePage from './pages/PurposePage';
 import MapPage from './pages/MapPage';
 import LandingPage from './pages/LandingPage';
 import InactivatePage from './pages/InactivatePage';
+import From40000to9000Page from './pages/From40000To9000Page';
 import { SnomedProvider } from './contexts/SnomedContext'; // Updated import
 import { LoadingProvider } from './contexts/LoadingContext';
 import { PurposeDataProvider } from './contexts/PurposeDataContext';
@@ -40,6 +41,7 @@ function App() {
                     <Route path="/purpose" element={<PurposePage />} />
                     <Route path="/map" element={<MapPage />} />
                     <Route path="/inactivate" element={<InactivatePage />} />
+                    <Route path="/from40000to9000" element={<From40000to9000Page />} />
                   </Routes>
                 </div>
               </Router>

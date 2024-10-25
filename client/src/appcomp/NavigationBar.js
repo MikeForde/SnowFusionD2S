@@ -92,6 +92,21 @@ function NavigationBar() {
                 About DMICP and Read
               </NavDropdown.Item>
               <NavDropdown.Divider />
+              
+              {/* New "About Review" submenu */}
+              <NavDropdown title="About Review" id="about-review-dropdown">
+                <NavDropdown.Item as={Link} to="/from40000to9000" onClick={() => handleNavItemSelect(false)}>
+                  From 40,000 Codes to 9000
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/about-review/review-process" onClick={() => handleNavItemSelect(false)}>
+                  Reviewing the 9000
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/about-review/snomed-positioning" onClick={() => handleNavItemSelect(false)}>
+                  SNOMED Positioning of the DMS Create Codes
+                </NavDropdown.Item>
+              </NavDropdown>
+              
+              <NavDropdown.Divider />
               <NavDropdown.Item as={Link} to="/changelog" onClick={() => handleNavItemSelect(false)}>
                 Change Log
               </NavDropdown.Item>
