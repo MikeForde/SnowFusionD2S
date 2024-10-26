@@ -212,7 +212,7 @@ function PurposePage() {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>Cat</th>
+                        <th>Gp</th>
                         <th>DMICP Code</th>
                         <th>Description</th>
                         <th>FSN Type</th>
