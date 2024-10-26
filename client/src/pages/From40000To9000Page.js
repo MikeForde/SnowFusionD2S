@@ -1,7 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Card, Collapse, Button, Table } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileExcel, faCode, faSearch, faFileAlt, faFilter, faDatabase, faCheck, faClock, faExchangeAlt, faExclamationTriangle, faCalculator } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faFileAlt, faFilter, faDatabase, faCheck, faClock, faExclamationTriangle, faCalculator, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import "./Page.css";
 
 function From40000To9000Page() {
     const [open, setOpen] = React.useState(Array(10).fill(false)); // For handling collapsible sections
@@ -14,26 +15,25 @@ function From40000To9000Page() {
 
     return (
         <Container className="mt-5">
-            <h2>From 40,000 to 9,000 Codes: The Selection Process</h2>
-            <p>This page outlines the processes undertaken to filter down the DMS Local Codes from an initial 40,000 to 9,000 selected for review. The steps below highlight key stages, datasets, and methods used.</p>
+            <h2>Why 9,000+ Codes reviewed and not 40,000: The Selection Process</h2>
+            <p>There are just shy of 40,000 DMS local codes in DMICP. This page outlines the processes undertaken to target the 9000+ DMS Local Codes selected for review rather than reviewing them all. The steps below highlight key stages, datasets, and methods used.</p>
 
             {/* Section 1: Template Codes */}
             <Row className="mt-4">
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faCalculator} className="me-2" />Template Codes</Card.Title>
-                            <p>Source: <strong>Template detailed analysis with counts.xlsx</strong></p>
+                            <Card.Title><FontAwesomeIcon icon={faCalculator} className="me-2" />Determine codes used in DMICP Input Templates</Card.Title>
+                            <p>Source: <strong>Template detailed analysis with counts.xlsx - An offical file requested for this purpose</strong></p>
                             <Button variant="link" onClick={() => toggleCollapse(0)} aria-controls="template-collapse" aria-expanded={open[0]}>
                                 View Detailed Steps
                             </Button>
                             <Collapse in={open[0]}>
                                 <div id="template-collapse">
                                     <ul>
-                                        <li>Three columns containing codes were simplified to just the codes themselves.</li>
-                                        <li>Templates were included in the “accessible list” if “Global” or linked to global (i.e. were sub-templates).</li>
-                                        <li>Determined templates called by protocols by exporting all protocols as XML files.</li>
-                                        <li>Bespoke VBA code was written to extract the template names, flagged in the Master list, and added to the included list.</li>
+                                        <li>Templates were included if they were 'globaly accessible' to all DMS users or sub-templates of those templates (some templates cannot be accessed directly but can be reached via other templates).</li>
+                                        <li>Some templates can only be reached by DMICP Protocols - these were determined by exporting all protocols as XML files. Bespoke VBA code was then written to extract the template names.</li>
+                                        <li>The codes used in each template were then extracted.</li>
                                     </ul>
                                 </div>
                             </Collapse>
@@ -47,7 +47,7 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faSearch} className="me-2" />Search Codes</Card.Title>
+                            <Card.Title><FontAwesomeIcon icon={faSearch} className="me-2" />Determine Codes used in DMICP Shared Searches</Card.Title>
                             <p>Source: <strong>DMICP Shared searches</strong></p>
                             <Button variant="link" onClick={() => toggleCollapse(1)} aria-controls="search-collapse" aria-expanded={open[1]}>
                                 View Detailed Steps
@@ -56,9 +56,9 @@ function From40000To9000Page() {
                                 <div id="search-collapse">
                                     <ul>
                                         <li>This process was done manually as no export feature was available in DMICP.</li>
-                                        <li>An offical Excel file provided for this purpose proved unreliable and badly organized.</li>
+                                        <li>An offical Excel file requested for this purpose proved unreliable.</li>
                                         <li>Included and excluded Read codes were therefore manually extracted—whether included or excluded was not relevant for the analysis.</li>
-                                        <li>This manual process took a week to complete but was quicker than rerequesting the offical file.</li>
+                                        <li>This manual process took a week to complete but was quicker than re-requesting the offical file due to constraints on the providers of the data.</li>
                                     </ul>
                                 </div>
                             </Collapse>
@@ -72,7 +72,7 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faFileAlt} className="me-2" />Document Codes</Card.Title>
+                            <Card.Title><FontAwesomeIcon icon={faFileAlt} className="me-2" />Detemine Codes used in DMICP Shared Documents</Card.Title>
                             <p>Source: <strong>DMICP Shared documents in the Autopopulating set folder</strong></p>
                             <Button variant="link" onClick={() => toggleCollapse(2)} aria-controls="document-collapse" aria-expanded={open[2]}>
                                 View Detailed Steps
@@ -80,7 +80,7 @@ function From40000To9000Page() {
                             <Collapse in={open[2]}>
                                 <div id="document-collapse">
                                     <ul>
-                                        <li>All documents were exported.</li>
+                                        <li>All documents in the DMICP Shared folder were exported.</li>
                                         <li>Bespoke VBA code was used to extract Read codes used in the documents.</li>
                                         <li>The Read code is written into the bookmark. However, it was not possible to determine if the “Include child codes” flag was set.</li>
                                     </ul>
@@ -96,14 +96,15 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faFilter} className="me-2" />Combining Datasets</Card.Title>
+                            <Card.Title><FontAwesomeIcon icon={faFilter} className="me-2" />Combine and Filter Datasets So Far</Card.Title>
                             <Button variant="link" onClick={() => toggleCollapse(3)} aria-controls="combining-collapse" aria-expanded={open[3]}>
                                 View Detailed Steps
                             </Button>
                             <Collapse in={open[3]}>
                                 <div id="combining-collapse">
                                     <ul>
-                                        <li>Datasets from the previous steps were combined, unique entries filtered for Non-NHS codes only, e.g., "EMIS", "PCS", "DMS", "TRI", etc.</li>
+                                        <li>Datasets from the previous steps were combined, unique entries filtered for non-NHS codes only. </li>
+                                        <li>The specific SQL WHERE criteria to identify non-NHS were: Like "*EMIS*" Or Like "*PCS*" Or Like "*DMS*" Or Like "*TRI*" Or Like "*RAF*" Or Like "*ESC*" Or Like "*CUL*" Or Like "*SHHAPT*" Or Like "*EGTON*" Or Like "*JHC*" Or Like "*REHAB*" Or Like "*CVP*" Or Like "*CVA*" Or Like "CAB*"</li>
                                         <li>Total of 3548 BC (Business Critical) codes were identified.</li>
                                     </ul>
                                 </div>
@@ -118,15 +119,15 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faDatabase} className="me-2" />Usage Data</Card.Title>
-                            <p>Source: <strong>UniqueALL_May2022.xls</strong></p>
+                            <Card.Title><FontAwesomeIcon icon={faDatabase} className="me-2" />Add in Usage Data</Card.Title>
+                            <p>Source: <strong>UniqueALL_May2022.xls - usage data for all codes since advent of DMICP</strong></p>
                             <Button variant="link" onClick={() => toggleCollapse(4)} aria-controls="usage-collapse" aria-expanded={open[4]}>
                                 View Detailed Steps
                             </Button>
                             <Collapse in={open[4]}>
                                 <div id="usage-collapse">
                                     <ul>
-                                        <li>Filtered for Non-NHS codes.</li>
+                                        <li>Filtered for non-NHS codes using established criteria above.</li>
                                         <li>Combined with the previous dataset to create a total of 13,772 codes (3548 BC codes and 10224 Non-BC codes).</li>
                                         <li>Due to all the previous steps, the data now includes usage counts and whether a code is used in templates, searches, or documents.</li>
                                     </ul>
@@ -169,26 +170,27 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faExclamationTriangle} className="me-2" />Specific Known Business Critical Codes</Card.Title>
+                            <Card.Title><FontAwesomeIcon icon={faExclamationTriangle} className="me-2" />Identify Codes Highly Critical to the Business</Card.Title>
                             <Button variant="link" onClick={() => toggleCollapse(6)} aria-controls="specific-collapse" aria-expanded={open[6]}>
                                 View Detailed Steps
                             </Button>
                             <Collapse in={open[6]}>
                                 <div id="specific-collapse">
                                     <ul>
-                                        <li>The following templates were analyzed in detail to determine their Read codes and parent codes:</li>
+                                        <li>The following templates were analyzed in detail to determine their Read codes and parent codes (the latter not necessarily being present in the dataset so far but necessary for the hierarchy structure):</li>
                                         <ul>
-                                            <li>PULHHHEEMS widget</li>
-                                            <li>Audiogram widget</li>
-                                            <li>Acuity/Refraction widget</li>
+                                            <li>PULHHEEMS widget*</li>
+                                            <li>Audiogram widget*</li>
+                                            <li>Acuity/Refraction widget*</li>
                                             <li>Harmonised Med Lims</li>
                                             <li>Appendix 9 Lims</li>
-                                            <li>Army Grading template</li>
                                             <li>Naval Grading template</li>
+                                            <li>Army Grading template</li>
                                             <li>RAF Grading template</li>
                                         </ul>
                                         <li>This identified 1561 unique codes, with 1056 active/current and 505 inactive/legacy codes.</li>
                                         <li>183 new codes were added, with active flagged as BC and inactive flagged as Non-BC. This changed the BC total from 3548 to 4043 and the Non-BC from 10224 to 9912.</li>
+                                        <li><i>* widget - Complex EMIS-built DMICP template user interface components whose codes would not have necessarily been captured during the initial template code determination stage as that only concerned codes associated with simple template controls.</i></li>
                                     </ul>
                                 </div>
                             </Collapse>
@@ -202,7 +204,7 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faClock} className="me-2" />Time Data (Month and Year, Read code first and last used)</Card.Title>
+                            <Card.Title><FontAwesomeIcon icon={faClock} className="me-2" />Add in Time Data (Month and Year, Read code first and last used)</Card.Title>
                             <p>Source: <strong>ReadCodeUsage22 table from Neil Robinson's “Mapping Database”</strong></p>
                             <Button variant="link" onClick={() => toggleCollapse(7)} aria-controls="time-collapse" aria-expanded={open[7]}>
                                 View Detailed Steps
@@ -212,6 +214,7 @@ function From40000To9000Page() {
                                     <ul>
                                         <li>Filtered for Non-NHS codes.</li>
                                         <li>13,946 codes were matched, and the time data (first and last used) was added to the dataset.</li>
+                                        <li>This data was critical for the final step of excluding codes based on how recently used.</li>
                                     </ul>
                                 </div>
                             </Collapse>
@@ -225,17 +228,17 @@ function From40000To9000Page() {
                 <Col>
                     <Card>
                         <Card.Body>
-                            <Card.Title><FontAwesomeIcon icon={faFilter} className="me-2" />Final Adjustments</Card.Title>
+                            <Card.Title><FontAwesomeIcon icon={faTimesCircle} className="me-2" />Make Final Pre-Review Exclusions</Card.Title>
                             <Button variant="link" onClick={() => toggleCollapse(8)} aria-controls="final-collapse" aria-expanded={open[8]}>
                                 View Detailed Steps
                             </Button>
                             <Collapse in={open[8]}>
                                 <div id="final-collapse">
                                     <ul>
-                                        <li>Drop the ‘legacy’ codes identified in the 'Business Critical' step above.</li>
-                                        <li>Drop the NEGATION- (Not-) and UNCERTAIN- (Query-) codes.</li>
-                                        <li>Codes not used within the last 5 years were excluded (with 10yrs and 3yrs considered as well, final decision made with Def Stats).</li>
-                                        <li>These combined removed just over 4000 codes from the non-BC set.</li>
+                                        <li>We dropped the ‘legacy’ codes identified in the 'Business Critical' step above.</li>
+                                        <li>We dropped the NEGATION- (Not-) and UNCERTAIN- (Query-) codes as these are DMICP-specific.</li>
+                                        <li>Codes not used within the last 5 years were then excluded (with 10yrs and 3yrs considered as well with final decision agreed with Def Stats).</li>
+                                        <li>These exclusions combined removed just over 4000 codes from the non-BC set.</li>
                                     </ul>
                                 </div>
                             </Collapse>
@@ -247,48 +250,58 @@ function From40000To9000Page() {
             {/* Code Breakdown Table */}
             <h2>Code Breakdown</h2>
             <Table striped bordered hover>
-                <thead>
+                <thead className="highlight-header">
                     <tr>
-                        <th>Item</th>
-                        <th>Criteria</th>
+                        <th className="highlight-final">Item</th>
+                        <th className="highlight-final">Criteria</th>
                         <th>Base Count</th>
                         <th>Legacy Dropped</th>
                         <th>NegAnd? Dropped</th>
                         <th>Last 10 Years</th>
-                        <th>Last 5 Years</th>
+                        <th className="highlight-final">Last 5 Years</th>
                         <th>Last 3 Years</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>All Significant Non-NHS Codes</td>
-                        <td>BC or Usage &gt; 0</td>
+                    <tr className="highlight-base">
+                        <td className="highlight-final">All Significant Non-NHS Codes</td>
+                        <td className="highlight-final">BC or Usage &gt; 0</td>
                         <td>13,955</td>
                         <td>13,497</td>
                         <td>12,865</td>
                         <td>10,937</td>
-                        <td>9,710</td>
+                        <td className="highlight-final">9,710</td>
                         <td>8,916</td>
                     </tr>
-                    <tr>
-                        <td>Business Critical (BC)</td>
-                        <td>Used in Templates, Widgets, Searches, Documents + Parent Codes</td>
+                    <tr className="highlight-base">
+                        <td className="highlight-final">Business Critical (BC)</td>
+                        <td className="highlight-final">Used in Templates, Widgets, Searches, Documents + Parent Codes</td>
                         <td>4,043</td>
                         <td>4,043</td>
                         <td>4,002</td>
                         <td>4,002</td>
-                        <td>4,002</td>
+                        <td className="highlight-final">4,002</td>
                         <td>4,002</td>
                     </tr>
-                    <tr>
-                        <td>All Non-BC (for review)</td>
-                        <td>Not BC but Usage &gt; 0</td>
+                    <tr className="highlight-base">
+                        <td className="highlight-final">All Non-BC (for review)</td>
+                        <td className="highlight-final">Not BC but Usage &gt; 0</td>
                         <td>9,912</td>
                         <td>9,454</td>
                         <td>8,863</td>
                         <td>6,935</td>
-                        <td>5,708</td>
+                        <td className="highlight-final">5,708</td>
                         <td>4,914</td>
+                    </tr>
+                    <tr>
+                        <td>NonBC-Thousand Plus Club</td>
+                        <td>Usage ≥ 1000</td>
+                        <td>1,753</td>
+                        <td>1,429</td>
+                        <td>1,333</td>
+                        <td>1,329</td>
+                        <td>1,307</td>
+                        <td>1,292</td>
                     </tr>
                     <tr>
                         <td>NonBC-Thousand Plus Club</td>
