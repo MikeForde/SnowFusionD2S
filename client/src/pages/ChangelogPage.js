@@ -247,7 +247,7 @@ function ChangeLogPage() {
                             </ul>
                         </li>
                         <li className="mb-5">
-                            <h3 className="text-primary">Version 0_12 - 28 Oct 2024</h3>
+                            <h3 className="text-primary">Version 0_12 - 25 Oct 2024</h3>
                             <ul>
                                 <li>
                                     <p><strong>Introduced New Landing Page</strong></p>
@@ -263,7 +263,57 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_13 - 26 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Added Selection Page to Info-Review section</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added <code>From40000To9000Page</code> to provide a comprehensive breakdown of the process that reduced 40,000 DMS Local Codes to 9,000 for review. This update includes:</p>
+                                    <ul>
+                                        <li>Clear step-by-step explanations for each process involved, from template and search code extraction to document code inclusion.</li>
+                                        <li>Individual sections for each major stage, with collapsible details for an organized and navigable layout.</li>
+                                        <li>A table at the end of the page to summarize code statistics, using highlighted columns and rows to draw attention to critical data points.</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <p>Formatted sections with icons to visually distinguish each part of the workflow, improving readability and user experience.</p>
+                                </li>
+                            </ul>
+                        </li>
 
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_14 - 26 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Added Review Page to Info-Review section</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added <code>ReviewPage</code> to outline the manual review process for the 9,000+ DMS codes, detailing key fates for each code: creation as a DMS local code, mapping to SNOMED, or inactivation.</p>
+                                </li>
+                                <li>
+                                    <p>Included an <strong>Inactivation Section</strong> on the ReviewPage, describing common inactivation categories and rationales for business-critical codes and associated examples.</p>
+                                </li>
+                                <li>
+                                    <p>Enhanced the <strong>Table Styling</strong> on <code>From40000To9000Page</code> for improved readability, with highlighted columns for key rows to make important data stand out without altering the table structure.</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_15 - 27 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Added Hierarchical Organisation Page to Info-Review section</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added <code>DMSCreatePage</code> to outline the hierarchical organisation process for the DMS Create codes.</p>
+                                </li>
+                                <li>
+                                    <p>Added <strong>Diagrams</strong>, to each of the three review info pages to provide a visual overview of each process. Colour-coordinated with related categories on the WebApp, e.g., High/Med/Low Priority and Create/Map/Inactivate.</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>
