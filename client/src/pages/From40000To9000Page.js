@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col, Card, Collapse, Button, Table } from 'react-bootstrap';
+import { Container, Row, Col, Card, Collapse, Button, Table, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFileAlt, faFilter, faDatabase, faCheck, faClock, faExclamationTriangle, faCalculator, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import "./Page.css";
@@ -17,6 +17,14 @@ function From40000To9000Page() {
         <Container className="mt-5">
             <h2>Why 9,000+ Codes were reviewed and not 40,000: The Selection Process</h2>
             <p>There are just shy of 40,000 DMS local codes in DMICP. This page outlines the processes undertaken to objectively select the 9000+ DMS Local Codes reviewed rather than manually reviewing them all. The steps below highlight key stages, datasets, and methods used. </p><p>Note, none of these processes involved subjective 'decisions' except for the final exclusion step of choosing the recent-use threshold.</p>
+
+            {/* Placeholder for the diagram */}
+            <Row className="my-4">
+                <Col className="text-center">
+                    <Image src="SnowFusion_Selection.png" alt="Diagram showing the review process" style={{ maxWidth: '100%' }} />
+                    <p>Overview of Selection Process</p>
+                </Col>
+            </Row>
 
             {/* Section 1: Template Codes */}
             <Row className="mt-4">

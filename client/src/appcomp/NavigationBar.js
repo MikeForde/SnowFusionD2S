@@ -101,8 +101,8 @@ function NavigationBar() {
                 <NavDropdown.Item as={Link} to="/review-process" onClick={() => handleNavItemSelect(false)}>
                   Reviewing the 9000+
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/about-review/snomed-positioning" onClick={() => handleNavItemSelect(false)}>
-                  SNOMED Positioning of the DMS Create Codes
+                <NavDropdown.Item as={Link} to="/snomed-positioning" onClick={() => handleNavItemSelect(false)}>
+                  Organising DMS Create Codes
                 </NavDropdown.Item>
               </NavDropdown>
               

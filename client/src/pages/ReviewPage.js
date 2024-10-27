@@ -12,17 +12,17 @@ function ReviewPage() {
         <Container className="mt-5">
             <h2>Review of the 9000+ Codes</h2>
             <p>
-                The review process of the 9000+ codes involved considerable manual intervention despite efforts to streamline it.
+                The review process of the 9000+ codes was necessarily a manual one despite efforts to streamline it.
                 Each code had to undergo careful evaluation to determine its ultimate fate among three potential outcomes.
             </p>
 
             {/* Placeholder for the diagram */}
-            {/* <Row className="my-4">
+            <Row className="my-4">
                 <Col className="text-center">
-                    <Image src="placeholder.png" alt="Diagram showing the review process" style={{ maxWidth: '100%' }} />
-                    <p>Diagram of the review process (coming soon)</p>
+                    <Image src="SnowFusion_Review.png" alt="Diagram showing the review process" style={{ maxWidth: '100%' }} />
+                    <p>Overview of Review Process</p>
                 </Col>
-            </Row> */}
+            </Row>
 
             {/* Outcomes of the review */}
             <Card className="mb-4">
@@ -83,6 +83,7 @@ function ReviewPage() {
                         <li>
                             Some codes were deliberately not mapped due to functional or structural differences between DMS needs and SNOMED hierarchy, ensuring the DMS-specific context was preserved.
                         </li>
+                        <li>An example of High Priority codes that were mapped are those for audiometry frequency. These play a critical role in the DMS but exist as standard codes as hearing tests clearly exist in the NHS as well.</li>
                         <li>In total 2392 codes were mapped, 1710 by API matches and 682 manually.</li>
                     </ul>
                 </Card.Body>
