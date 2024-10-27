@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCheckCircle,
@@ -12,7 +13,8 @@ function ReviewPage() {
         <Container className="mt-5">
             <h2>Review of the 9000+ Codes</h2>
             <p>
-                The review process of the 9000+ codes was necessarily a manual one despite efforts to streamline it.
+                The review process of the 9000+ codes was necessarily a long manual one despite efforts to streamline it, hence the effort spent on <Link to="/from40000to9000">
+                    down-selecting these codes</Link> from the original nearly 40,000 DMS local codes in DMICP.
                 Each code had to undergo careful evaluation to determine its ultimate fate among three potential outcomes.
             </p>
 
@@ -32,7 +34,7 @@ function ReviewPage() {
                         <li><FontAwesomeIcon
                             icon={faCheckCircle}
                             style={{ color: 'green', marginRight: '10px' }}
-                        /> Selection for creation as a DMS local code</li>
+                        /> Selection for <Link to="/snomed-positioning">creation as a DMS local code</Link></li>
                         <li><FontAwesomeIcon
                             icon={faExchangeAlt}
                             style={{ color: 'blue', marginRight: '10px' }}

@@ -102,7 +102,7 @@ function NavigationBar() {
                   Reviewing the 9000+
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/snomed-positioning" onClick={() => handleNavItemSelect(false)}>
-                  Organising DMS Create Codes
+                  Fusing DMS Create Codes
                 </NavDropdown.Item>
               </NavDropdown>
               

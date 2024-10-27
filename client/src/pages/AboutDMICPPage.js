@@ -94,25 +94,6 @@ function AboutDMICPPage() {
                     </Card>
                 </Col>
             </Row>
-            <Row className="mt-4">
-                <Col>
-                    <h3>Future Developments</h3>
-                    <Card>
-                        <Card.Body>
-                            <Card.Text>
-                                The MOD continues to invest in the modernization of its healthcare IT infrastructure. Future developments may include:
-                                <ul>
-                                    <li><strong>Enhanced Integration with SNOMED CT:</strong> Further aligning with international standards for clinical terminology to improve data quality and interoperability.</li>
-                                    <li><strong>Improved User Experience:</strong> Upgrading user interfaces and system functionalities to enhance usability for healthcare professionals.</li>
-                                    <li><strong>Advanced Analytics:</strong> Leveraging data analytics to support population health management and strategic planning.</li>
-                                    <li><strong>Mobile Accessibility:</strong> Expanding access to DMICP through mobile devices to support healthcare delivery in diverse environments.</li>
-                                </ul>
-                                We welcome feedback and ideas for further development!
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
         </Container>
     );
 }

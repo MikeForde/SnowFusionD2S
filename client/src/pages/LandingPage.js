@@ -55,11 +55,10 @@ function LandingPage() {
       </ul>
       <p>
         The codes recommended to be created were then <Link to="/snomed-positioning">
-        found a position</Link> in the SNOMED hierarchy - i.e., the fusion of DMS Local Codes with SNOMED.
+          fused with SNOMED</Link>  - i.e., the DMS Local Codes were located within the regular SNOMED hierarchy.
       </p>
       <p>
-        This application helps you navigate and review these selected DMICP Read codes. Below are
-        links to various sections of the application:
+        Below are links to various sections of the application:
       </p>
       <Row>
         <Col md={4}>
@@ -93,7 +92,7 @@ function LandingPage() {
                 DMS Review Search Page of All Codes
               </Card.Title>
               <Card.Text>
-                Search among all the DMS local codes that made it into the review and the decisions
+                Search among all the DMS local codes included in the review and the decisions
                 made about them.
               </Card.Text>
               <Link to="/review" className="btn btn-primary custom-button">
@@ -153,7 +152,7 @@ function LandingPage() {
                 Inactivation Page
               </Card.Title>
               <Card.Text>
-                Review codes selected for inactivation and their details.
+                Review DMICP DMS codes selected for inactivation and their details.
               </Card.Text>
               <Link to="/inactivate" className="btn btn-primary custom-button">
                 Go to Inactivate Page

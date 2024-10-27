@@ -304,10 +304,10 @@ function ChangeLogPage() {
                             <h3 className="text-primary">Version 0_15 - 27 Oct 2024</h3>
                             <ul>
                                 <li>
-                                    <p><strong>Added Hierarchical Organisation Page to Info-Review section</strong></p>
+                                    <p><strong>Added Fusion Page to Info-Review section</strong></p>
                                 </li>
                                 <li>
-                                    <p>Added <code>DMSCreatePage</code> to outline the hierarchical organisation process for the DMS Create codes.</p>
+                                    <p>Added <code>FusionPage</code> to outline the hierarchical organisation process for the DMS Create codes.</p>
                                 </li>
                                 <li>
                                     <p>Added <strong>Diagrams</strong>, to each of the three review info pages to provide a visual overview of each process. Colour-coordinated with related categories on the WebApp, e.g., High/Med/Low Priority and Create/Map/Inactivate.</p>
