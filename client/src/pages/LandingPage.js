@@ -18,8 +18,8 @@ function LandingPage() {
       <h2>Welcome to SnowFusion - the DMS Local Code Review WebApp</h2>
       <p>
         The Defence Medical Information Capability Programme (DMICP) includes approximately{' '}
-        <strong>40,000</strong> DMS local codes. From these, about <strong>9,000</strong> codes were
-        selected for review based on being in one of three priority groups:
+        <strong>40,000</strong> DMS local codes. From these, about <strong>9,000</strong> codes were <Link to="/from40000to9000">
+          selected for review</Link> based on being in one of three priority groups:
       </p>
       <ul>
         <li>
@@ -34,23 +34,29 @@ function LandingPage() {
           <strong>Group 3 - Low</strong>: Codes not captured above but used at least once in the last 5 years.
         </li>
       </ul>
-      <p>These codes were reviewed to determine if they needed to be:</p>
+      <p>These codes were <Link to="/review-process">
+        reviewed
+      </Link> to determine if they needed to be:</p>
       <ul>
         <li><FontAwesomeIcon
-                  icon={faCheckCircle}
-                  style={{ color: 'green', marginRight: '10px' }}
-                />Created as local codes alongside regular SNOMED codes.</li>
+          icon={faCheckCircle}
+          style={{ color: 'green', marginRight: '10px' }}
+        />Created as local codes alongside regular SNOMED codes.</li>
         <li><FontAwesomeIcon
-                  icon={faExchangeAlt}
-                  style={{ color: 'blue', marginRight: '10px' }}
-                />Mapped to existing SNOMED codes (UK or International).</li>
+          icon={faExchangeAlt}
+          style={{ color: 'blue', marginRight: '10px' }}
+        />Mapped to existing SNOMED codes (UK or International).</li>
         <li><FontAwesomeIcon
-                  icon={faTimesCircle}
-                  style={{ color: 'red', marginRight: '10px' }}
-                />
+          icon={faTimesCircle}
+          style={{ color: 'red', marginRight: '10px' }}
+        />
           Inactivated or not converted, depending on the eventual vendor system.
         </li>
       </ul>
+      <p>
+        The codes recommended to be created were then <Link to="/snomed-positioning">
+        found a position</Link> in the SNOMED hierarchy - i.e., the fusion of DMS Local Codes with SNOMED.
+      </p>
       <p>
         This application helps you navigate and review these selected DMICP Read codes. Below are
         links to various sections of the application:
