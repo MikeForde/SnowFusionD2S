@@ -17,12 +17,12 @@ function ReviewPage() {
             </p>
 
             {/* Placeholder for the diagram */}
-            <Row className="my-4">
+            {/* <Row className="my-4">
                 <Col className="text-center">
                     <Image src="placeholder.png" alt="Diagram showing the review process" style={{ maxWidth: '100%' }} />
                     <p>Diagram of the review process (coming soon)</p>
                 </Col>
-            </Row>
+            </Row> */}
 
             {/* Outcomes of the review */}
             <Card className="mb-4">
