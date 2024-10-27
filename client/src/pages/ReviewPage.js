@@ -4,9 +4,9 @@ import { Container, Row, Col, Card, Image } from 'react-bootstrap';
 function ReviewPage() {
     return (
         <Container className="mt-5">
-            <h2>Review of DMS Codes</h2>
+            <h2>Review of the 9000+ Codes</h2>
             <p>
-                The review process for over 9,000 DMS codes involved considerable manual intervention despite efforts to streamline it.
+                The review process of the 9000+ codes involved considerable manual intervention despite efforts to streamline it.
                 Each code had to undergo careful evaluation to determine its ultimate fate among three potential outcomes.
             </p>
 

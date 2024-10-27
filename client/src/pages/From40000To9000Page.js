@@ -15,7 +15,7 @@ function From40000To9000Page() {
 
     return (
         <Container className="mt-5">
-            <h2>Why 9,000+ Codes reviewed and not 40,000: The Selection Process</h2>
+            <h2>Why 9,000+ Codes were reviewed and not 40,000: The Selection Process</h2>
             <p>There are just shy of 40,000 DMS local codes in DMICP. This page outlines the processes undertaken to objectively select the 9000+ DMS Local Codes reviewed rather than manually reviewing them all. The steps below highlight key stages, datasets, and methods used. </p><p>Note, none of these processes involved subjective 'decisions' except for the final exclusion step of choosing the recent-use threshold.</p>
 
             {/* Section 1: Template Codes */}
