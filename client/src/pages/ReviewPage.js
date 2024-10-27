@@ -1,5 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Card, Image } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faCheckCircle,
+    faExchangeAlt,
+    faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 function ReviewPage() {
     return (
@@ -23,9 +29,18 @@ function ReviewPage() {
                 <Card.Body>
                     <Card.Title>Possible Outcomes for Each Code</Card.Title>
                     <ul>
-                        <li>Selection for creation as a DMS local code</li>
-                        <li>Mapping to an existing SNOMED code</li>
-                        <li>Designation for inactivation</li>
+                        <li><FontAwesomeIcon
+                            icon={faCheckCircle}
+                            style={{ color: 'green', marginRight: '10px' }}
+                        /> Selection for creation as a DMS local code</li>
+                        <li><FontAwesomeIcon
+                            icon={faExchangeAlt}
+                            style={{ color: 'blue', marginRight: '10px' }}
+                        />Mapping to an existing SNOMED code</li>
+                        <li><FontAwesomeIcon
+                            icon={faTimesCircle}
+                            style={{ color: 'red', marginRight: '10px' }}
+                        />Designation for inactivation</li>
                     </ul>
                     <p>These outcomes reflect the decisions made for each code based on their relevance, usage, and comparability to existing SNOMED standards.</p>
                 </Card.Body>
@@ -54,7 +69,10 @@ function ReviewPage() {
             {/* Mapping process */}
             <Card className="mb-4">
                 <Card.Body>
-                    <Card.Title>Mapping Process</Card.Title>
+                    <Card.Title><FontAwesomeIcon
+                        icon={faExchangeAlt}
+                        style={{ color: 'blue', marginRight: '10px' }}
+                    />Mapping Process</Card.Title>
                     <p>The mapping process used the SnowFusion-Access application and SnowStorm API to facilitate the matching of DMS codes to SNOMED entries:</p>
                     <ul>
                         <li>Each code was searched in SNOMED using the API, and any potential matches were retrieved.</li>
@@ -72,7 +90,10 @@ function ReviewPage() {
             {/* Inactivation process */}
             <Card className="mb-4">
                 <Card.Body>
-                    <Card.Title>Inactivation Process</Card.Title>
+                    <Card.Title><FontAwesomeIcon
+                        icon={faTimesCircle}
+                        style={{ color: 'red', marginRight: '10px' }}
+                    />Inactivation Process</Card.Title>
                     <p>The selection process for inactivation was also handled manually. However, some broad groups of codes were identified with similar inactivation criteria:</p>
                     <ul>
                         <li>
