@@ -6,6 +6,7 @@ import { faStar, faExclamationTriangle, faTools, faCogs, faTimesCircle } from '@
 import { useNavigate } from 'react-router-dom';
 import { InactivateDataContext } from '../contexts/InactivateDataContext';
 import renderTooltip from '../components/renderTooltip';
+import { CSVLink } from 'react-csv';
 
 function InactivatePage() {
     const { inactivateData, dropFilter, setDropFilter } = useContext(InactivateDataContext);
@@ -34,6 +35,33 @@ function InactivatePage() {
         setRecordCount(filtered.length);
     };
 
+    // Define headers for CSV
+    const csvHeaders = [
+        { label: 'Pre-Inactivate', key: 'Drop' },
+        { label: 'DMICP Code', key: 'DMICPCode' },
+        { label: 'Description', key: 'Description' },
+        { label: 'New Description', key: 'NewDescription' },
+        { label: 'Read Parent', key: 'Parent_Term' }
+    ];
+
+    // CSV data generator based on current filter
+    const generateCSVData = (filteredData) => {
+        return filteredData.map(item => ({
+            Drop: item.Drop,
+            DMICPCode: item.DMICPCode,
+            Description: item.Description.replace(/"/g, ''),
+            NewDescription: item.NewDescription ? item.NewDescription.replace(/"/g, '') : '',
+            Parent_Term: item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent
+        }));
+    };
+
+    // Function to create a filename based on dropFilter
+    const generateFileName = (dropFilter) => {
+        let fileName = "Inactivate_Codes_";
+        if (dropFilter) fileName += `Priority_${dropFilter}_`;
+        return fileName + "Filtered.tsv";
+    };
+
     return (
         <div className="container mt-4">
             <h3><FontAwesomeIcon icon={faTimesCircle} style={{ color: 'red', marginLeft: '10px' }} /> Codes by Pre-Inactivation Priority</h3>
@@ -48,6 +76,25 @@ function InactivatePage() {
             </ButtonGroup>
 
             <p>Total Records: {recordCount}</p>
+
+            <CSVLink
+                data={generateCSVData(filteredData)}
+                headers={csvHeaders}
+                filename={generateFileName(dropFilter)}
+                className="btn btn-secondary me-2"
+                separator={String.fromCharCode(9)}
+            >
+                Download Filtered Data (TSV)
+            </CSVLink>
+            <CSVLink
+                data={generateCSVData(inactivateData)}
+                headers={csvHeaders}
+                filename="Inactivate_Codes_Full.tsv"
+                className="btn btn-secondary"
+                separator={String.fromCharCode(9)}
+            >
+                Download Full Data (TSV)
+            </CSVLink>
 
             <Table striped bordered hover>
                 <thead>

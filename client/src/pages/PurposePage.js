@@ -6,6 +6,8 @@ import "./Page.css" // Import the CSS file
 import { useNavigate } from 'react-router-dom';
 import { PurposeDataContext } from '../contexts/PurposeDataContext';
 import renderTooltip from '../components/renderTooltip'; // Import the shared renderTooltip function
+import { CSVLink } from 'react-csv';
+
 
 function PurposePage() {
     const { purposeData, filterType, setFilterType, subFilterType, setSubFilterType, dropFilter, setDropFilter } = useContext(PurposeDataContext);
@@ -25,7 +27,45 @@ function PurposePage() {
         }
     }, [filterType, subFilterType, dropFilter, purposeData]);
 
+    // Additional headers for the extended CSV download
+    const extendedHeaders = [
+        { label: "Gp", key: "Drop" },
+        { label: "Purpose", key: "Purpose" },
+        { label: "DMICP Code", key: "DMICPCode" },
+        { label: "Description", key: "Description" },
+        { label: "FSN Type", key: "FSNType" },
+        { label: "Read Parent", key: "Parent" },
+        { label: "Parent Term", key: "Parent_Term" },
+        { label: "SNOMEDParent", key: "SNOMEDParent" },
+        { label: "DMS SNOMED Code", key: "SNOMEDCode" },
+        { label: "Usage Count", key: "UsageCount" },
+        { label: "Template Names", key: "TemplateNames" },
+        { label: "Document Names", key: "DocumentNames" },
+        { label: "Search Names", key: "SearchNames" },
+        { label: "Category", key: "Cat2" },
+        // Add any additional fields as needed
+    ];
 
+    // Extended filename generator for detailed download
+    const generateDetailedFileName = () => {
+        const baseName = "DMSCreateCodes_FullDetails";
+        const filterPart = filterType ? `_${filterType.replace(/\s+/g, "_")}` : "";
+        const subFilterPart = subFilterType ? `_${subFilterType.replace(/\s+/g, "_")}` : "";
+        const dropFilterPart = dropFilter ? `_Drop${dropFilter.slice(-1)}` : "_All";
+
+        return `${baseName}${filterPart}${subFilterPart}${dropFilterPart}.tsv`;
+    };
+
+
+    // Function to generate a file name based on current filters
+    const generateFileName = () => {
+        const baseName = "DMSCreateCodes";
+        const filterPart = filterType ? `_${filterType.replace(/\s+/g, "_")}` : "";
+        const subFilterPart = subFilterType ? `_${subFilterType.replace(/\s+/g, "_")}` : "";
+        const dropFilterPart = dropFilter ? `_Drop${dropFilter.slice(-1)}` : "_All";
+
+        return `${baseName}${filterPart}${subFilterPart}${dropFilterPart}.tsv`;
+    };
 
     const applyFilter = (filterType, subFilterType = null) => {
         let filtered = [];
@@ -208,6 +248,32 @@ function PurposePage() {
 
 
             <p>Total Records: {recordCount}</p>
+
+            <CSVLink
+                data={filteredData}
+                headers={[
+                    { label: "Gp", key: "Drop" },
+                    { label: "DMICP Code", key: "DMICPCode" },
+                    { label: "Description", key: "Description" },
+                    { label: "FSN Type", key: "FSNType" },
+                    { label: "Read Parent", key: "Parent" },
+                ]}
+                filename={generateFileName()}
+                className="btn btn-secondary me-2"
+                separator={String.fromCharCode(9)}
+            >
+                Download View (TSV)
+            </CSVLink>
+
+            <CSVLink
+                data={filteredData}
+                headers={extendedHeaders}
+                filename={generateDetailedFileName()}
+                className="btn btn-secondary"
+                separator={String.fromCharCode(9)}
+            >
+                Download Extended Details of View (TSV)
+            </CSVLink>
 
             <Table striped bordered hover>
                 <thead>

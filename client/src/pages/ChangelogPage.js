@@ -314,6 +314,20 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_16 - 28 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Implemented TSV Download Capabilities</strong></p>
+                                </li>
+                                <li>
+                                    <p>Added functionality to <code>PurposePage</code>, <code>MapPage</code>, and <code>InactivatePage</code> to allow filtered and full dataset downloads as TSV files, preserving current filter selections in downloadable format.</p>
+                                </li>
+                                <li>
+                                    <p>Use of <strong>tab-separated values (TSV)</strong> format - rather than CSV, ensuring compatibility with applications like Excel, Numbers and Google Sheets due to the presence of commas in the text data.</p>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </Col>
             </Row>

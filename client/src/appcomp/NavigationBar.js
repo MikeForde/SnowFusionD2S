@@ -60,7 +60,7 @@ function NavigationBar() {
           />
           SnowFusion
           <span style={{ fontSize: '0.8em', marginLeft: '5px' }}>D2S</span>
-          <span style={{ fontSize: '0.6em', marginLeft: '5px' }}>0_15</span>
+          <span style={{ fontSize: '0.6em', marginLeft: '5px' }}>0_16</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />

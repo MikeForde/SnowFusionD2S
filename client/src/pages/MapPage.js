@@ -6,6 +6,7 @@ import { faStar, faExclamationTriangle, faTools, faCogs, faExchangeAlt } from '@
 import { useNavigate } from 'react-router-dom';
 import { MapDataContext } from '../contexts/MapDataContext';
 import renderTooltip from '../components/renderTooltip';
+import { CSVLink } from 'react-csv';
 
 function MapPage() {
     const { mapData, filterType, setFilterType, dropFilter, setDropFilter } = useContext(MapDataContext);
@@ -43,6 +44,36 @@ function MapPage() {
         setRecordCount(filtered.length);
     };
 
+    // Define headers for CSV
+    const csvHeaders = [
+        { label: 'Pre-Map', key: 'Drop' },
+        { label: 'DMICP Code', key: 'DMICPCode' },
+        { label: 'Description', key: 'Description' },
+        { label: 'Mapped SNOMED Term', key: 'MappedTerm' },
+        { label: 'Read Parent', key: 'Parent_Term' },
+        { label: 'Mapping', key: 'Decision'},
+    ];
+
+    // CSV data generator based on current filter
+    const generateCSVData = (filteredData) => {
+        return filteredData.map(item => ({
+            Drop: item.Drop,
+            DMICPCode: item.DMICPCode,
+            Description: item.Description.replace(/"/g, ''),
+            MappedTerm: item.Decision === 'APIMap' ? item.APIMapTerm : item.ManualMapFSN,
+            Parent_Term: item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent,
+            Decision: item.Decision,
+        }));
+    };
+
+    // Function to create a filename based on filters
+    const generateFileName = (filterType, dropFilter) => {
+        let fileName = "Mapped_Codes_";
+        if (filterType) fileName += `${filterType}_`;
+        if (dropFilter) fileName += `Priority_${dropFilter}_`;
+        return fileName + "Filtered.tsv";
+    };
+
     return (
         <div className="container mt-4">
             <h3><FontAwesomeIcon icon={faExchangeAlt} style={{ color: 'blue', marginLeft: '10px' }} /> Mapped Codes with Pre-Map Priority</h3>
@@ -64,6 +95,25 @@ function MapPage() {
             </ButtonGroup>
 
             <p>Total Records: {recordCount}</p>
+
+            <CSVLink
+                data={generateCSVData(filteredData)}
+                headers={csvHeaders}
+                filename={generateFileName(filterType, dropFilter)}
+                className="btn btn-secondary me-2"
+                separator={String.fromCharCode(9)}
+            >
+                Download Filtered Data (TSV)
+            </CSVLink>
+            <CSVLink
+                data={generateCSVData(mapData)}
+                headers={csvHeaders}
+                filename="Mapped_Codes_Full.tsv"
+                className="btn btn-secondary"
+                separator={String.fromCharCode(9)}
+            >
+                Download Full Data (TSV)
+            </CSVLink>
 
             <Table striped bordered hover>
                 <thead>
