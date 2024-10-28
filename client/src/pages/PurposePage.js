@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Table, ButtonGroup, Button, Dropdown, OverlayTrigger } from 'react-bootstrap';
+import { Table, ButtonGroup, Button, Dropdown, OverlayTrigger, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExclamationTriangle, faTools, faCogs, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import "./Page.css" // Import the CSS file
@@ -247,33 +247,48 @@ function PurposePage() {
             </ButtonGroup>
 
 
-            <p>Total Records: {recordCount}</p>
-
-            <CSVLink
-                data={filteredData}
-                headers={[
-                    { label: "Gp", key: "Drop" },
-                    { label: "DMICP Code", key: "DMICPCode" },
-                    { label: "Description", key: "Description" },
-                    { label: "FSN Type", key: "FSNType" },
-                    { label: "Read Parent", key: "Parent" },
-                ]}
-                filename={generateFileName()}
-                className="btn btn-secondary me-2"
-                separator={String.fromCharCode(9)}
-            >
-                Download View (TSV)
-            </CSVLink>
-
-            <CSVLink
-                data={filteredData}
-                headers={extendedHeaders}
-                filename={generateDetailedFileName()}
-                className="btn btn-secondary"
-                separator={String.fromCharCode(9)}
-            >
-                Download Extended Details of View (TSV)
-            </CSVLink>
+            <Row className="mb-3 align-items-center">
+                <Col xs="auto">
+                    <p className="mb-0">Total Records: {recordCount}</p>
+                </Col>
+                <Col xs="auto">
+                    <Dropdown>
+                        <Dropdown.Toggle variant="secondary" id="download-dropdown">
+                            Download Options
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item as="div">
+                                <CSVLink
+                                    data={filteredData}
+                                    headers={[
+                                        { label: "Gp", key: "Drop" },
+                                        { label: "DMICP Code", key: "DMICPCode" },
+                                        { label: "Description", key: "Description" },
+                                        { label: "FSN Type", key: "FSNType" },
+                                        { label: "Read Parent", key: "Parent" },
+                                    ]}
+                                    filename={generateFileName()}
+                                    separator={String.fromCharCode(9)}
+                                    className="dropdown-item"
+                                >
+                                    Download Current View (TSV)
+                                </CSVLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item as="div">
+                                <CSVLink
+                                    data={filteredData}
+                                    headers={extendedHeaders}
+                                    filename={generateDetailedFileName()}
+                                    separator={String.fromCharCode(9)}
+                                    className="dropdown-item"
+                                >
+                                    Download Current View with Extended Details (TSV)
+                                </CSVLink>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Col>
+            </Row>
 
             <Table striped bordered hover>
                 <thead>

@@ -1,6 +1,6 @@
 // MapPage.js
 import React, { useContext, useState, useEffect } from 'react';
-import { Table, ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
+import { Table, ButtonGroup, Button, OverlayTrigger, Row, Col, Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faExclamationTriangle, faTools, faCogs, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -51,7 +51,7 @@ function MapPage() {
         { label: 'Description', key: 'Description' },
         { label: 'Mapped SNOMED Term', key: 'MappedTerm' },
         { label: 'Read Parent', key: 'Parent_Term' },
-        { label: 'Mapping', key: 'Decision'},
+        { label: 'Mapping', key: 'Decision' },
     ];
 
     // CSV data generator based on current filter
@@ -94,26 +94,42 @@ function MapPage() {
                 <Button variant={dropFilter === null ? 'primary custom-button' : 'secondary'} onClick={() => setDropFilter(null)}>All</Button>
             </ButtonGroup>
 
-            <p>Total Records: {recordCount}</p>
-
-            <CSVLink
-                data={generateCSVData(filteredData)}
-                headers={csvHeaders}
-                filename={generateFileName(filterType, dropFilter)}
-                className="btn btn-secondary me-2"
-                separator={String.fromCharCode(9)}
-            >
-                Download Filtered Data (TSV)
-            </CSVLink>
-            <CSVLink
-                data={generateCSVData(mapData)}
-                headers={csvHeaders}
-                filename="Mapped_Codes_Full.tsv"
-                className="btn btn-secondary"
-                separator={String.fromCharCode(9)}
-            >
-                Download Full Data (TSV)
-            </CSVLink>
+            <Row className="mb-3 align-items-center">
+                <Col xs="auto">
+                    <p className="mb-0">Total Records: {recordCount}</p>
+                </Col>
+                <Col xs="auto">
+                    <Dropdown>
+                        <Dropdown.Toggle variant="secondary" id="download-dropdown">
+                            Download Options
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item as="div">
+                                <CSVLink
+                                    data={generateCSVData(filteredData)}
+                                    headers={csvHeaders}
+                                    filename={generateFileName(filterType, dropFilter)}
+                                    separator={String.fromCharCode(9)}
+                                    className="dropdown-item"
+                                >
+                                    Download Filtered Data (TSV)
+                                </CSVLink>
+                            </Dropdown.Item>
+                            <Dropdown.Item as="div">
+                                <CSVLink
+                                    data={generateCSVData(mapData)}
+                                    headers={csvHeaders}
+                                    filename="Mapped_Codes_Full.tsv"
+                                    separator={String.fromCharCode(9)}
+                                    className="dropdown-item"
+                                >
+                                    Download Full Data (TSV)
+                                </CSVLink>
+                            </Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Col>
+            </Row>
 
             <Table striped bordered hover>
                 <thead>
