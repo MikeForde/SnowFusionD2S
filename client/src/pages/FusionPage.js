@@ -1,12 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Card, Image } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCheckCircle,
-    faExchangeAlt,
-    faTimesCircle,
-} from '@fortawesome/free-solid-svg-icons';
 
 function FusionPage() {
     return (
@@ -46,7 +40,7 @@ function FusionPage() {
             <Card className="mb-4">
                 <Card.Body>
                     <Card.Title>Systems Used for the Fusion Process</Card.Title>
-                    <p>The Two primary systems set up for the review were also used to facilitate this process:</p>
+                    <p>The two primary systems set up for the review were also used to facilitate this process:</p>
                     <ol>
                         <li>
                             <strong>SnowStorm Server</strong>: A copy of the NHS SNOMED server system (SnowStorm) created locally within Docker and seeded with a complete set of International and NHS SNOMED codes (as at Sep 2022).
@@ -55,7 +49,7 @@ function FusionPage() {
                             <strong>SnowFusion-Access Application</strong>: A custom-built VBA Access application created to serve as the single source of truth during the review. This application included:
                             <ul>
                                 <li>UI components and VBA code designed to assist in the fusion process - shown below.</li>
-                                <li>Integration with SnowStorm via its API to ensure any SNOMED parents chosen were defintely active codes.</li>
+                                <li>Integration with SnowStorm via its API to ensure any SNOMED parents chosen were active codes.</li>
                                 <li>SnowFusion-Access can generate SNOMED RF2 files - the official format - and, using the API, import these into the SnowStorm Server</li>
                                 <li>It was then possible to view the integrated codes within the context of the regular SnowStorm SNOMED CT browser.</li>
                             </ul>

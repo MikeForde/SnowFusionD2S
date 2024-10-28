@@ -15,7 +15,7 @@ function ReviewPage() {
             <p>
                 The review process of the 9000+ codes was necessarily a long manual one despite efforts to streamline it, hence the effort spent on <Link to="/from40000to9000">
                     down-selecting these codes</Link> from the original nearly 40,000 DMS local codes in DMICP.
-                Each code had to undergo careful evaluation to determine its ultimate fate among three potential outcomes.
+                Each code had to undergo careful evaluation to determine its ultimate fate among three potential outcomes (create, map or inactivate).
             </p>
 
             {/* Placeholder for the diagram */}

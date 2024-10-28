@@ -68,7 +68,7 @@ function From40000To9000Page() {
                                     <ul>
                                         <li>This process was done manually as no export feature was available in DMICP.</li>
                                         <li>An offical Excel file requested for this purpose proved unreliable.</li>
-                                        <li>Included and excluded Read codes were therefore manually extracted—whether included or excluded was not relevant for the analysis.</li>
+                                        <li>Read codes used in the search parameters were therefore manually extracted — whether the parameter was "include these codes" or "exclude these codes" was not relevant for the analysis.</li>
                                         <li>This manual process took a week to complete but was quicker than re-requesting the offical file due to constraints on the providers of the data.</li>
                                     </ul>
                                 </div>
@@ -92,7 +92,7 @@ function From40000To9000Page() {
                                 <div id="document-collapse">
                                     <ul>
                                         <li>All documents in the DMICP Shared folder were exported.</li>
-                                        <li>Bespoke VBA code was used to extract Read codes used in the documents.</li>
+                                        <li>Bespoke VBA code was used to extract embedded Read codes used in the documents.</li>
                                         <li>The Read code is written into the bookmark. However, it was not possible to determine if the “Include child codes” flag was set.</li>
                                     </ul>
                                 </div>
@@ -116,7 +116,7 @@ function From40000To9000Page() {
                                     <ul>
                                         <li>Datasets from the previous steps were combined, unique entries filtered for non-NHS codes only. </li>
                                         <li>The specific SQL WHERE criteria to identify non-NHS were: Like "*EMIS*" Or Like "*PCS*" Or Like "*DMS*" Or Like "*TRI*" Or Like "*RAF*" Or Like "*ESC*" Or Like "*CUL*" Or Like "*SHHAPT*" Or Like "*EGTON*" Or Like "*JHC*" Or Like "*REHAB*" Or Like "*CVP*" Or Like "*CVA*" Or Like "CAB*"</li>
-                                        <li>Total of 3548 codes were identified - these were given the moniker BC (Business Critical).</li>
+                                        <li>Total of 3548 codes were identified - these were given the moniker BC (Business Critical), note, this was just shorthand for the processes above.</li>
                                     </ul>
                                 </div>
                             </Collapse>
@@ -166,8 +166,8 @@ function From40000To9000Page() {
                                         <li>162,081 codes were previously reviewed in 2019-2020.</li>
                                         <li>Filtering for Non-NHS codes resulted in 36,957 codes.</li>
                                         <li>13,546 codes were matched to the dataset, and 3323 of these had suggestions about SNOMED mapping codes.</li>
-                                        <li>However the work was done against a brief that no new codes would be created and a best-fit match should be attenpted.</li>
-                                        <li>Not unsuprisingly then a review showed only 694 met the ‘no loss of granular meaning’ criteria, but those 694 mapping suggestions were added to the main dataset.</li>
+                                        <li>However, the work was done against a brief that no new codes would be created and a 'best-fit' match should be attempted.</li>
+                                        <li>Not suprisingly then a review showed only 694 met the ‘no loss of granular meaning’ criteria, but those 694 mapping suggestions were added to the main dataset.</li>
                                         <li>Natually this did not change the actual number of codes to be reviewed.</li>
                                     </ul>
                                 </div>
@@ -189,7 +189,7 @@ function From40000To9000Page() {
                             <Collapse in={open[6]}>
                                 <div id="specific-collapse">
                                     <ul>
-                                        <li>The following templates were analyzed in detail to determine their Read codes and parent codes (the latter not necessarily being present in the dataset so far but necessary for the hierarchy structure):</li>
+                                        <li>The following templates were analyzed in detail to determine their Read codes and parent codes (the latter not necessarily being present in the dataset so far but necessary for the hierarchical structure):</li>
                                         <ul>
                                             <li>PULHHEEMS widget*</li>
                                             <li>Audiogram widget*</li>
@@ -249,7 +249,7 @@ function From40000To9000Page() {
                                     <ul>
                                         <li>We dropped the ‘legacy’ codes identified in the 'Business Critical' step above as they are obsolete by defintion.</li>
                                         <li>We dropped the NEGATION- (Not-) and UNCERTAIN- (Query-) codes as these are DMICP-specific qualifiers rather than true separate codes.</li>
-                                        <li>Non-BC Codes not used within the last 5 years were then excluded (with 10yrs and 3yrs considered as well with final decision agreed with Def Stats).</li>
+                                        <li>Non-BC Codes not used within the last 5 years were then excluded (with 10yrs and 3yrs considered as well with the final decision agreed with Def Stats).</li>
                                         <li>These exclusions combined removed just over 4000 codes - mainly from the non-BC set.</li>
                                     </ul>
                                 </div>

@@ -18,8 +18,8 @@ function LandingPage() {
       <h2>Welcome to SnowFusion - the DMS Local Code Review WebApp</h2>
       <p>
         The Defence Medical Information Capability Programme (DMICP) includes approximately{' '}
-        <strong>40,000</strong> DMS local codes. From these, about <strong>9,000</strong> codes were <Link to="/from40000to9000">
-          selected for review</Link> based on being in one of three priority groups:
+        <strong>40,000</strong> DMS local codes. </p><p>Firstly, <Link to="/from40000to9000">
+        we selected</Link> <strong>9,000+</strong> codes for review based on being in one of three priority groups:
       </p>
       <ul>
         <li>
@@ -34,9 +34,7 @@ function LandingPage() {
           <strong>Group 3 - Low</strong>: Codes not captured above but used at least once in the last 5 years.
         </li>
       </ul>
-      <p>These codes were <Link to="/review-process">
-        reviewed
-      </Link> to determine if they needed to be:</p>
+      <p>Secondly, <Link to="/review-process">we reviewed</Link> these <strong>9,000+</strong> codes to determine if they needed to be:</p>
       <ul>
         <li><FontAwesomeIcon
           icon={faCheckCircle}
@@ -54,8 +52,7 @@ function LandingPage() {
         </li>
       </ul>
       <p>
-        The codes recommended to be created were then <Link to="/snomed-positioning">
-          fused with SNOMED</Link>  - i.e., the DMS Local Codes were located within the regular SNOMED hierarchy.
+        Thirdly, <Link to="/snomed-positioning">we fused</Link> the <strong>5,000+</strong> 'DMS Create' codes with SNOMED  - i.e., the codes recommended for creation as DMS local codes were positioned within the regular SNOMED hierarchy.
       </p>
       <p>
         Below are links to various sections of the application:
@@ -132,8 +129,8 @@ function LandingPage() {
                 Mapping Page
               </Card.Title>
               <Card.Text>
-                Explore DMS codes that map to established SNOMED codes and do not therefore need
-                creating.
+                Explore DMS codes that map to established SNOMED codes (and do not, therefore, need
+                creating).
               </Card.Text>
               <Link to="/map" className="btn btn-primary custom-button">
                 Go to Map Page
