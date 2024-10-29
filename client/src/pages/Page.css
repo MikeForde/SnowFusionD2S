@@ -164,6 +164,10 @@
   font-weight: bold;
 }
 
+.custom-dropdown-toggle {
+  padding: 0.2rem 0.4rem !important; /* Adjust as needed to achieve the desired height */
+  font-size: 0.875rem; /* Optional: Adjust font size to match the reduced height */
+}
 
 
 /* For mobile aspect (small screens), stack the details above the search results */

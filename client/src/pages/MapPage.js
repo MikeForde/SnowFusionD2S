@@ -100,7 +100,7 @@ function MapPage() {
                 </Col>
                 <Col xs="auto">
                     <Dropdown>
-                        <Dropdown.Toggle variant="secondary" id="download-dropdown">
+                        <Dropdown.Toggle variant="secondary" id="download-dropdown" className="custom-dropdown-toggle">
                             Download Options
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
