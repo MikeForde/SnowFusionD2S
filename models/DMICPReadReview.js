@@ -203,7 +203,11 @@ module.exports = (sequelize, DataTypes) => {
         PreviousParentIfChanged: {
             type: DataTypes.TEXT,
             allowNull: true
-        }
+        },
+        Comments: {
+            type: DataTypes.TEXT,
+            allowNull: true
+        },
     });
 
     DMICPReadReview.associate = models => {

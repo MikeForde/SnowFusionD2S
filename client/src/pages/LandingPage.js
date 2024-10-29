@@ -149,7 +149,7 @@ function LandingPage() {
                 Inactivation Page
               </Card.Title>
               <Card.Text>
-                Review DMICP DMS codes selected for inactivation and their details.
+                Review DMICP DMS codes selected for inactivation and the reasoning behind it.
               </Card.Text>
               <Link to="/inactivate" className="btn btn-primary custom-button">
                 Go to Inactivate Page

@@ -41,7 +41,8 @@ function InactivatePage() {
         { label: 'DMICP Code', key: 'DMICPCode' },
         { label: 'Description', key: 'Description' },
         { label: 'New Description', key: 'NewDescription' },
-        { label: 'Read Parent', key: 'Parent_Term' }
+        { label: 'Read Parent', key: 'Parent_Term' },
+        { label: 'Comments', key: 'Comments' }
     ];
 
     // CSV data generator based on current filter
@@ -51,7 +52,8 @@ function InactivatePage() {
             DMICPCode: item.DMICPCode,
             Description: item.Description.replace(/"/g, ''),
             NewDescription: item.NewDescription ? item.NewDescription.replace(/"/g, '') : '',
-            Parent_Term: item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent
+            Parent_Term: item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent,
+            Comments: item.Comments ? item.Comments.replace(/"/g, '') : '',
         }));
     };
 
@@ -118,8 +120,7 @@ function InactivatePage() {
                         <th>Pre-Inactivate</th>
                         <th>DMICP Code</th>
                         <th>Description</th>
-                        <th>New Description</th>
-                        <th>Read Parent</th>
+                        <th>Comment</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,9 +144,22 @@ function InactivatePage() {
                                     {item.DMICPCode}
                                 </span>
                             </td>
-                            <td>{item.Description.replace(/"/g, '')}</td>
-                            <td>{item.NewDescription ? item.NewDescription.replace(/"/g, '') : ''}</td>
-                            <td>{item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent}</td>
+                            <td>
+                                {item.NewDescription ? (
+                                    <>
+                                        {item.NewDescription.replace(/"/g, '')}{" "}
+                                        <div>
+                                        <span style={{ fontSize: "0.8em", color: "black" }}>
+                                            (original: {item.Description.replace(/"/g, '')})
+                                        </span></div>
+                                    </>
+                                ) : (
+                                    item.Description.replace(/"/g, '')
+                                )}
+                            </td>
+
+                            {/* <td>{item.Parent_Term ? `${item.Parent} - ${item.Parent_Term}` : item.Parent}</td> */}
+                            <td>{item.Comments ? item.Comments.replace(/"/g, '') : ''}</td>
                         </tr>
                     ))}
                 </tbody>

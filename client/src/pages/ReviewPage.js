@@ -121,7 +121,7 @@ function ReviewPage() {
                         </li>
                     </ul>
                     <p>
-                        Each code inactivated has a reason comment entered, explaining why it was made inactive. While these comments are currently unavailable in the WebApp, plans are in place to make them accessible in the future.
+                        Each code inactivated has a reason comment entered, explaining why it was suggested it be made inactive. 
                     </p>
                 </Card.Body>
             </Card>

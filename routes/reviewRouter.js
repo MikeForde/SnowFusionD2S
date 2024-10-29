@@ -211,7 +211,8 @@ const getDMICPReadReviewsByInactivateDecision = async (req, res) => {
                 'DocumentNames',
                 'SearchNames',
                 'UsageCount',
-                'Cat2' // Include any additional fields required for rendering
+                'Cat2',
+                'Comments', // Include any additional fields required for rendering
             ]
         });
         res.json(reviews);

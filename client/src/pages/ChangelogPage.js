@@ -328,6 +328,24 @@ function ChangeLogPage() {
                                 </li>
                             </ul>
                         </li>
+                        <li className="mb-5">
+                            <h3 className="text-primary">Version 0_17 - 30 Oct 2024</h3>
+                            <ul>
+                                <li>
+                                    <p><strong>Enhanced Data Presentation and Comments Integration</strong></p>
+                                </li>
+                                <li>
+                                    <p>Updated <code>PurposePage</code>, <code>MapPage</code>, and <code>InactivatePage</code> to compact the download options and streamline the user interface for better usability.</p>
+                                </li>
+                                <li>
+                                    <p>Added support to the <strong>Inactivation Page</strong> for displaying <strong>New Descriptions</strong> with original descriptions as smaller, appended text for clear differentiation.</p>
+                                </li>
+                                <li>
+                                    <p>Integrated comments from <strong>SnowFusion_Access</strong> into the database so can be displayed alongside <strong>Inactivate</strong> elements to show reasoning behind suggestion.</p>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </Col>
             </Row>

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faExchangeAlt, faTimesCircle, faEye, faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import { SnomedContext } from '../contexts/SnomedContext';
 import { useLoading } from '../contexts/LoadingContext';
-import SnomedSearch from './SnomedSearch';
+// import SnomedSearch from './SnomedSearch';
 import './AppComp.css';
 
 function NavigationBar() {
@@ -21,18 +21,18 @@ function NavigationBar() {
     }
   }, [selectedSnomedCodes, setSelectedSnomedCode]);
 
-  const handleSnomedSelect = (snomedCode) => {
-    setSelectedSnomedCode(snomedCode);
-    setExpanded(false); // Collapse Navbar on SNOMED code select
+  // const handleSnomedSelect = (snomedCode) => {
+  //   setSelectedSnomedCode(snomedCode);
+  //   setExpanded(false); // Collapse Navbar on SNOMED code select
 
-    // Check if the current path matches one of the specified routes
-    //const currentPath = location.pathname;
-    // const shouldStartLoading = ['/api', '/qr', '/beergarden', '/offroadpost'].includes(currentPath);
+  //   // Check if the current path matches one of the specified routes
+  //   //const currentPath = location.pathname;
+  //   // const shouldStartLoading = ['/api', '/qr', '/beergarden', '/offroadpost'].includes(currentPath);
 
-    // if (shouldStartLoading) {
-    //   startLoading();
-    // }
-  };
+  //   // if (shouldStartLoading) {
+  //   //   startLoading();
+  //   // }
+  // };
 
   const handleNavItemSelect = (startLoad) => {
     setExpanded(false); // Collapse Navbar on any item select
@@ -41,10 +41,10 @@ function NavigationBar() {
     }
   };
 
-  // Function to collapse the Navbar
-  const collapseNavbar = () => {
-    setExpanded(false);
-  };
+  // // Function to collapse the Navbar
+  // const collapseNavbar = () => {
+  //   setExpanded(false);
+  // };
 
   return (
     <Navbar expanded={expanded} expand="lg" fixed="top">
@@ -60,7 +60,7 @@ function NavigationBar() {
           />
           SnowFusion
           <span style={{ fontSize: '0.8em', marginLeft: '5px' }}>D2S</span>
-          <span style={{ fontSize: '0.6em', marginLeft: '5px' }}>0_16</span>
+          <span style={{ fontSize: '0.6em', marginLeft: '5px' }}>0_17</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(!expanded)} />

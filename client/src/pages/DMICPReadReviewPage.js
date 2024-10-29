@@ -215,6 +215,9 @@ function DMICPReadReviewPage() {
                                 )}
                             </p>
                             {selectedReview.NewDescription && <p><strong>New Description:</strong> {selectedReview.NewDescription}</p>}
+                            {selectedReview.Comments && selectedReview.Decision === 'Inactivate' && (
+                                <p><strong>Comments:</strong> {selectedReview.Comments.replace(/"/g, '')}</p>
+                            )}
                             {selectedReview.ManualMapCode && (
                                 <p><strong>Manual Map Code:</strong> {selectedReview.ManualMapCode} - {selectedReview.ManualMapFSN}
                                     <FontAwesomeIcon
