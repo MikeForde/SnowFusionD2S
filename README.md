@@ -62,10 +62,10 @@ The application was developed to streamline the **transition from Read Codes to 
 
    Create a `.env` file in the `server` directory with the following content:
    ```
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASS=password
-   DB_NAME=snowfusion
+   DB_HOST=
+   DB_USER=
+   DB_PASS=
+   DB_NAME=
    ```
 
 5. Start the development server:
