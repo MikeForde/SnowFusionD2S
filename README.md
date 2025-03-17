@@ -10,7 +10,6 @@ The application is part of the **D2S SNOMED Project**, supporting the transition
 - [Features](#features)
 - [Setup](#setup)
 - [Data Processing Workflow](#data-processing-workflow)
-- [API Documentation](#api-documentation)
 - [Client-Side Pages](#client-side-pages)
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
@@ -18,22 +17,18 @@ The application is part of the **D2S SNOMED Project**, supporting the transition
 
 ## Overview
 
-SnowFusion enables:
-- **Review of DMS Local Codes** (40,000+ codes filtered down to ~9,000 for analysis).
-- **Categorization of codes** into three primary fates:
-  1. **DMSCreate** – Codes to be retained as local codes in a new system.
-  2. **Mapped** – Codes that align with existing SNOMED CT UK/International concepts.
-  3. **Inactivate** – Codes that are obsolete, redundant, or unnecessary.
-- **Integration with SNOMED API** to support mapping and validation.
-- **Detailed Review Tracking**, allowing reviewers to annotate and process each code systematically.
+SnowFusion is a **SERN (SQL, Express, React, Node.js) stack** application that enables users to **search, review, and classify** medical codes. It provides tools to map **DMS Local Codes** to **SNOMED CT** or mark them for inactivation based on business-critical assessments.
+
+The application was developed to streamline the **transition from Read Codes to SNOMED CT** while ensuring that essential codes remain available in future electronic health record (EHR) systems.
 
 ## Features
 
-- **Search & Filter**: Review and analyze DMS Local Codes using multiple filtering options.
-- **Mapping to SNOMED CT**: Automated and manual SNOMED mapping via **SnowStorm API**.
-- **Data Visualization**: Categorization and review progress tracking.
-- **Download Data as TSV**: Filtered views can be exported in a tab-separated format.
-- **Historical Review Context**: Tracks previous mapping and review decisions.
+- **Code Classification**: Identify whether a code should be mapped, inactivated, or created as a local DMS code.
+- **Automated SNOMED Search**: Query the SNOMED CT database to find potential matches.
+- **Business Critical Code Review**: Identify essential codes for **Occupational Medicine**, **Military Administration**, and **Clinical Needs**.
+- **Filter and Search Tools**: Easily find codes using structured filters.
+- **Download Capabilities**: Export filtered results as **TSV** files for analysis.
+- **Hierarchical Representation**: Display parent-child relationships of codes.
 
 ## Setup
 
@@ -45,7 +40,101 @@ SnowFusion enables:
 
 ### Installation
 
-1. **Clone the repository:**
+1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/SnowFusionD2S.git
-   cd SnowFusionD2S
+   git clone https://github.com/yourusername/SnowFusion.git
+   cd SnowFusion
+   ```
+
+2. Install server dependencies:
+   ```bash
+   cd server
+   npm install
+   ```
+
+3. Install client dependencies:
+   ```bash
+   cd ../client
+   npm install
+   ```
+
+4. Set up environment variables:
+
+   Create a `.env` file in the `server` directory with the following content:
+   ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASS=password
+   DB_NAME=snowfusion
+   ```
+
+5. Start the development server:
+   ```bash
+   cd ../server
+   npm run dev
+   ```
+
+6. Start the React frontend:
+   ```bash
+   cd ../client
+   npm start
+   ```
+
+## Data Processing Workflow
+
+The application follows a **structured review process**:
+
+1. **Filtering Codes**  
+   - Initial dataset: **~40,000 DMS Local Codes**
+   - Codes are filtered based on **business-critical importance** and **usage frequency**.
+   - Final dataset for review: **~9,000 codes**.
+
+2. **Mapping to SNOMED CT**  
+   - **Exact matches** are automatically suggested.
+   - **Close matches** require manual review.
+   - Codes that cannot be mapped retain their **DMS Local Code** status.
+
+3. **Inactivation Review**  
+   - Legacy codes and redundant entries are **marked for inactivation**.
+   - Comments are recorded for each decision.
+
+4. **Hierarchical Code Organization**  
+   - Parent-child relationships between codes are preserved for structured classification.
+
+## Client-Side Pages
+
+| Page               | Description |
+|--------------------|-------------|
+| **Landing Page**  | Overview of all features, with links to key sections. |
+| **SNOMED Review** | Compare DMS Local Codes with SNOMED CT. |
+| **Create Page**   | List of DMS Local Codes recommended for creation. |
+| **Map Page**      | Codes mapped to SNOMED CT with review status. |
+| **Inactivate Page** | List of codes marked for inactivation. |
+| **Review Info**   | Detailed breakdown of the **From 40,000 to 9,000** selection process. |
+| **Change Log**    | Track version history and updates. |
+
+## Technologies Used
+
+- **Frontend**: React, Bootstrap
+- **Backend**: Node.js, Express.js
+- **Database**: MySQL
+- **Data Processing**: Custom SNOMED CT querying and classification algorithms
+- **Deployment**: Docker (optional)
+
+## Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit changes: `git commit -m "Description of changes"`
+4. Push to branch: `git push origin feature-name`
+5. Submit a pull request.
+
+## License
+
+This project is licensed under the **MIT License**.
+
+---
+
+This updated **README.md** reflects the **SnowFusion** project more accurately.
