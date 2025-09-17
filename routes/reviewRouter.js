@@ -81,6 +81,33 @@ router.get('/search/:searchTerm', async (req, res) => {
     }
 });
 
+router.post('/decisions', async (req, res) => {
+  try {
+    const codes = Array.isArray(req.body?.codes) ? req.body.codes.filter(Boolean) : [];
+    if (!codes.length) return res.json({ results: {} });
+
+    const rows = await db.DMICPReadReview.findAll({
+      where: { DMICPCode: { [db.Sequelize.Op.in]: codes } },
+      attributes: ['DMICPCode', 'Description', 'Decision']  // keep it lean
+    });
+
+    // Return as a map keyed by code
+    const results = {};
+    rows.forEach(r => {
+      const j = r.toJSON();
+      results[j.DMICPCode] = {
+        decision: j.Decision || null,
+        description: j.Description || null
+      };
+    });
+
+    res.json({ results });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Batch decision lookup failed' });
+  }
+});
+
 router.get('/searchBySNOMEDCode/:snomedCode', async (req, res) => {
     const { snomedCode } = req.params;
 
