@@ -88,16 +88,61 @@ router.post('/decisions', async (req, res) => {
 
     const rows = await db.DMICPReadReview.findAll({
       where: { DMICPCode: { [db.Sequelize.Op.in]: codes } },
-      attributes: ['DMICPCode', 'Description', 'Decision']  // keep it lean
+      attributes: [
+        'DMICPCode', 'Description', 'Decision',
+        'Drop', 'Purpose',                       // for DMSCreate
+        'Comments',                              // for Inactivate
+        'ManualMapCode', 'ManualMapFSN',         // for ManualMap
+        'APIMapCode', 'APIMapTerm'               // for APIMap
+      ]
     });
 
-    // Return as a map keyed by code
+    const clean = s => (s ?? '')
+      .replace(/^"+|"+$/g, '')   // strip leading/trailing quotes
+      .replace(/\r?\n/g, ' ')    // collapse newlines
+      .trim();
+
+    function buildInfo(j) {
+      const d = j.Decision;
+      if (d === 'DMSCreate') {
+        let priority = null;
+        if ((j.Drop || '').startsWith('Drop1')) priority = 'High Priority';
+        else if ((j.Drop || '').startsWith('Drop2')) priority = 'Medium Priority';
+        const bits = [];
+        if (priority) bits.push(priority);
+        if (j.Purpose) bits.push(j.Purpose);
+        return bits.length ? bits.join(' - ') : null;
+      }
+      if (d === 'Inactivate') {
+        const c = clean(j.Comments);
+        return c || null;
+      }
+      if (d === 'ManualMap') {
+        const code = j.ManualMapCode ? String(j.ManualMapCode) : null;
+        const term = j.ManualMapFSN ? String(j.ManualMapFSN) : null;
+        if (code && term) return `${code} - ${term}`;
+        if (code) return code;
+        if (term) return term;
+        return null;
+      }
+      if (d === 'APIMap') {
+        const code = j.APIMapCode ? String(j.APIMapCode) : null;
+        const term = j.APIMapTerm ? String(j.APIMapTerm) : null;
+        if (code && term) return `${code} - ${term}`;
+        if (code) return code;
+        if (term) return term;
+        return null;
+      }
+      return null;
+    }
+
     const results = {};
     rows.forEach(r => {
       const j = r.toJSON();
       results[j.DMICPCode] = {
         decision: j.Decision || null,
-        description: j.Description || null
+        description: j.Description || null,
+        info: buildInfo(j)
       };
     });
 
@@ -107,6 +152,7 @@ router.post('/decisions', async (req, res) => {
     res.status(500).json({ error: 'Batch decision lookup failed' });
   }
 });
+
 
 router.get('/searchBySNOMEDCode/:snomedCode', async (req, res) => {
     const { snomedCode } = req.params;
