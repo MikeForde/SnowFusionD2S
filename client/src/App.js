@@ -34,7 +34,8 @@ function App() {
                   <LoadingSpinner />
                   <Routes>
                     <Route path="/" element={<LandingPage />} />
-                    <Route path="/snomed" element={<HomePage />} />
+                    <Route path="/snomed/:term?" element={<HomePage />} />
+                    <Route path="/snomed/conceptid/:conceptId" element={<HomePage />} />
                     <Route path="/review/:code?" element={<DMICPReadReviewPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/changelog" element={<ChangeLogPage />} />
