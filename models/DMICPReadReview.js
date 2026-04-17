@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         ManualMapCode: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.BIGINT,
             allowNull: true
         },
         ManualMapFSN: {
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         APIMapCode: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.BIGINT,
             allowNull: true
         },
         APIMapTerm: {
@@ -57,11 +57,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         SNOMEDCode: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.BIGINT,
             allowNull: true
         },
         SNOMEDParent: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.BIGINT,
             allowNull: true
         },
         ParentInDataset: {
@@ -153,7 +153,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         SCT_ID: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.BIGINT,
             allowNull: true
         },
         ChildOf_Hash: {

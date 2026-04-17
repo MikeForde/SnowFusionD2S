@@ -7,17 +7,14 @@ const db = require("./models");  // import the models
 const snomedRouter = require("./routes/snomedRouter"); // Import the router
 const reviewRouter = require("./routes/reviewRouter"); // Import the router
 
+const shouldSyncDb = String(process.env.DB_SYNC).toLowerCase() === "true";
+
 const api = express();
 api.use(cors()); // enable CORS on all our requests 
 api.use(express.json()); // parses incoming requests with JSON payloads
 api.use(express.urlencoded({ extended: false })); // parses incoming requests with urlencoded payloads
 api.use(express.text());
 api.use(xmlparser());
-
-// Sync Sequelize models
-db.sequelize.sync({ force: false }).then(() => {
-    console.log('Database & tables created!');
-}).catch(console.error);
 
 // Use the snomedRouter for all SNOMED-related API endpoints
 api.use('/snomed', snomedRouter);
@@ -31,6 +28,25 @@ api.get("/*", (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-api.listen(port, () => {
-    console.log(`Server is running on port: ${port}`)
-});
+
+async function startServer() {
+    try {
+        await db.sequelize.authenticate();
+
+        if (shouldSyncDb) {
+            await db.sequelize.sync({ force: false });
+            console.log('Database tables synchronized.');
+        } else {
+            console.log('Database sync skipped because DB_SYNC is not true.');
+        }
+
+        api.listen(port, () => {
+            console.log(`Server is running on port: ${port}`);
+        });
+    } catch (error) {
+        console.error('Failed to initialize database:', error);
+        process.exit(1);
+    }
+}
+
+startServer();
